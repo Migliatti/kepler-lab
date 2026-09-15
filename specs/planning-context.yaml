@@ -1,0 +1,68 @@
+feature_name: Kepler Lab MVP
+problem_statement: >-
+  Make astronomy and cosmology approachable to curious general audiences through a
+  scientifically grounded, freely navigable 3D exploration of the Milky Way.
+solution: >-
+  A pt-BR experience that starts from a welcome screen and Earth, then lets visitors
+  navigate continuously through adapted exploration scales, discover destinations,
+  search the curated catalogue, and read progressively deeper scientific content.
+actors:
+  - Curious general-public visitor, with no assumed scientific background
+constraints:
+  - First release target is one month.
+  - Physics is an optional depth layer, not a prerequisite; each physics topic may expose a formula on demand using the destination's own values, with a plain-language explanation.
+  - Use exploration-scale transitions and disclose when scale is illustrative.
+  - Support desktop and mobile; mobile navigation uses direct gestures.
+  - Scientific content is curated/static and cites reputable sources.
+  - Interface language is pt-BR.
+key_decisions:
+  - decision: The primary interaction is a navigable 3D Milky Way map beginning at Earth.
+    rationale: Familiar origin makes cosmic scale discoverable through free exploration.
+  - decision: Use hybrid destination markers and a curated-catalogue search.
+    rationale: The map remains uncluttered while serving both discovery and informed visitors.
+  - decision: Search opens from a fixed magnifier, filters results as the visitor types, and shows suggested destinations before input; each result presents name, type, region, brief description, and “Ir até lá”.
+    rationale: Makes known destinations fast to reach while keeping the MVP limited to curated, static content; desktop uses a floating search window and mobile uses a bottom panel.
+  - decision: Search recognizes simple popular aliases for curated destinations (for example, “buraco negro” for Sagittarius A*).
+    rationale: Supports visitors who do not know formal astronomical names without requiring external search.
+  - decision: Key destinations are gently suggested from the start, while other catalogue markers appear progressively by proximity; distant markers minimize or hide, and crowded regions group markers until approached.
+    rationale: Balances guided discovery with an uncluttered, explorable scene.
+  - decision: Use a scientifically grounded but more layered, mystical visual style: recognizable simplified astro textures, deep color gradients, sparse luminous dust, subtle nebulae, and restrained bloom/parallax effects.
+    rationale: Creates wonder and depth while retaining scientific legibility and mobile performance.
+  - decision: Interface follows an Apple-like glassmorphism language: translucent frosted panels, restrained blur, rounded surfaces, soft borders, and high-contrast text.
+    rationale: Keeps controls elegant and visually light over a rich scene while preserving readability.
+  - decision: Object information opens automatically on arrival in a progressive continuous-scroll panel.
+    rationale: Supports casual reading while allowing voluntary depth in physics, history, culture, and curiosities; formulas remain hidden unless requested and are contextualized with the selected destination's values.
+  - decision: Desktop destination markers reveal an “Ir até lá” cue on hover; mobile shows an explicit “Ir até lá” action on selection before starting camera travel.
+    rationale: Hover provides lightweight affordance with a mouse, while mobile requires a clear touch target and prevents accidental travel.
+  - decision: Camera travel lasts approximately 3–6 seconds and shows the destination name and an illustrative distance, with a “Pular viagem” control; the full panel opens on arrival.
+    rationale: Keeps the journey perceptible without delaying exploration and leaves visitors in control.
+  - decision: Camera travel is enabled by default and may be disabled in settings.
+    rationale: Preserves a sense of journey without slowing purposeful exploration.
+  - decision: Solar-System orbits move at a fixed illustrative speed.
+    rationale: Adds life without turning the MVP into an ephemeris simulator.
+  - decision: Persistent exploration UI uses a current-location indicator at upper left; search, Help, sound, and settings controls at upper right; a return-to-Earth action at lower right; and a compact scientific-data card for the selected destination at lower left.
+    rationale: Keeps navigation, recovery, and scientific context available without competing with the 3D scene.
+  - decision: Settings provide camera-travel toggle, reduced-motion toggle, ambient-sound volume/mute, larger-text toggle, high-contrast toggle, and descriptive interface labels; preferences persist locally.
+    rationale: Delivers essential control and accessibility options within a compact, one-month MVP.
+  - decision: First-use onboarding has three skippable stages: a welcome, device-specific navigation guidance, and destination-discovery guidance; it remains available through Help afterward.
+    rationale: Introduces the experience and controls without repeatedly obstructing exploration.
+  - decision: The welcome uses a mystical but scientifically grounded message: “Você está aqui. Em um pequeno mundo azul, na borda de uma galáxia repleta de estrelas, mundos e mistérios. Aproxime-se. Observe. Viaje.”
+    rationale: Establishes wonder and cosmic context before the visitor begins.
+  - decision: Use one continuous ambient soundtrack in the MVP.
+    rationale: Creates atmosphere within the one-month scope.
+content_scope:
+  launch_catalogue:
+    solar_system: Sun, Mercury, Venus, Earth, Moon, Mars, Jupiter, Europa, Io, Saturn, Titan, Uranus, Neptune, and Pluto.
+    milky_way_and_nearby_cosmos: Alpha Centauri, Sirius, Betelgeuse, Orion Nebula, Crab Nebula, Sagittarius A*, Galactic Center, and Milky Way overview.
+  information_layers: Conhecer, Entender a física (with optional formula reveal), Curiosidades e história, Dados e fontes.
+out_of_scope:
+  - Interactive laboratories and scientific simulations
+  - Guided journeys
+  - News or real-time external content
+  - Saved destinations and session resume
+  - User accounts and cloud persistence
+  - Real-scale mode
+success_criteria:
+  - A visitor can freely explore a 3D map from Earth through the Solar System to the selected Milky Way destinations.
+  - Every selected destination exposes accessible, cited scientific information in pt-BR.
+  - The experience works on desktop and mobile.
