@@ -38,7 +38,7 @@ Fase em andamento. Tarefas 1–3 concluídas e revisadas; Tarefas 4–6 pendente
 - Modificar `src/utils/search.js`: indexação dos novos campos textuais sem alterar o ranqueamento principal.
 - Modificar `src/utils/search.test.js`: testes de conteúdo progressivo, aliases e não mutação.
 - Criar `src/content/catalogue.test.js`: testes de cobertura nominal, contagem e integridade editorial do catálogo de lançamento.
-- Modificar `AGENT_ISSUES.md`: registrar evidências e mover a Fase 1 para concluída somente após todas as verificações.
+- Modificar este plano: registrar evidências e mover a Fase 1 para concluída somente após todas as verificações.
 
 ## Contrato de destino produzido por esta fase
 
@@ -470,12 +470,12 @@ git commit -m "feat(search): index progressive destination content"
 **Arquivos:**
 
 - Modificar: `src/content/catalogue.test.js`
-- Modificar: `AGENT_ISSUES.md`
+- Modificar: `docs/superpowers/plans/2026-09-16-phase-1-catalogue.md`
 
 **Interfaces:**
 
 - Consome: catálogo final e todos os validadores/testes.
-- Produz: evidência reproduzível de conclusão da Fase 1 e próximo passo explícito para a Fase 2.
+- Produz: evidência reproduzível de conclusão da Fase 1 no próprio plano e próximo passo explícito para a Fase 2.
 
 - [ ] **Etapa 1: acrescentar garantias contra conteúdo provisório e fontes duplicadas**
 
@@ -519,14 +519,14 @@ Para cada um dos 22 destinos:
 4. Confirmar pt-BR, linguagem acessível e ausência de promessa de escala real.
 5. Confirmar que aliases não colidem; executar `validateCatalogue(destinations)` por meio dos testes.
 
-- [ ] **Etapa 4: atualizar o registro do projeto**
+- [ ] **Etapa 4: atualizar o progresso deste plano**
 
-Em `AGENT_ISSUES.md`, mover `AI-001` apenas se seu escopo tiver sido redefinido para a Fase 1; caso continue representando o MVP inteiro, mantê-lo em andamento e substituir `Next` por “iniciar o plano detalhado da Fase 2 — cena e navegação”. Registrar como evidência as contagens finais dos testes e os comandos aprovados.
+Na seção **Progresso de execução**, marcar as Tarefas 1–6 como concluídas somente após todas as verificações e a auditoria manual. Registrar as contagens finais dos testes, os comandos aprovados e o próximo passo: “iniciar o plano detalhado da Fase 2 — cena e navegação”.
 
 - [ ] **Etapa 5: criar commit de encerramento**
 
 ```powershell
-git add src/content/catalogue.test.js AGENT_ISSUES.md
+git add src/content/catalogue.test.js docs/superpowers/plans/2026-09-16-phase-1-catalogue.md
 git commit -m "chore(content): verify phase one catalogue"
 ```
 
