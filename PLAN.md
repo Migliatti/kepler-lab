@@ -2,7 +2,7 @@
 
 ## Status
 
-Este plano substitui o plano orbital anterior. A implementação só começa após sua aprovação.
+Este plano substitui o plano orbital anterior. Aprovado pelo usuário em 16/09/2026; implementação autorizada conforme as fases e verificações abaixo.
 
 A especificação de produto aprovada durante o planejamento está em [`specs/product-spec.md`](./specs/product-spec.md). As decisões estruturadas estão em [`specs/planning-context.yaml`](./specs/planning-context.yaml).
 
@@ -85,4 +85,4 @@ A cena consome o estado da aplicação e o conteúdo curado. Nenhuma informaçã
 - Three.js + @react-three/fiber + @react-three/drei;
 - Vitest.
 
-Nenhuma dependência deve ser instalada antes da aprovação deste plano, conforme `AGENTS.md`.
+Novas dependências devem ser justificadas no plano ou na mudança correspondente, conforme `AGENTS.md`.

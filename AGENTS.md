@@ -45,4 +45,4 @@ Antes de declarar uma mudança concluída, execute pelo menos `npm test` e `npm 
 
 ## Estado atual
 
-A implementação aguarda aprovação de [`PLAN.md`](./PLAN.md). Não iniciar o scaffold nem adicionar dependências antes dessa aprovação.
+[`PLAN.md`](./PLAN.md) foi aprovado pelo usuário em 16/09/2026. A implementação pode prosseguir conforme as fases e verificações do plano; novas dependências devem ser justificadas antes de serem adicionadas.
