@@ -7,8 +7,7 @@ import {
 
 describe('camera travel', () => {
   it('uses a short, stable illustrative duration', () => {
-    expect(CAMERA_TRAVEL_DURATION_MS).toBeGreaterThanOrEqual(3000)
-    expect(CAMERA_TRAVEL_DURATION_MS).toBeLessThanOrEqual(6000)
+    expect(CAMERA_TRAVEL_DURATION_MS).toBe(4500)
   })
 
   it('frames a destination from an offset based on its illustrative radius', () => {
