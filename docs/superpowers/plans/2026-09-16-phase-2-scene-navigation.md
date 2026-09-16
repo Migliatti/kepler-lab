@@ -10,6 +10,8 @@
 
 **Spec:** `specs/product-spec.md`; decisões: `specs/planning-context.yaml`; roteiro: `PLAN.md`.
 
+**Dependências instaladas (Tarefa 1, 16/09/2026):** `three` `^0.186.0`, `@react-three/fiber` `^9.7.0` e `@react-three/drei` `^10.7.8`. React e React DOM foram mantidos em `^19.2.8`, compatível com o intervalo exigido por `@react-three/fiber` (`>=19 <19.3`).
+
 ## Restrições globais
 
 - Interface em pt-BR; identificadores em inglês e módulos ES JavaScript.
@@ -43,7 +45,7 @@
 - Consome destinos com `id`, `category` e `featured`.
 - Produz `getSceneDestination(destination)`, `getSceneDestinations(destinations)`, `getCategoryAppearance(category)`, `SCALE_NOTICE` e `EARTH_CAMERA_POSITION`.
 
-- [ ] **Etapa 1: instalar as dependências aprovadas**
+- [x] **Etapa 1: instalar as dependências aprovadas**
 
 ```powershell
 npm.cmd install three @react-three/fiber @react-three/drei
@@ -51,7 +53,7 @@ npm.cmd install three @react-three/fiber @react-three/drei
 
 Confirmar que somente esses três pacotes entram em `dependencies`.
 
-- [ ] **Etapa 2: escrever o teste que falha**
+- [x] **Etapa 2: escrever o teste que falha**
 
 Criar `src/scene/layout.test.js`:
 
@@ -86,7 +88,7 @@ describe('scene layout', () => {
 })
 ```
 
-- [ ] **Etapa 3: executar e confirmar a falha**
+- [x] **Etapa 3: executar e confirmar a falha**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
@@ -94,7 +96,7 @@ npm.cmd test -- src/scene/layout.test.js
 
 Esperado: falha de resolução de `layout.js`.
 
-- [ ] **Etapa 4: implementar somente o contrato necessário**
+- [x] **Etapa 4: implementar somente o contrato necessário**
 
 Criar `layout.js` com `SCALE_NOTICE = 'Posições e tamanhos são ilustrativos para permitir a exploração.'`, `EARTH_CAMERA_POSITION = [0, 9, 24]` e tabela imutável de todos os IDs abaixo. Estes valores não são dados científicos:
 
@@ -122,7 +124,7 @@ export function getSceneDestinations(destinations) { return destinations.map(get
 
 Adicionar tabela imutável de aparência para as oito categorias; planetas/luas azuis, estrelas amarelas, nebulosas violetas e buraco negro âmbar. Cada objeto contém `color`, `emissive`, `transparent` e `opacity`; `getCategoryAppearance(category)` retorna essa tabela.
 
-- [ ] **Etapa 5: verificar e criar commit**
+- [x] **Etapa 5: verificar e criar commit**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
@@ -393,4 +395,3 @@ git commit -m "chore(scene): verify phase two navigation"
 - O aviso de escala ilustrativa permanece visível.
 - Viagem, busca integrada, retorno, dados completos e preferências continuam fora da fase.
 - Testes, lint, build, diff e inspeção desktop/mobile têm evidência registrada.
-
