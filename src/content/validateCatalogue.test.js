@@ -35,6 +35,14 @@ describe('validateCatalogue', () => {
     expect(validateCatalogue(destinations)).toEqual([])
   })
 
+  it('validates the inner Solar System content batch', () => {
+    const ids = ['sun', 'mercury', 'venus', 'moon', 'mars']
+    const batch = destinations.filter(({ id }) => ids.includes(id))
+
+    expect(batch).toHaveLength(ids.length)
+    expect(validateCatalogue(batch)).toEqual([])
+  })
+
   it('accepts a valid destination', () => {
     expect(validateCatalogue([makeDestination()])).toEqual([])
   })
