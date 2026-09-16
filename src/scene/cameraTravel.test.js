@@ -18,6 +18,14 @@ describe('camera travel', () => {
     ])
   })
 
+  it('frames Sagittarius A* using its illustrative radius', () => {
+    expect(getDestinationCameraPosition({ position: [-42, -3, 24], radius: 1.1 })).toEqual([
+      -42,
+      0.30000000000000027,
+      29.5,
+    ])
+  })
+
   it('keeps the camera at its origin before travel and at its target after travel', () => {
     const origin = [0, 9, 24]
     const destination = [5, 1.3, 4.5]

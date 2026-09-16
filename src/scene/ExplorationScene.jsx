@@ -4,7 +4,13 @@ import { DestinationMarkers } from './DestinationMarkers.jsx'
 import { SceneCanvas } from './SceneCanvas.jsx'
 import { EARTH_CAMERA_POSITION, getSceneDestinations, getVisibleMarkerItems, SCALE_NOTICE } from './layout.js'
 
-export function ExplorationScene({ destinations, selectedId, onSelectDestination }) {
+export function ExplorationScene({
+  destinations,
+  selectedId,
+  onSelectDestination,
+  travel,
+  onTravelComplete,
+}) {
   const sceneDestinations = useMemo(() => getSceneDestinations(destinations), [destinations])
   const destinationById = useMemo(
     () => new Map(destinations.map((destination) => [destination.id, destination])),
@@ -22,7 +28,12 @@ export function ExplorationScene({ destinations, selectedId, onSelectDestination
 
   return (
     <main className="exploration-scene" aria-label="Visão geral celeste navegável">
-      <SceneCanvas onControlsChange={handleControlsChange}>
+      <SceneCanvas
+        onControlsChange={handleControlsChange}
+        travel={travel}
+        sceneDestinations={sceneDestinations}
+        onTravelComplete={onTravelComplete}
+      >
         <CelestialBodies destinations={sceneDestinations} selectedId={selectedId} />
         <DestinationMarkers
           items={markerItems}
