@@ -12,12 +12,16 @@
 
 ## Progresso de execução
 
-Fase em andamento. Tarefas 1–3 concluídas e revisadas; Tarefas 4–6 pendentes.
+Fase concluída. Tarefas 1–6 concluídas e revisadas.
 
 - `cc1d5a7` — contrato progressivo e estrito.
 - `e4cd06e` — destinos do Sistema Solar interior.
 - `44c9f7f` — destinos do Sistema Solar exterior.
-- Estado verificado após a Tarefa 3: 15 destinos, 27 testes aprovados, lint e build aprovados.
+- `d085f36` — catálogo de lançamento completo, com 22 destinos.
+- `bfbae4c` — busca indexa conteúdo progressivo após o resumo.
+- Auditoria da Tarefa 6 em 16/09/2026: 22 destinos e URLs HTTPS revisados; páginas da NASA, ESA, ESO e Event Horizon Telescope abertas e confrontadas com títulos, publicadores, fatos, unidades, qualificadores e conteúdo progressivo.
+- Estado final verificado: 22 destinos, 35 testes aprovados, `npm.cmd run lint`, `npm.cmd run build` e `git diff --check` aprovados.
+- Próximo passo: iniciar o plano detalhado da Fase 2 — cena e navegação.
 
 ## Restrições globais
 
@@ -296,7 +300,7 @@ git commit -m "feat(content): add outer Solar System destinations"
 - Consome: contrato validado por `validateCatalogue()`.
 - Produz: objetos `alpha-centauri`, `sirius`, `betelgeuse`, `orion-nebula`, `crab-nebula`, `galactic-center` e `milky-way`.
 
-- [ ] **Etapa 1: criar o teste editorial completo, que falha pelos sete destinos ausentes**
+- [x] **Etapa 1: criar o teste editorial completo, que falha pelos sete destinos ausentes**
 
 Criar `catalogue.test.js` com a lista nominal aprovada:
 
@@ -346,17 +350,17 @@ describe('launch catalogue', () => {
 })
 ```
 
-- [ ] **Etapa 2: executar o teste focal e confirmar que faltam sete destinos**
+- [x] **Etapa 2: executar o teste focal e confirmar que faltam sete destinos**
 
 Executar: `npm.cmd test -- src/content/catalogue.test.js`
 
 Resultado esperado: a comparação nominal e o lote galáctico falham pelos sete destinos ausentes.
 
-- [ ] **Etapa 3: cadastrar o lote com conteúdo completo**
+- [x] **Etapa 3: cadastrar o lote com conteúdo completo**
 
 Adicionar os sete objetos, distinguindo Alpha Centauri como sistema estelar, o Centro Galáctico como região e Sagittarius A* como objeto dentro dessa região. Para distâncias e dimensões com incerteza ou aproximação, usar qualificadores como “cerca de” e evitar precisão maior que a fornecida pela fonte. Priorizar NASA, ESA, ESO, Chandra e páginas institucionais de observatórios.
 
-- [ ] **Etapa 4: executar os testes focal e editorial**
+- [x] **Etapa 4: executar os testes focal e editorial**
 
 Executar:
 
@@ -367,7 +371,7 @@ npm.cmd test -- src/content/validateCatalogue.test.js
 
 Resultado esperado: ambos passam; o catálogo contém exatamente os 22 IDs aprovados.
 
-- [ ] **Etapa 5: criar commit do lote**
+- [x] **Etapa 5: criar commit do lote**
 
 ```powershell
 git add src/content/destinations.js src/content/validateCatalogue.test.js src/content/catalogue.test.js
@@ -388,7 +392,7 @@ git commit -m "feat(content): complete launch destination catalogue"
 - Consome: destinos com `name`, `aliases`, `type`, `region`, `summary`, `impact`, `overview`, `physics.explanation` e `history`.
 - Produz: `searchDestinations(destinations, query): destination[]` sem mutação, preservando o ranqueamento nome/alias → tipo/região → resumo → conteúdo aprofundado.
 
-- [ ] **Etapa 1: escrever testes de pesquisa nos novos campos**
+- [x] **Etapa 1: escrever testes de pesquisa nos novos campos**
 
 ```js
 it('finds lower-priority matches in progressive content', () => {
@@ -420,13 +424,13 @@ it('keeps summary matches ahead of progressive content matches', () => {
 })
 ```
 
-- [ ] **Etapa 2: executar o teste focal e confirmar a falha**
+- [x] **Etapa 2: executar o teste focal e confirmar a falha**
 
 Executar: `npm.cmd test -- src/utils/search.test.js`
 
 Resultado esperado: a busca ainda não encontra `physics.explanation` nem `history`.
 
-- [ ] **Etapa 3: implementar a camada de menor prioridade**
+- [x] **Etapa 3: implementar a camada de menor prioridade**
 
 Adicionar `progressiveContent: 5` a `RANK` e, depois do teste de `summary`, pesquisar:
 
@@ -445,7 +449,7 @@ if (progressiveContent.some((content) => content.includes(query))) {
 
 Não indexar expressões matemáticas, valores dos fatos nem URLs.
 
-- [ ] **Etapa 4: executar testes de busca e catálogo**
+- [x] **Etapa 4: executar testes de busca e catálogo**
 
 Executar:
 
@@ -456,7 +460,7 @@ npm.cmd test -- src/content
 
 Resultado esperado: todos os testes aprovados e catálogo sem mutação.
 
-- [ ] **Etapa 5: criar commit da tarefa**
+- [x] **Etapa 5: criar commit da tarefa**
 
 ```powershell
 git add src/utils/search.js src/utils/search.test.js
@@ -477,7 +481,7 @@ git commit -m "feat(search): index progressive destination content"
 - Consome: catálogo final e todos os validadores/testes.
 - Produz: evidência reproduzível de conclusão da Fase 1 no próprio plano e próximo passo explícito para a Fase 2.
 
-- [ ] **Etapa 1: acrescentar garantias contra conteúdo provisório e fontes duplicadas**
+- [x] **Etapa 1: acrescentar garantias contra conteúdo provisório e fontes duplicadas**
 
 Adicionar a `catalogue.test.js`:
 
@@ -496,7 +500,7 @@ it('does not repeat a source URL inside one destination', () => {
 })
 ```
 
-- [ ] **Etapa 2: executar toda a validação automatizada**
+- [x] **Etapa 2: executar toda a validação automatizada**
 
 Executar:
 
@@ -509,7 +513,7 @@ git diff --check
 
 Resultado esperado: 100% dos testes aprovados, lint sem diagnósticos, build Vite concluído e `git diff --check` sem saída de erro.
 
-- [ ] **Etapa 3: realizar auditoria manual das fontes e do texto**
+- [x] **Etapa 3: realizar auditoria manual das fontes e do texto**
 
 Para cada um dos 22 destinos:
 
@@ -519,7 +523,7 @@ Para cada um dos 22 destinos:
 4. Confirmar pt-BR, linguagem acessível e ausência de promessa de escala real.
 5. Confirmar que aliases não colidem; executar `validateCatalogue(destinations)` por meio dos testes.
 
-- [ ] **Etapa 4: atualizar o progresso deste plano**
+- [x] **Etapa 4: atualizar o progresso deste plano**
 
 Na seção **Progresso de execução**, marcar as Tarefas 1–6 como concluídas somente após todas as verificações e a auditoria manual. Registrar as contagens finais dos testes, os comandos aprovados e o próximo passo: “iniciar o plano detalhado da Fase 2 — cena e navegação”.
 

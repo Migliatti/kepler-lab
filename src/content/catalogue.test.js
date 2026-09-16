@@ -40,4 +40,19 @@ describe('launch catalogue', () => {
       }
     }
   })
+
+  it('contains no editorial placeholders', () => {
+    const serialized = JSON.stringify(destinations)
+
+    expect(serialized).not.toMatch(/\b(?:TBD|TODO)\b/)
+    expect(serialized).not.toMatch(/lorem ipsum/i)
+  })
+
+  it('does not repeat a source URL inside one destination', () => {
+    for (const destination of destinations) {
+      const urls = destination.sources.map(({ url }) => url)
+
+      expect(new Set(urls).size).toBe(urls.length)
+    }
+  })
 })
