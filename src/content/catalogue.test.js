@@ -1,0 +1,43 @@
+import { describe, expect, it } from 'vitest'
+
+import { destinations } from './destinations.js'
+
+const LAUNCH_DESTINATION_IDS = [
+  'sun', 'mercury', 'venus', 'earth', 'moon', 'mars', 'jupiter', 'europa', 'io',
+  'saturn', 'titan', 'uranus', 'neptune', 'pluto',
+  'alpha-centauri', 'sirius', 'betelgeuse', 'orion-nebula', 'crab-nebula',
+  'sagittarius-a-star', 'galactic-center', 'milky-way',
+]
+
+describe('launch catalogue', () => {
+  it('contains exactly the 22 approved destinations', () => {
+    expect(destinations.map(({ id }) => id).sort()).toEqual(
+      [...LAUNCH_DESTINATION_IDS].sort(),
+    )
+  })
+
+  it('validates the stellar and galactic content batch', () => {
+    const ids = [
+      'alpha-centauri',
+      'sirius',
+      'betelgeuse',
+      'orion-nebula',
+      'crab-nebula',
+      'galactic-center',
+      'milky-way',
+    ]
+    const batch = destinations.filter(({ id }) => ids.includes(id))
+
+    expect(batch).toHaveLength(ids.length)
+  })
+
+  it('keeps every source attributable and secure', () => {
+    for (const destination of destinations) {
+      expect(destination.sources.length).toBeGreaterThan(0)
+      for (const source of destination.sources) {
+        expect(source.publisher).not.toHaveLength(0)
+        expect(source.url).toMatch(/^https:\/\//)
+      }
+    }
+  })
+})

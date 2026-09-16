@@ -489,6 +489,251 @@ export const destinations = [
     ],
   },
   {
+    id: 'alpha-centauri',
+    name: 'Alpha Centauri',
+    aliases: ['Alfa Centauri', 'Rigil Kentaurus', 'sistema Alpha Centauri'],
+    category: 'star-system',
+    type: 'Sistema estelar triplo',
+    region: 'Vizinhança Solar',
+    summary:
+      'O sistema estelar triplo mais próximo do Sistema Solar, com Alpha Centauri A, B e Proxima Centauri.',
+    featured: true,
+    impact:
+      'Alpha Centauri é a primeira grande escala além do Sistema Solar: sua luz leva mais de quatro anos para chegar até nós.',
+    overview:
+      'O sistema reúne duas estrelas parecidas com o Sol, Alpha Centauri A e B, e a anã vermelha Proxima Centauri. É o sistema estelar vizinho mais próximo do nosso.',
+    physics: {
+      explanation:
+        'As estrelas do sistema permanecem ligadas pela gravidade. Alpha Centauri A e B orbitam uma à outra, enquanto Proxima Centauri está muito mais distante delas.',
+    },
+    history:
+      'Conhecido desde a Antiguidade no céu do hemisfério sul, o sistema é estudado como referência para medir distâncias estelares e procurar planetas em estrelas próximas.',
+    facts: [
+      { label: 'Distância da Terra', value: 'cerca de 4,3 anos-luz' },
+      { label: 'Componentes', value: 'Alpha Centauri A, Alpha Centauri B e Proxima Centauri' },
+      { label: 'Tipo de A', value: 'estrela semelhante ao Sol' },
+      { label: 'Tipo de B', value: 'estrela semelhante ao Sol, um pouco menor' },
+      { label: 'Tipo de Proxima', value: 'anã vermelha' },
+    ],
+    sources: [
+      {
+        title: 'Cosmic Distances',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/solar-system/cosmic-distances/',
+      },
+    ],
+  },
+  {
+    id: 'sirius',
+    name: 'Sirius',
+    aliases: ['Sírio', 'estrela do Cão Maior', 'Sirius A'],
+    category: 'star-system',
+    type: 'Sistema estelar binário',
+    region: 'Vizinhança Solar',
+    summary:
+      'O sistema de Sirius contém a estrela mais brilhante vista no céu noturno e sua companheira anã branca.',
+    featured: true,
+    impact:
+      'Sirius parece extraordinariamente brilhante porque combina luminosidade intrínseca com uma distância pequena em termos estelares.',
+    overview:
+      'Sirius A é uma estrela branca muito luminosa; Sirius B é uma anã branca, o núcleo compacto que restou de uma estrela que já perdeu suas camadas externas.',
+    physics: {
+      explanation:
+        'As duas estrelas orbitam seu centro de massa em cerca de 50 anos. A grande diferença de brilho torna Sirius B difícil de observar perto de Sirius A.',
+    },
+    history:
+      'Sirius foi usado por diferentes culturas para marcar épocas do ano. Observações do Hubble ajudaram a medir propriedades de Sirius B, uma das anãs brancas mais próximas.',
+    facts: [
+      { label: 'Distância da Terra', value: 'cerca de 8,6 anos-luz' },
+      { label: 'Componentes', value: 'Sirius A e Sirius B' },
+      { label: 'Período orbital do par', value: 'cerca de 50 anos' },
+      { label: 'Sirius A', value: 'a estrela mais brilhante do céu noturno' },
+      { label: 'Sirius B', value: 'anã branca' },
+    ],
+    sources: [
+      {
+        title: 'Hubble image of Sirius A, the brightest star in our nighttime sky',
+        publisher: 'European Space Agency',
+        url: 'https://www.esa.int/ESA_Multimedia/Images/2005/12/Hubble_image_of_Sirius_A_the_brightest_star_in_our_nighttime_sky',
+      },
+    ],
+  },
+  {
+    id: 'betelgeuse',
+    name: 'Betelgeuse',
+    aliases: ['Betelgeuse de Órion', 'Alpha Orionis', 'ombro de Órion'],
+    category: 'star',
+    type: 'Supergigante vermelha',
+    region: 'Constelação de Órion',
+    summary:
+      'Uma supergigante vermelha muito grande e variável que marca o ombro da constelação de Órion.',
+    featured: true,
+    impact:
+      'Betelgeuse mostra que uma estrela muito maior que o Sol pode ter uma superfície dinâmica, perder matéria e mudar de brilho.',
+    overview:
+      'É uma estrela envelhecida e fria para os padrões estelares, por isso tem aparência avermelhada. Seu tamanho e sua distância ainda são refinados por observações.',
+    physics: {
+      explanation:
+        'Em supergigantes vermelhas, enormes movimentos de gás e a perda de matéria afetam a superfície e o brilho. A poeira expelida pode também escurecer a estrela quando vista da Terra.',
+    },
+    history:
+      'A queda incomum de brilho observada entre 2019 e 2020 foi acompanhada pelo Very Large Telescope. Os dados indicaram a participação de poeira expelida pela própria estrela.',
+    facts: [
+      { label: 'Distância da Terra', value: 'cerca de 600 anos-luz' },
+      { label: 'Tipo estelar', value: 'supergigante vermelha' },
+      { label: 'Constelação', value: 'Órion' },
+      { label: 'Tamanho observado', value: 'cerca de 800 vezes o do Sol' },
+      { label: 'Fenômeno principal', value: 'variação de brilho e perda de matéria' },
+    ],
+    sources: [
+      {
+        title: 'A bubbling Betelgeuse',
+        publisher: 'European Southern Observatory',
+        url: 'https://www.eso.org/public/images/potw2634a/',
+      },
+    ],
+  },
+  {
+    id: 'orion-nebula',
+    name: 'Nebulosa de Órion',
+    aliases: ['M42', 'Messier 42', 'Orion Nebula'],
+    category: 'nebula',
+    type: 'Nebulosa de emissão e região de formação estelar',
+    region: 'Constelação de Órion',
+    summary:
+      'Uma região próxima de formação estelar, iluminada por estrelas jovens no coração da constelação de Órion.',
+    featured: true,
+    impact:
+      'A Nebulosa de Órion permite observar, em uma única região, gás, poeira e estrelas em diferentes etapas de nascimento.',
+    overview:
+      'Também chamada de M42, ela é uma grande nuvem de gás e poeira onde novas estrelas se formam. Pode ser vista a olho nu sob céu escuro.',
+    physics: {
+      explanation:
+        'A radiação ultravioleta de estrelas jovens energiza o gás da nebulosa e faz parte dele brilhar. Ao mesmo tempo, gravidade e pressão moldam nuvens onde outras estrelas podem nascer.',
+    },
+    history:
+      'A nebulosa é registrada em catálogos astronômicos desde o século XVII. Observações modernas do Hubble revelam discos e estruturas associadas ao nascimento de estrelas.',
+    facts: [
+      { label: 'Distância da Terra', value: 'cerca de 1.500 anos-luz' },
+      { label: 'Designação', value: 'M42' },
+      { label: 'Constelação', value: 'Órion' },
+      { label: 'Tipo', value: 'nebulosa de emissão' },
+      { label: 'Núcleo luminoso', value: 'aglomerado do Trapézio' },
+    ],
+    sources: [
+      {
+        title: 'Messier 42',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-42/',
+      },
+    ],
+  },
+  {
+    id: 'crab-nebula',
+    name: 'Nebulosa do Caranguejo',
+    aliases: ['M1', 'Messier 1', 'Crab Nebula'],
+    category: 'nebula',
+    type: 'Remanescente de supernova',
+    region: 'Constelação de Touro',
+    summary:
+      'Os restos em expansão de uma supernova observada em 1054, energizados por um pulsar em seu centro.',
+    featured: true,
+    impact:
+      'A Nebulosa do Caranguejo conecta um registro histórico de uma estrela que explodiu aos processos extremos de uma estrela de nêutrons.',
+    overview:
+      'Ela é formada por gás expelido na explosão de uma estrela. No centro há um pulsar, uma estrela de nêutrons que gira rapidamente e alimenta parte da emissão observada.',
+    physics: {
+      explanation:
+        'O pulsar gira cerca de 30 vezes por segundo e acelera partículas em campos magnéticos intensos. Essas partículas produzem radiação e ajudam a iluminar a nebulosa em vários comprimentos de onda.',
+    },
+    history:
+      'Astrônomos chineses e japoneses registraram a supernova em 1054. A nebulosa foi identificada séculos depois e se tornou o primeiro objeto do catálogo de Messier.',
+    facts: [
+      { label: 'Distância da Terra', value: 'cerca de 6.500 anos-luz' },
+      { label: 'Designações', value: 'M1 e NGC 1952' },
+      { label: 'Constelação', value: 'Touro' },
+      { label: 'Extensão', value: 'cerca de 11 anos-luz' },
+      { label: 'Objeto central', value: 'Pulsar do Caranguejo' },
+    ],
+    sources: [
+      {
+        title: 'Crab Nebula',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/asset/hubble/crab-nebula-3/',
+      },
+    ],
+  },
+  {
+    id: 'galactic-center',
+    name: 'Centro Galáctico',
+    aliases: ['centro da Via Láctea', 'núcleo da Via Láctea', 'Galactic Center'],
+    category: 'galactic-region',
+    type: 'Região central da Via Láctea',
+    region: 'Via Láctea',
+    summary:
+      'A região central, densa e empoeirada da Via Láctea, onde está Sagittarius A*.',
+    featured: true,
+    impact:
+      'O Centro Galáctico reúne estrelas, gás, poeira e gravidade extrema em uma região que só é bem estudada com luz infravermelha, rádio e raios X.',
+    overview:
+      'Ele fica na direção da constelação de Sagitário e é ocultado em luz visível por poeira interestelar. Telescópios que observam outras faixas de luz conseguem revelar sua população estelar e seu gás quente.',
+    physics: {
+      explanation:
+        'A gravidade organiza as órbitas de estrelas e nuvens de gás nessa região. No núcleo está Sagittarius A*, o buraco negro supermassivo já presente neste catálogo como um destino separado.',
+    },
+    history:
+      'A observação em infravermelho e raios X permitiu atravessar parte da poeira que bloqueia a visão óptica e estudar a região central com maior detalhe.',
+    facts: [
+      { label: 'Distância da Terra', value: 'cerca de 26 mil anos-luz' },
+      { label: 'Direção no céu', value: 'constelação de Sagitário' },
+      { label: 'Observação óptica', value: 'fortemente bloqueada por poeira' },
+      { label: 'Objeto central associado', value: 'Sagittarius A*' },
+      { label: 'Faixas úteis', value: 'infravermelho, rádio e raios X' },
+    ],
+    sources: [
+      {
+        title: 'Stars at the Galactic Center',
+        publisher: 'NASA',
+        url: 'https://www.nasa.gov/image-article/stars-galactic-center/',
+      },
+    ],
+  },
+  {
+    id: 'milky-way',
+    name: 'Via Láctea',
+    aliases: ['nossa galáxia', 'galáxia Via Láctea', 'Milky Way'],
+    category: 'galactic-region',
+    type: 'Galáxia espiral barrada',
+    region: 'Grupo Local',
+    summary:
+      'A galáxia que abriga o Sistema Solar, formada por estrelas, gás, poeira e matéria escura ligados pela gravidade.',
+    featured: true,
+    impact:
+      'A Via Láctea é nosso endereço cósmico: olhar sua faixa no céu é observar o disco da galáxia a partir de dentro.',
+    overview:
+      'A Via Láctea é uma galáxia espiral barrada. O Sistema Solar fica em um de seus braços e leva centenas de milhões de anos para dar uma volta ao redor do centro galáctico.',
+    physics: {
+      explanation:
+        'A gravidade mantém bilhões de estrelas, gás e poeira ligados à galáxia. As estrelas orbitam o centro, enquanto braços espirais e regiões de formação estelar fazem parte da estrutura do disco.',
+    },
+    history:
+      'Antes dos telescópios, a Via Láctea era vista como uma faixa esbranquiçada. Observações posteriores mostraram que ela é composta por muitas estrelas e que o Sol está dentro dela.',
+    facts: [
+      { label: 'Tipo', value: 'galáxia espiral barrada' },
+      { label: 'Diâmetro do disco', value: 'mais de 100 mil anos-luz' },
+      { label: 'Número estimado de estrelas', value: 'cerca de 100 a 400 bilhões' },
+      { label: 'Local do Sistema Solar', value: 'em um braço espiral, longe do centro' },
+      { label: 'Órbita do Sistema Solar', value: 'cerca de 240 milhões de anos' },
+    ],
+    sources: [
+      {
+        title: 'Galaxies',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/universe/galaxies/',
+      },
+    ],
+  },
+  {
     id: 'sagittarius-a-star',
     name: 'Sagittarius A*',
     aliases: ['Sgr A*', 'buraco negro', 'buraco negro da Via Láctea'],

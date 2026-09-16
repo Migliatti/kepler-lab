@@ -51,6 +51,22 @@ describe('validateCatalogue', () => {
     expect(validateCatalogue(batch)).toEqual([])
   })
 
+  it('validates the stellar and galactic content batch', () => {
+    const ids = [
+      'alpha-centauri',
+      'sirius',
+      'betelgeuse',
+      'orion-nebula',
+      'crab-nebula',
+      'galactic-center',
+      'milky-way',
+    ]
+    const batch = destinations.filter(({ id }) => ids.includes(id))
+
+    expect(batch).toHaveLength(ids.length)
+    expect(validateCatalogue(batch)).toEqual([])
+  })
+
   it('accepts a valid destination', () => {
     expect(validateCatalogue([makeDestination()])).toEqual([])
   })
