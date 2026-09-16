@@ -22,6 +22,12 @@ describe('scene layout', () => {
     expect(destinations).toEqual(original)
   })
 
+  it('has one visual presentation for each catalogue id', () => {
+    expect(getSceneDestinations(destinations).map(({ id }) => id).sort()).toEqual(
+      destinations.map(({ id }) => id).sort(),
+    )
+  })
+
   it('provides a visible appearance for every rendered category', () => {
     expect(getCategoryAppearance('planet')).toMatchObject({ color: expect.stringMatching(/^#/) })
     expect(getCategoryAppearance('nebula')).toMatchObject({ transparent: true, opacity: expect.any(Number) })
