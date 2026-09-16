@@ -17,6 +17,19 @@ integralmente no futuro por outra IA. A revisão deve considerar especialmente
 a permanência da câmera no astro de destino após a chegada, além dos fluxos de
 busca, pulo, chegada e retorno à Terra.
 
+## Informativo para averiguação futura: uso de subagente
+
+| Tarefa | Uso de subagente | Evidência disponível |
+| --- | --- | --- |
+| 1 | Não informado | O plano não registra executor específico |
+| 2 | Não informado | O relatório disponível descreve a execução, mas não identifica uso de subagente |
+| 3 | Não | Executada nesta sessão sem subagente disponível |
+| 4 | Não | Executada nesta sessão sem subagente disponível |
+| 5 | Não executada | Ainda não há registro de execução |
+
+`Não informado` significa que não há evidência suficiente para afirmar `Sim`
+ou `Não`; essa distinção fica preservada para a revisão futura.
+
 ## Restrições globais
 
 - Interface em pt-BR; identificadores em inglês e módulos ES JavaScript.

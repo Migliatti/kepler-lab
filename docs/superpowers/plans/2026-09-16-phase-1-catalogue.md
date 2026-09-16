@@ -14,6 +14,21 @@
 
 Fase concluída. Tarefas 1–6 concluídas e revisadas.
 
+## Informativo para averiguação futura: uso de subagente
+
+Os registros disponíveis não informam uso de subagente nas tarefas desta fase.
+Para a Tarefa 1, o usuário relatou possível uso parcial de subagente, ainda
+pendente de confirmação objetiva.
+
+| Tarefa | Uso de subagente | Evidência disponível |
+| --- | --- | --- |
+| 1 | Pendente de confirmação | Usuário relata possível uso parcial de subagente |
+| 2 | Não informado | Nenhum registro específico no plano |
+| 3 | Não informado | Nenhum registro específico no plano |
+| 4 | Não informado | Nenhum registro específico no plano |
+| 5 | Não informado | Nenhum registro específico no plano |
+| 6 | Não informado | Nenhum registro específico no plano |
+
 - `cc1d5a7` — contrato progressivo e estrito.
 - `e4cd06e` — destinos do Sistema Solar interior.
 - `44c9f7f` — destinos do Sistema Solar exterior.

@@ -14,6 +14,16 @@
 
 ## Progresso de execução
 
+- **Informativo para averiguação futura — uso de subagente:** conforme confirmado pelo usuário, nenhuma tarefa desta fase usou subagente.
+
+| Tarefa | Uso de subagente | Evidência disponível |
+| --- | --- | --- |
+| 1 | Não | Confirmação do usuário |
+| 2 | Não | Confirmação do usuário |
+| 3 | Não | Confirmação do usuário |
+| 4 | Não | Confirmação do usuário |
+| 5 | Não | Confirmação do usuário |
+
 - **Tarefa 2 concluída:** `e533fb7 feat(scene): add marker visibility rules`.
 - **Tarefa 3 concluída, exceto inspeção manual:** `8b62000 feat(scene): render navigable celestial overview`.
 - **Tarefa 4 implementada:** `caa701b feat(scene): select destinations from markers`.
