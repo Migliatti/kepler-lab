@@ -12,6 +12,13 @@
 
 **Dependências instaladas (Tarefa 1, 16/09/2026):** `three` `^0.186.0`, `@react-three/fiber` `^9.7.0` e `@react-three/drei` `^10.7.8`. React e React DOM foram mantidos em `^19.2.8`, compatível com o intervalo exigido por `@react-three/fiber` (`>=19 <19.3`).
 
+## Progresso de execução
+
+- **Tarefa 2 concluída:** `e533fb7 feat(scene): add marker visibility rules`.
+- **Tarefa 3 concluída, exceto inspeção manual:** `8b62000 feat(scene): render navigable celestial overview`.
+- **Verificações executadas em 16/09/2026:** `npm.cmd test` (41 testes), `npm.cmd run lint`, `npm.cmd run build` e `git diff --check` concluídos sem falhas. O build emite apenas o aviso de bundle acima de 500 kB após a inclusão do motor 3D.
+- **Inspeção desktop/mobile:** pendente. O servidor local iniciou, mas não havia navegador conectado neste ambiente para verificar órbita por mouse/toque e console; não há evidência para registrá-la como realizada.
+
 ## Restrições globais
 
 - Interface em pt-BR; identificadores em inglês e módulos ES JavaScript.
@@ -142,7 +149,7 @@ git commit -m "feat(scene): add illustrative destination layout"
 - Produz `getVisibleMarkerItems(nodes, cameraPosition)`: itens `{ kind: 'destination', destination }` ou `{ kind: 'cluster', id, position, destinations }`.
 - Regra: destacados sempre individuais; não destacados são visíveis a até 42 unidades; dois ou mais não destacados separados por até 5 unidades formam cluster.
 
-- [ ] **Etapa 1: escrever os testes que falham**
+- [x] **Etapa 1: escrever os testes que falham**
 
 ```js
 import { getVisibleMarkerItems } from './layout.js'
@@ -169,17 +176,17 @@ it('clusters nearby non-featured markers but keeps featured markers individual',
 })
 ```
 
-- [ ] **Etapa 2: executar e confirmar a falha**
+- [x] **Etapa 2: executar e confirmar a falha**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
 ```
 
-- [ ] **Etapa 3: implementar sem APIs Three.js**
+- [x] **Etapa 3: implementar sem APIs Three.js**
 
 Usar `Math.hypot` para distância. Filtrar primeiro por destaque ou 42 unidades. Separar destacados em itens individuais. Para os demais, formar componentes conectados pela distância de 5 unidades; um cluster tem ID estável `cluster:` mais IDs ordenados, posição igual à média e `destinations` ordenados. Um grupo de um item volta como `kind: 'destination'`.
 
-- [ ] **Etapa 4: verificar e criar commit**
+- [x] **Etapa 4: verificar e criar commit**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
@@ -198,7 +205,7 @@ git commit -m "feat(scene): add marker visibility rules"
 - `CelestialBodies({ destinations, selectedId })` recebe somente nós do layout.
 - `ExplorationScene({ destinations, selectedId, onSelectDestination })` será o único ponto React Three Fiber.
 
-- [ ] **Etapa 1: preparar teste de cobertura de apresentação**
+- [x] **Etapa 1: preparar teste de cobertura de apresentação**
 
 Acrescentar:
 
@@ -210,13 +217,13 @@ it('has one visual presentation for each catalogue id', () => {
 })
 ```
 
-- [ ] **Etapa 2: executar e confirmar a falha se algum ID estiver ausente**
+- [x] **Etapa 2: executar e confirmar a falha se algum ID estiver ausente**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
 ```
 
-- [ ] **Etapa 3: implementar os componentes**
+- [x] **Etapa 3: implementar os componentes**
 
 `SceneCanvas.jsx` usa:
 
@@ -258,7 +265,9 @@ npm.cmd run dev
 
 Inspecionar: fundo escuro, Terra na origem, órbita com mouse e gesto de toque, sem erros de console. Encerrar o servidor.
 
-- [ ] **Etapa 5: criar commit**
+**Registro parcial (16/09/2026):** o teste de layout, lint e build foram executados com sucesso. A inspeção manual permanece pendente porque não havia navegador conectado.
+
+- [x] **Etapa 5: criar commit**
 
 ```powershell
 git add src/scene src/App.jsx src/index.css
