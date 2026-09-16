@@ -64,7 +64,7 @@ A cena consome o estado da aplicação e o conteúdo curado. Nenhuma informaçã
    - **Verificação:** revisão manual de todos os destinos e links de fonte.
 
 5. **Acabamento e acessibilidade**
-   - Aplicar identidade mística/científica e glassmorphism.
+   - Aplicar identidade mística/científica e glassmorphism, incluindo acabamento 3D estilizado e gameficado para corpos celestes: materiais procedurais, halos, partículas e efeitos visuais por categoria, sem texturas hiperrealistas ou modelos pesados.
    - Implementar preferências locais: som, viagem, movimento reduzido, texto maior, contraste e rótulos.
    - Validar responsividade e desempenho básico.
    - **Verificação:** `npm test && npm run build` e roteiro manual desktop/mobile.
