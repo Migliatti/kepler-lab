@@ -117,6 +117,11 @@ describe('searchDestinations', () => {
 })
 
 describe('getSuggestedDestinations', () => {
+  it('keeps featured suggestions separate from an empty search result', () => {
+    expect(searchDestinations([sun, earth], '')).toEqual([])
+    expect(ids(getSuggestedDestinations([sun, earth]))).toEqual(['sun'])
+  })
+
   it('returns featured destinations in catalogue order', () => {
     expect(ids(getSuggestedDestinations([sun, earth, sagittariusA]))).toEqual([
       'sun',
