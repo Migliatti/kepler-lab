@@ -6,6 +6,7 @@ const RANK = {
   termPartial: 2,
   typeOrRegion: 3,
   summary: 4,
+  progressiveContent: 5,
 }
 
 function rankDestination(destination, query) {
@@ -20,11 +21,22 @@ function rankDestination(destination, query) {
 
   if (normalizeText(destination.summary).includes(query)) return RANK.summary
 
+  const progressiveContent = [
+    destination.impact,
+    destination.overview,
+    destination.physics?.explanation,
+    destination.history,
+  ].map(normalizeText)
+
+  if (progressiveContent.some((content) => content.includes(query))) {
+    return RANK.progressiveContent
+  }
+
   return null
 }
 
 /**
- * Filters the curated catalogue by name, alias, type, region and summary.
+ * Filters the curated catalogue by name, alias, type, region, summary and progressive content.
  * Results are ordered by match relevance, keeping catalogue order for ties.
  * An empty query returns no results; use getSuggestedDestinations instead.
  */

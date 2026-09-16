@@ -66,6 +66,34 @@ describe('searchDestinations', () => {
     ])
   })
 
+  it('finds lower-priority matches in progressive content', () => {
+    const destination = {
+      ...earth,
+      impact: 'Um ponto azul no espaço.',
+      overview: 'A biosfera transforma o planeta.',
+      physics: { explanation: 'A magnetosfera desvia partículas carregadas.' },
+      history: 'A missão Apollo fotografou a Terra inteira.',
+    }
+
+    expect(ids(searchDestinations([destination], 'magnetosfera'))).toEqual(['earth'])
+    expect(ids(searchDestinations([destination], 'Apollo'))).toEqual(['earth'])
+  })
+
+  it('keeps summary matches ahead of progressive content matches', () => {
+    const summaryMatch = { ...earth, id: 'summary', summary: 'Magnetosfera terrestre' }
+    const contentMatch = {
+      ...earth,
+      id: 'content',
+      summary: 'Planeta rochoso',
+      physics: { explanation: 'A magnetosfera protege o planeta.' },
+    }
+
+    expect(ids(searchDestinations([contentMatch, summaryMatch], 'magnetosfera'))).toEqual([
+      'summary',
+      'content',
+    ])
+  })
+
   it('keeps catalogue order for equally ranked results', () => {
     expect(ids(searchDestinations([sun, earth], 'sistema solar'))).toEqual(['sun', 'earth'])
   })
