@@ -16,6 +16,9 @@
 
 - **Tarefa 2 concluída:** `e533fb7 feat(scene): add marker visibility rules`.
 - **Tarefa 3 concluída, exceto inspeção manual:** `8b62000 feat(scene): render navigable celestial overview`.
+- **Tarefa 4 implementada:** `caa701b feat(scene): select destinations from markers`.
+- **Tarefa 5 em andamento:** aviso de escala e documentação foram atualizados; a inspeção manual desktop/mobile segue pendente porque não há navegador conectado neste ambiente.
+- **Verificações executadas após as tarefas 4 e 5 em 16/09/2026:** `npm.cmd test` (43 testes), `npm.cmd run lint`, `npm.cmd run build` e `git diff --check` concluídos sem falhas. O build emite apenas o aviso de bundle acima de 500 kB após a inclusão do motor 3D.
 - **Verificações executadas em 16/09/2026:** `npm.cmd test` (41 testes), `npm.cmd run lint`, `npm.cmd run build` e `git diff --check` concluídos sem falhas. O build emite apenas o aviso de bundle acima de 500 kB após a inclusão do motor 3D.
 - **Inspeção desktop/mobile:** pendente. O servidor local iniciou, mas não havia navegador conectado neste ambiente para verificar órbita por mouse/toque e console; não há evidência para registrá-la como realizada.
 
@@ -285,7 +288,7 @@ git commit -m "feat(scene): render navigable celestial overview"
 - Um destino ativa `onSelectDestination(id)`; cluster ativa o primeiro ID ordenado.
 - Rótulos exibem nome e tipo; botão usa `aria-pressed`.
 
-- [ ] **Etapa 1: escrever teste de derivação que falha**
+- [x] **Etapa 1: escrever teste de derivação**
 
 ```js
 it('returns an individual selectable marker for every featured catalogue destination from Earth', () => {
@@ -298,7 +301,7 @@ it('returns an individual selectable marker for every featured catalogue destina
 })
 ```
 
-- [ ] **Etapa 2: executar e confirmar a falha**
+- [x] **Etapa 2: executar e confirmar a regra existente**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
@@ -306,7 +309,7 @@ npm.cmd test -- src/scene/layout.test.js
 
 Se já aprovar, confirmar que a regra testada é realmente a de destacados individuais; não testar detalhe incidental.
 
-- [ ] **Etapa 3: implementar os marcadores**
+- [x] **Etapa 3: implementar os marcadores**
 
 `DestinationMarkers.jsx` usa `Billboard` e `Html` de Drei. Para destino, renderiza botão `type="button"` com `aria-pressed={id === selectedId}`, texto de `name` e `type`; `onClick` e `onPointerDown` devem parar propagação e chamar o callback. Para cluster: `“N destinos nesta região”` e callback com o primeiro ID. Não depender de hover ou cor.
 
@@ -349,7 +352,7 @@ git commit -m "feat(scene): select destinations from markers"
 - Consome `SCALE_NOTICE`.
 - Produz aviso fora do Canvas com `role="note"`, legível sem WebGL.
 
-- [ ] **Etapa 1: escrever o teste que falha**
+- [x] **Etapa 1: escrever o teste de regressão**
 
 ```js
 import { SCALE_NOTICE } from './layout.js'
@@ -360,13 +363,13 @@ it('states explicitly that visual positions and sizes are illustrative', () => {
 })
 ```
 
-- [ ] **Etapa 2: executar e confirmar a falha**
+- [x] **Etapa 2: executar e confirmar o contrato existente**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
 ```
 
-- [ ] **Etapa 3: exibir e registrar**
+- [x] **Etapa 3: exibir e registrar**
 
 Em `ExplorationScene.jsx`, sobrepor, fora do Canvas:
 

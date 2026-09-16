@@ -6,14 +6,15 @@ Kepler Lab é uma experiência didática e contemplativa que parte da Terra para
 
 ## Estado do projeto
 
-O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e o catálogo completo de 22 destinos já existem. A próxima etapa é a Fase 2: cena 3D e navegação; depois virão marcadores, viagens de câmera, painéis de destino e preferências de acessibilidade.
+O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e o catálogo completo de 22 destinos já existem. A cena 3D navegável começa na Terra e permite selecionar destinos por marcadores. Viagens de câmera, retorno à Terra, painéis de destino e preferências de acessibilidade continuam planejados.
 
 | Disponível hoje | Planejado para o MVP |
 | --- | --- |
-| Aplicação React/Vite em pt-BR | Cena 3D navegável, iniciando na Terra |
-| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Marcadores, descoberta por proximidade e busca integrada |
-| Busca local, aliases e validação do catálogo sem WebGL | Viagem de câmera opcional e retorno à Terra |
-| Testes unitários para busca, texto e conteúdo | Painéis progressivos, onboarding e preferências locais |
+| Aplicação React/Vite em pt-BR | Viagem de câmera opcional e retorno à Terra |
+| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Painéis progressivos de destino |
+| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade | Busca integrada à cena |
+| Busca local, aliases e validação do catálogo sem WebGL | Onboarding e preferências locais |
+| Testes unitários para busca, texto, conteúdo e regras de cena | Ajustes de acessibilidade planejados |
 
 ## Princípios
 
@@ -56,6 +57,7 @@ npm run lint    # verifica o código com Oxlint
 - [Especificação do produto](./specs/product-spec.md)
 - [Plano de implementação](./PLAN.md)
 - [Plano detalhado da Fase 1](./docs/superpowers/plans/2026-09-16-phase-1-catalogue.md)
+- [Plano detalhado da Fase 2](./docs/superpowers/plans/2026-09-16-phase-2-scene-navigation.md)
 - [Arquitetura e regras de contribuição](./AGENTS.md)
 
 ## Escopo do MVP
