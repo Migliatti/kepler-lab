@@ -1,18 +1,37 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { CelestialBodies } from './CelestialBodies.jsx'
+import { DestinationMarkers } from './DestinationMarkers.jsx'
 import { SceneCanvas } from './SceneCanvas.jsx'
-import { getSceneDestinations } from './layout.js'
+import { EARTH_CAMERA_POSITION, getSceneDestinations, getVisibleMarkerItems, SCALE_NOTICE } from './layout.js'
 
 export function ExplorationScene({ destinations, selectedId, onSelectDestination }) {
   const sceneDestinations = useMemo(() => getSceneDestinations(destinations), [destinations])
+  const destinationById = useMemo(
+    () => new Map(destinations.map((destination) => [destination.id, destination])),
+    [destinations],
+  )
+  const [cameraPosition, setCameraPosition] = useState(EARTH_CAMERA_POSITION)
+  const markerItems = useMemo(
+    () => getVisibleMarkerItems(sceneDestinations, cameraPosition),
+    [cameraPosition, sceneDestinations],
+  )
 
-  void onSelectDestination
+  function handleControlsChange(event) {
+    setCameraPosition(event.target.object.position.toArray())
+  }
 
   return (
     <main className="exploration-scene" aria-label="Visão geral celeste navegável">
-      <SceneCanvas>
+      <SceneCanvas onControlsChange={handleControlsChange}>
         <CelestialBodies destinations={sceneDestinations} selectedId={selectedId} />
+        <DestinationMarkers
+          items={markerItems}
+          destinationById={destinationById}
+          selectedId={selectedId}
+          onSelectDestination={onSelectDestination}
+        />
       </SceneCanvas>
+      <p className="scale-notice" role="note">{SCALE_NOTICE}</p>
     </main>
   )
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { destinations } from '../content/destinations.js'
 import {
   EARTH_CAMERA_POSITION,
+  SCALE_NOTICE,
   getCategoryAppearance,
   getSceneDestination,
   getSceneDestinations,
@@ -57,5 +58,20 @@ describe('scene layout', () => {
         destination: expect.objectContaining({ id: 'jupiter' }),
       }),
     ]))
+  })
+
+  it('returns an individual selectable marker for every featured catalogue destination from Earth', () => {
+    const ids = getVisibleMarkerItems(getSceneDestinations(destinations), [0, 0, 0])
+      .filter(({ kind }) => kind === 'destination')
+      .map(({ destination }) => destination.id)
+
+    expect(ids).toEqual(expect.arrayContaining(
+      destinations.filter(({ featured }) => featured).map(({ id }) => id),
+    ))
+  })
+
+  it('states explicitly that visual positions and sizes are illustrative', () => {
+    expect(SCALE_NOTICE).toMatch(/posições e tamanhos/i)
+    expect(SCALE_NOTICE).toMatch(/ilustrativ/i)
   })
 })
