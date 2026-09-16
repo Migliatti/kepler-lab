@@ -6,12 +6,12 @@ Kepler Lab é uma experiência didática e contemplativa que parte da Terra para
 
 ## Estado do projeto
 
-O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e 15 destinos do catálogo já existem. A cena 3D, marcadores, viagens de câmera, painéis de destino e preferências de acessibilidade são as próximas etapas planejadas.
+O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e o catálogo completo de 22 destinos já existem. A próxima etapa é a Fase 2: cena 3D e navegação; depois virão marcadores, viagens de câmera, painéis de destino e preferências de acessibilidade.
 
 | Disponível hoje | Planejado para o MVP |
 | --- | --- |
 | Aplicação React/Vite em pt-BR | Cena 3D navegável, iniciando na Terra |
-| Catálogo curado de destinos do Sistema Solar e Sagittarius A* | Marcadores, descoberta por proximidade e busca integrada |
+| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Marcadores, descoberta por proximidade e busca integrada |
 | Busca local, aliases e validação do catálogo sem WebGL | Viagem de câmera opcional e retorno à Terra |
 | Testes unitários para busca, texto e conteúdo | Painéis progressivos, onboarding e preferências locais |
 
@@ -26,7 +26,7 @@ O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável
 
 O MVP prevê 22 destinos: objetos do Sistema Solar, Alpha Centauri, Sirius, Betelgeuse, as nebulosas de Órion e do Caranguejo, Sagittarius A*, o Centro Galáctico e uma visão geral da Via Láctea.
 
-O catálogo atual possui 15 destinos e continua em expansão. As fontes de cada objeto ficam registradas junto de seus dados em [`src/content/`](./src/content/).
+O catálogo atual possui os 22 destinos previstos para o lançamento, com fontes institucionais e conteúdo progressivo em pt-BR. As fontes de cada objeto ficam registradas junto de seus dados em [`src/content/`](./src/content/).
 
 ## Arquitetura
 
