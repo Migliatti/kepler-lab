@@ -21,6 +21,16 @@ export const destinations = [
     region: 'Sistema Solar',
     summary: 'O terceiro planeta a partir do Sol e o único mundo conhecido que abriga vida.',
     featured: true,
+    impact:
+      'A Terra é a referência para comparar outros mundos porque concentra toda a vida conhecida e a única civilização capaz de estudá-los.',
+    overview:
+      'Seu interior rochoso, oceanos de água líquida, atmosfera e campo magnético formam um sistema que sustenta condições habitáveis na superfície.',
+    physics: {
+      explanation:
+        'A gravidade da Terra mantém o ar e a água próximos ao planeta; sua rotação e a energia recebida do Sol também influenciam o clima.',
+    },
+    history:
+      'Observações feitas por satélites e missões espaciais transformaram a Terra de um horizonte local em um planeta medido como um sistema inteiro.',
     facts: [
       { label: 'Raio médio', value: '6.371 km' },
       { label: 'Massa', value: '5,97 × 10²⁴ kg' },
@@ -45,6 +55,16 @@ export const destinations = [
     region: 'Centro Galáctico',
     summary: 'O buraco negro supermassivo no centro da nossa galáxia.',
     featured: true,
+    impact:
+      'Sagittarius A* torna visível que o centro da Via Láctea é dominado por um objeto compacto com milhões de vezes a massa do Sol.',
+    overview:
+      'Ele está a cerca de 27 mil anos-luz da Terra e é cercado por estrelas que orbitam uma região muito pequena do Centro Galáctico.',
+    physics: {
+      explanation:
+        'A gravidade de um buraco negro curva intensamente o espaço-tempo; as órbitas das estrelas próximas revelam a massa concentrada em Sagittarius A*.',
+    },
+    history:
+      'Medições de décadas das órbitas estelares no Centro Galáctico sustentaram sua identificação, e o Event Horizon Telescope divulgou sua primeira imagem em 2022.',
     facts: [
       { label: 'Massa', value: 'cerca de 4 milhões de massas solares' },
       { label: 'Distância da Terra', value: 'cerca de 27 mil anos-luz' },

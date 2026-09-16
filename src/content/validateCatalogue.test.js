@@ -13,6 +13,12 @@ function makeDestination(overrides = {}) {
     region: 'Sistema Solar',
     summary: 'O terceiro planeta a partir do Sol.',
     featured: true,
+    impact: 'Um pequeno mundo azul que abriga toda a vida conhecida.',
+    overview: 'A Terra é um planeta rochoso com água líquida em sua superfície.',
+    physics: {
+      explanation: 'A gravidade mantém a atmosfera e tudo o que vive sobre a superfície.',
+    },
+    history: 'A exploração espacial permitiu observar a Terra como um mundo inteiro.',
     facts: [
       { label: 'Raio médio', value: '6.371 km' },
       { label: 'Massa', value: '5,97 × 10²⁴ kg' },
@@ -38,6 +44,60 @@ describe('validateCatalogue', () => {
 
     expect(errors).toContain('earth: "name" must be a non-empty string')
     expect(errors).toContain('earth: "summary" must be a non-empty string')
+  })
+
+  it('requires the progressive content fields', () => {
+    const destination = makeDestination({
+      impact: '',
+      overview: undefined,
+      physics: { explanation: '' },
+      history: '',
+    })
+
+    expect(validateCatalogue([destination])).toEqual(
+      expect.arrayContaining([
+        'earth: "impact" must be a non-empty string',
+        'earth: "overview" must be a non-empty string',
+        'earth: physics.explanation must be a non-empty string',
+        'earth: "history" must be a non-empty string',
+      ]),
+    )
+  })
+
+  it('requires kebab-case ids', () => {
+    expect(validateCatalogue([makeDestination({ id: 'Earth Planet' })])).toContain(
+      'Earth Planet: "id" must use kebab-case',
+    )
+  })
+
+  it('validates an optional contextualized formula', () => {
+    const physics = {
+      explanation: 'A gravidade depende da massa e do raio.',
+      formula: { expression: '', variables: [], interpretation: '' },
+    }
+
+    expect(validateCatalogue([makeDestination({ physics })])).toEqual(
+      expect.arrayContaining([
+        'earth: physics.formula.expression must be a non-empty string',
+        'earth: physics.formula.variables must have at least one item',
+        'earth: physics.formula.interpretation must be a non-empty string',
+      ]),
+    )
+  })
+
+  it('requires complete descriptions for each formula variable', () => {
+    const physics = {
+      explanation: 'A gravidade depende da massa e do raio.',
+      formula: {
+        expression: 'g = GM / r²',
+        variables: [{ symbol: '', meaning: 'massa', value: '' }],
+        interpretation: 'A aceleração aumenta com a massa e diminui com a distância.',
+      },
+    }
+
+    expect(validateCatalogue([makeDestination({ physics })])).toContain(
+      'earth: physics.formula.variables[0] must have a non-empty symbol, meaning and value',
+    )
   })
 
   it('reports an unknown category', () => {

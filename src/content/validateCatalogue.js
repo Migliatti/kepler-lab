@@ -2,8 +2,10 @@ import { normalizeText } from '../utils/text.js'
 import { DESTINATION_CATEGORIES } from './categories.js'
 
 const REQUIRED_TEXT_FIELDS = ['id', 'name', 'category', 'type', 'region', 'summary']
+const PROGRESSIVE_TEXT_FIELDS = ['impact', 'overview', 'history']
 const MIN_FACTS = 4
 const MAX_FACTS = 5
+const KEBAB_CASE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 const isNonEmptyString = (value) => typeof value === 'string' && value.trim() !== ''
 
@@ -13,6 +15,47 @@ function validateDestination(destination) {
   for (const field of REQUIRED_TEXT_FIELDS) {
     if (!isNonEmptyString(destination[field])) {
       errors.push(`"${field}" must be a non-empty string`)
+    }
+  }
+
+  if (isNonEmptyString(destination.id) && !KEBAB_CASE_ID.test(destination.id)) {
+    errors.push('"id" must use kebab-case')
+  }
+
+  for (const field of PROGRESSIVE_TEXT_FIELDS) {
+    if (!isNonEmptyString(destination[field])) {
+      errors.push(`"${field}" must be a non-empty string`)
+    }
+  }
+
+  if (!isNonEmptyString(destination.physics?.explanation)) {
+    errors.push('physics.explanation must be a non-empty string')
+  }
+
+  const formula = destination.physics?.formula
+  if (formula !== undefined) {
+    if (!isNonEmptyString(formula?.expression)) {
+      errors.push('physics.formula.expression must be a non-empty string')
+    }
+
+    const variables = Array.isArray(formula?.variables) ? formula.variables : []
+    if (variables.length === 0) {
+      errors.push('physics.formula.variables must have at least one item')
+    }
+    variables.forEach((variable, index) => {
+      if (
+        !isNonEmptyString(variable?.symbol) ||
+        !isNonEmptyString(variable?.meaning) ||
+        !isNonEmptyString(variable?.value)
+      ) {
+        errors.push(
+          `physics.formula.variables[${index}] must have a non-empty symbol, meaning and value`,
+        )
+      }
+    })
+
+    if (!isNonEmptyString(formula?.interpretation)) {
+      errors.push('physics.formula.interpretation must be a non-empty string')
     }
   }
 
