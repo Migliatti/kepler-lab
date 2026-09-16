@@ -33,6 +33,7 @@ body,
 
 .exploration-scene {
   position: relative;
+  height: 100dvh;
 }
 
 .destination-marker {

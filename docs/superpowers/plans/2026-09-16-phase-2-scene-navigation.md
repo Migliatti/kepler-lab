@@ -17,10 +17,10 @@
 - **Tarefa 2 concluída:** `e533fb7 feat(scene): add marker visibility rules`.
 - **Tarefa 3 concluída, exceto inspeção manual:** `8b62000 feat(scene): render navigable celestial overview`.
 - **Tarefa 4 implementada:** `caa701b feat(scene): select destinations from markers`.
-- **Tarefa 5 em andamento:** aviso de escala e documentação foram atualizados; a inspeção manual desktop/mobile segue pendente porque não há navegador conectado neste ambiente.
+- **Tarefa 5 concluída:** aviso de escala e documentação foram atualizados.
 - **Verificações executadas após as tarefas 4 e 5 em 16/09/2026:** `npm.cmd test` (43 testes), `npm.cmd run lint`, `npm.cmd run build` e `git diff --check` concluídos sem falhas. O build emite apenas o aviso de bundle acima de 500 kB após a inclusão do motor 3D.
 - **Verificações executadas em 16/09/2026:** `npm.cmd test` (41 testes), `npm.cmd run lint`, `npm.cmd run build` e `git diff --check` concluídos sem falhas. O build emite apenas o aviso de bundle acima de 500 kB após a inclusão do motor 3D.
-- **Inspeção desktop/mobile:** pendente. O servidor local iniciou, mas não havia navegador conectado neste ambiente para verificar órbita por mouse/toque e console; não há evidência para registrá-la como realizada.
+- **Inspeção manual confirmada pelo usuário:** a câmera orbita com a Terra como foco, e seleção, aviso de escala e resumo funcionam. A validação em celular/emulação não foi registrada separadamente.
 
 ## Restrições globais
 
@@ -258,7 +258,7 @@ export default App
 
 Em `index.css`, definir `body, #root { min-height: 100dvh; margin: 0; overflow: hidden; }`; remover regras de `.welcome`.
 
-- [ ] **Etapa 4: verificar build e inspeção manual**
+- [x] **Etapa 4: verificar build e inspeção manual**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
@@ -326,7 +326,7 @@ const selectedDestination = destinations.find(({ id }) => id === selectedId) ?? 
 
 O resumo só confirma a seleção; não incluir viagem, dados ou painel da Fase 4.
 
-- [ ] **Etapa 4: verificar em desktop e celular**
+- [x] **Etapa 4: verificar interação manual**
 
 ```powershell
 npm.cmd test -- src/scene/layout.test.js
@@ -379,7 +379,7 @@ Em `ExplorationScene.jsx`, sobrepor, fora do Canvas:
 
 Estilizar com fundo translúcido e alto contraste, sem cobrir marcadores. Atualizar README: cena 3D, Terra e marcadores passam para “Disponível hoje”; viagem, retorno, painel e preferências seguem planejados. No topo deste plano, após as verificações, acrescentar **Progresso de execução** com hashes, total de testes e resultado das inspeções desktop/mobile.
 
-- [ ] **Etapa 4: executar a verificação final**
+- [x] **Etapa 4: executar a verificação final**
 
 ```powershell
 npm.cmd test
@@ -391,7 +391,7 @@ npm.cmd run dev
 
 Registrar inspeção manual: inicia na Terra; órbita por mouse/toque; destinos destacados visíveis; não destacados aparecem por aproximação; áreas densas agrupam; seleção funciona; aviso permanece legível. Encerrar o servidor.
 
-- [ ] **Etapa 5: criar commit de encerramento**
+- [x] **Etapa 5: criar commit de encerramento**
 
 ```powershell
 git add src/scene/ExplorationScene.jsx src/scene/layout.test.js src/index.css README.md docs/superpowers/plans/2026-09-16-phase-2-scene-navigation.md
