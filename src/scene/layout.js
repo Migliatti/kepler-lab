@@ -60,3 +60,78 @@ export function getSceneDestinations(destinations) {
 export function getCategoryAppearance(category) {
   return CATEGORY_APPEARANCE[category]
 }
+
+const MARKER_VISIBILITY_DISTANCE = 42
+const MARKER_CLUSTER_DISTANCE = 5
+
+function getDistance([x1, y1, z1], [x2, y2, z2]) {
+  return Math.hypot(x2 - x1, y2 - y1, z2 - z1)
+}
+
+function getClusterPosition(destinations) {
+  const total = destinations.reduce(
+    ([x, y, z], destination) => [
+      x + destination.position[0],
+      y + destination.position[1],
+      z + destination.position[2],
+    ],
+    [0, 0, 0],
+  )
+
+  return total.map((coordinate) => coordinate / destinations.length)
+}
+
+function getConnectedGroups(destinations) {
+  const remaining = new Set(destinations)
+  const groups = []
+
+  while (remaining.size > 0) {
+    const [first] = remaining
+    const group = []
+    const pending = [first]
+    remaining.delete(first)
+
+    while (pending.length > 0) {
+      const destination = pending.pop()
+      group.push(destination)
+
+      for (const candidate of remaining) {
+        if (getDistance(destination.position, candidate.position) <= MARKER_CLUSTER_DISTANCE) {
+          pending.push(candidate)
+          remaining.delete(candidate)
+        }
+      }
+    }
+
+    groups.push(group)
+  }
+
+  return groups
+}
+
+export function getVisibleMarkerItems(nodes, cameraPosition) {
+  const visibleDestinations = nodes.filter(
+    (destination) => destination.featured
+      || getDistance(destination.position, cameraPosition) <= MARKER_VISIBILITY_DISTANCE,
+  )
+  const featuredItems = visibleDestinations
+    .filter((destination) => destination.featured)
+    .map((destination) => ({ kind: 'destination', destination }))
+  const nonFeaturedDestinations = visibleDestinations.filter((destination) => !destination.featured)
+  const clusteredItems = getConnectedGroups(nonFeaturedDestinations).map((group) => {
+    if (group.length === 1) {
+      return { kind: 'destination', destination: group[0] }
+    }
+
+    const destinations = group.map(({ id }) => id).sort()
+
+    return {
+      kind: 'cluster',
+      id: `cluster:${destinations.join(',')}`,
+      position: getClusterPosition(group),
+      destinations,
+    }
+  })
+
+  return [...featuredItems, ...clusteredItems]
+}
