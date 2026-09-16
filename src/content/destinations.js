@@ -217,6 +217,278 @@ export const destinations = [
     ],
   },
   {
+    id: 'jupiter',
+    name: 'Júpiter',
+    aliases: ['planeta Júpiter', 'gigante gasoso Júpiter'],
+    category: 'planet',
+    type: 'Gigante gasoso',
+    region: 'Sistema Solar exterior',
+    summary: 'O quinto planeta a partir do Sol e o maior planeta do Sistema Solar.',
+    featured: true,
+    impact:
+      'Júpiter concentra grande parte da massa planetária do Sistema Solar e permite estudar atmosferas profundas, campos magnéticos e sistemas de luas.',
+    overview:
+      'É um gigante composto principalmente de hidrogênio e hélio, coberto por faixas de nuvens e tempestades, incluindo a Grande Mancha Vermelha.',
+    physics: {
+      explanation:
+        'A rápida rotação e o hidrogênio eletricamente condutor em profundidade ajudam a gerar um campo magnético muito intenso; não há uma superfície sólida onde uma nave possa pousar.',
+    },
+    history:
+      'Observado desde a Antiguidade, Júpiter foi estudado de perto por missões como Voyager, Galileo e Juno, que mede seu campo gravitacional e magnético.',
+    facts: [
+      { label: 'Raio', value: '69.911 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 778 milhões de km' },
+      { label: 'Período orbital', value: 'cerca de 12 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 9,9 horas' },
+      { label: 'Atmosfera principal', value: 'hidrogênio e hélio' },
+    ],
+    sources: [
+      {
+        title: 'Jupiter Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/jupiter/jupiter-facts/',
+      },
+    ],
+  },
+  {
+    id: 'europa',
+    name: 'Europa',
+    aliases: ['lua Europa de Júpiter', 'Europa, lua de Júpiter'],
+    category: 'moon',
+    type: 'Satélite natural gelado de Júpiter',
+    region: 'Sistema de Júpiter',
+    summary: 'Uma grande lua de Júpiter cuja crosta de gelo provavelmente encobre um oceano global de água líquida.',
+    featured: true,
+    impact:
+      'Europa é um destino prioritário para investigar se um oceano subterrâneo em uma lua pode reunir condições favoráveis à vida como a conhecemos.',
+    overview:
+      'Esta lua de Júpiter tem uma superfície clara e fraturada de gelo; abaixo dela, há fortes evidências de um oceano de água salgada.',
+    physics: {
+      explanation:
+        'A gravidade de Júpiter estica Europa durante sua órbita levemente oval. Esse aquecimento de maré pode manter água líquida sob a crosta de gelo.',
+    },
+    history:
+      'Europa foi observada por Galileu em 1610; as missões Voyager e Galileo revelaram sua superfície fraturada, e a Europa Clipper foi projetada para investigar sua habitabilidade.',
+    facts: [
+      { label: 'Raio', value: 'cerca de 1.561 km' },
+      { label: 'Distância média de Júpiter', value: 'cerca de 671.000 km' },
+      { label: 'Período orbital', value: 'cerca de 3,5 dias terrestres' },
+      { label: 'Rotação', value: 'sincronizada com a órbita em torno de Júpiter' },
+      { label: 'Fenômeno principal', value: 'aquecimento de maré que pode sustentar um oceano interno' },
+    ],
+    sources: [
+      {
+        title: 'Europa: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/jupiter/jupiter-moons/europa/europa-facts/',
+      },
+    ],
+  },
+  {
+    id: 'io',
+    name: 'Io',
+    aliases: ['lua Io de Júpiter', 'Io, lua de Júpiter'],
+    category: 'moon',
+    type: 'Satélite natural vulcânico de Júpiter',
+    region: 'Sistema de Júpiter',
+    summary: 'Uma lua de Júpiter e o corpo com maior atividade vulcânica conhecida no Sistema Solar.',
+    featured: false,
+    impact:
+      'Io mostra como forças gravitacionais podem aquecer o interior de uma lua e alimentar vulcanismo intenso sem depender da energia do Sol.',
+    overview:
+      'A superfície desta lua de Júpiter é continuamente renovada por erupções vulcânicas e por depósitos ricos em enxofre.',
+    physics: {
+      explanation:
+        'As puxadas gravitacionais de Júpiter, Europa e Ganimedes deformam Io repetidamente. O atrito interno associado a essa maré transforma energia orbital em calor e alimenta vulcões.',
+    },
+    history:
+      'Io foi observada por Galileu em 1610; as sondas Voyager, Galileo e Juno registraram vulcões ativos e ajudaram a medir as forças que os alimentam.',
+    facts: [
+      { label: 'Raio', value: 'cerca de 1.822 km' },
+      { label: 'Distância média de Júpiter', value: 'cerca de 422.000 km' },
+      { label: 'Período orbital', value: 'cerca de 1,8 dia terrestre' },
+      { label: 'Rotação', value: 'sincronizada com a órbita em torno de Júpiter' },
+      { label: 'Fenômeno principal', value: 'vulcanismo alimentado por aquecimento de maré' },
+    ],
+    sources: [
+      {
+        title: 'Io: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/jupiter/jupiter-moons/io/facts/',
+      },
+    ],
+  },
+  {
+    id: 'saturn',
+    name: 'Saturno',
+    aliases: ['planeta Saturno', 'gigante gasoso Saturno'],
+    category: 'planet',
+    type: 'Gigante gasoso',
+    region: 'Sistema Solar exterior',
+    summary: 'O sexto planeta a partir do Sol, conhecido por seu sistema de anéis amplo e complexo.',
+    featured: true,
+    impact:
+      'Saturno permite estudar anéis, luas e processos gravitacionais em um sistema que funciona como um laboratório natural em escala planetária.',
+    overview:
+      'É o segundo maior planeta do Sistema Solar, feito principalmente de hidrogênio e hélio, com anéis compostos sobretudo de gelo e rocha.',
+    physics: {
+      explanation:
+        'Os anéis são formados por incontáveis partículas em órbitas separadas; a gravidade de Saturno e de suas luas organiza lacunas, ondas e outras estruturas.',
+    },
+    history:
+      'Conhecido desde a Antiguidade, Saturno foi visitado por Pioneer e Voyager; a missão Cassini orbitou o planeta de 2004 a 2017 e transformou o conhecimento sobre seu sistema.',
+    facts: [
+      { label: 'Diâmetro equatorial', value: 'cerca de 120.500 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 1,4 bilhão de km' },
+      { label: 'Período orbital', value: 'cerca de 29,4 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 10,7 horas' },
+      { label: 'Anéis', value: 'partículas de gelo e rocha em órbita' },
+    ],
+    sources: [
+      {
+        title: 'Saturn: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/saturn/facts/',
+      },
+    ],
+  },
+  {
+    id: 'titan',
+    name: 'Titã',
+    aliases: ['lua Titã de Saturno', 'Titã, lua de Saturno'],
+    category: 'moon',
+    type: 'Satélite natural com atmosfera de Saturno',
+    region: 'Sistema de Saturno',
+    summary: 'A maior lua de Saturno, com atmosfera densa e um ciclo de líquidos de metano e etano em sua superfície.',
+    featured: true,
+    impact:
+      'Titã é um caso único para comparar química atmosférica e ciclos de líquidos em um mundo frio, usando metano e etano em vez de água líquida na superfície.',
+    overview:
+      'Esta lua de Saturno é coberta por uma névoa dourada; sob ela existem nuvens, chuva, rios, lagos e mares de hidrocarbonetos líquidos.',
+    physics: {
+      explanation:
+        'Na baixa temperatura de Titã, metano e etano podem condensar, chover e escoar. A atmosfera densa, composta principalmente de nitrogênio, sustenta esse ciclo de líquidos.',
+    },
+    history:
+      'Descoberto por Christiaan Huygens em 1655, Titã foi investigado pela missão Cassini-Huygens; a sonda Huygens pousou em sua superfície em 2005.',
+    facts: [
+      { label: 'Raio', value: 'cerca de 2.575 km' },
+      { label: 'Distância média de Saturno', value: 'cerca de 1,2 milhão de km' },
+      { label: 'Período orbital', value: '15 dias e 22 horas' },
+      { label: 'Atmosfera', value: 'densa, principalmente de nitrogênio' },
+      { label: 'Fenômeno principal', value: 'ciclo de metano e etano com rios, lagos e mares' },
+    ],
+    sources: [
+      {
+        title: 'Titan: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/saturn/moons/titan/facts/',
+      },
+    ],
+  },
+  {
+    id: 'uranus',
+    name: 'Urano',
+    aliases: ['planeta Urano', 'gigante de gelo Urano'],
+    category: 'planet',
+    type: 'Gigante de gelo',
+    region: 'Sistema Solar exterior',
+    summary: 'O sétimo planeta a partir do Sol, um gigante de gelo que parece girar de lado.',
+    featured: false,
+    impact:
+      'Urano ajuda a investigar uma classe de planetas abundante fora do Sistema Solar, mas ainda pouco explorada de perto: os gigantes de gelo.',
+    overview:
+      'Sua atmosfera contém hidrogênio, hélio e metano; o metano absorve parte da luz vermelha e contribui para a aparência azul-esverdeada.',
+    physics: {
+      explanation:
+        'O eixo de rotação inclinado em cerca de 98 graus faz o planeta parecer girar de lado e produz estações extremas, com longos períodos de luz ou escuridão nos polos.',
+    },
+    history:
+      'William Herschel descobriu Urano com auxílio de telescópio em 1781; a Voyager 2 realizou a única visita próxima ao planeta em 1986.',
+    facts: [
+      { label: 'Diâmetro equatorial', value: 'cerca de 51.118 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 2,9 bilhões de km' },
+      { label: 'Período orbital', value: 'cerca de 84 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 17 horas' },
+      { label: 'Inclinação do eixo', value: '97,77 graus' },
+    ],
+    sources: [
+      {
+        title: 'Uranus: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/uranus/facts/',
+      },
+    ],
+  },
+  {
+    id: 'neptune',
+    name: 'Netuno',
+    aliases: ['planeta Netuno', 'gigante de gelo Netuno'],
+    category: 'planet',
+    type: 'Gigante de gelo',
+    region: 'Sistema Solar exterior',
+    summary: 'O oitavo e mais distante planeta do Sistema Solar, um mundo frio com ventos extremamente rápidos.',
+    featured: false,
+    impact:
+      'Netuno mostra que uma atmosfera distante, que recebe pouca energia solar, ainda pode apresentar clima dinâmico e ventos intensos.',
+    overview:
+      'É um gigante de gelo com atmosfera principalmente de hidrogênio e hélio; o metano contribui para sua cor azul e nuvens congeladas são levadas por ventos velozes.',
+    physics: {
+      explanation:
+        'A dinâmica atmosférica de Netuno produz ventos que podem ultrapassar 2.000 km/h. O metano absorve outras cores da luz e ajuda a dar ao planeta sua tonalidade azul.',
+    },
+    history:
+      'Netuno foi identificado em 1846 a partir de previsões matemáticas sobre perturbações na órbita de Urano; a Voyager 2 foi a primeira nave a passar pelo planeta, em 1989.',
+    facts: [
+      { label: 'Diâmetro equatorial', value: 'cerca de 49.528 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 4,5 bilhões de km' },
+      { label: 'Período orbital', value: 'cerca de 165 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 16 horas' },
+      { label: 'Ventos', value: 'mais de 2.000 km/h em sua atmosfera' },
+    ],
+    sources: [
+      {
+        title: 'Neptune: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/neptune/neptune-facts/',
+      },
+    ],
+  },
+  {
+    id: 'pluto',
+    name: 'Plutão',
+    aliases: ['planeta anão Plutão', 'Plutão do Cinturão de Kuiper'],
+    category: 'dwarf-planet',
+    type: 'Planeta anão gelado',
+    region: 'Cinturão de Kuiper',
+    summary: 'Um planeta anão no Cinturão de Kuiper, além de Netuno, com montanhas, planícies, crateras e geleiras.',
+    featured: true,
+    impact:
+      'Plutão ampliou o estudo dos pequenos mundos gelados e mostrou que a classificação científica descreve características orbitais, não uma escala de importância.',
+    overview:
+      'É um mundo complexo e distante, com gelo de nitrogênio, metano e monóxido de carbono na superfície e uma atmosfera tênue que varia ao longo de sua órbita.',
+    physics: {
+      explanation:
+        'A União Astronômica Internacional classifica Plutão como planeta anão porque ele orbita o Sol, tem forma quase esférica, mas não limpou a vizinhança de sua órbita de outros objetos.',
+    },
+    history:
+      'Descoberto em 1930 e reclassificado pela União Astronômica Internacional em 2006, Plutão foi explorado de perto pela missão New Horizons durante seu sobrevoo de 2015.',
+    facts: [
+      { label: 'Diâmetro equatorial', value: 'cerca de 2.377 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 5,9 bilhões de km' },
+      { label: 'Período orbital', value: 'cerca de 248 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 153 horas' },
+      { label: 'Luas conhecidas', value: '5, incluindo Caronte' },
+    ],
+    sources: [
+      {
+        title: 'Pluto: Facts',
+        publisher: 'NASA Science',
+        url: 'https://science.nasa.gov/dwarf-planets/pluto/facts/',
+      },
+    ],
+  },
+  {
     id: 'sagittarius-a-star',
     name: 'Sagittarius A*',
     aliases: ['Sgr A*', 'buraco negro', 'buraco negro da Via Láctea'],
