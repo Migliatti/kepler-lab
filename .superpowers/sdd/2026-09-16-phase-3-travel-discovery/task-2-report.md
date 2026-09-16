@@ -55,4 +55,4 @@ Pendente de levantamento. `App.jsx` ainda não fornece `travel` nem `onTravelCom
 
 ## Commit
 
-`0581e41 feat(scene): animate declarative camera travel`
+`9a7af70 feat(scene): animate declarative camera travel`
