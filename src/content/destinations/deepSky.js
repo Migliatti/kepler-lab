@@ -20,6 +20,11 @@ export const deepSkyDestinations = [
     },
     history:
       'Conhecido desde a Antiguidade no céu do hemisfério sul, o sistema é estudado como referência para medir distâncias estelares e procurar planetas em estrelas próximas.',
+    curiosities: [
+      { topic: 'records', text: 'Proxima Centauri, uma das três estrelas do sistema, é a estrela mais próxima do Sol.' },
+      { topic: 'discovery', text: 'Proxima Centauri tem pelo menos um planeta confirmado, Proxima b, que orbita em sua zona habitável.' },
+      { topic: 'naming', text: '"Alpha" indica a estrela mais brilhante da constelação do Centauro, visível no céu do hemisfério Sul.' },
+    ],
     facts: [
       { label: 'Distância da Terra', value: 'cerca de 4,3 anos-luz' },
       { label: 'Componentes', value: 'Alpha Centauri A, Alpha Centauri B e Proxima Centauri' },
@@ -68,6 +73,11 @@ export const deepSkyDestinations = [
     },
     history:
       'Sirius foi usado por diferentes culturas para marcar épocas do ano. Observações do Hubble ajudaram a medir propriedades de Sirius B, uma das anãs brancas mais próximas.',
+    curiosities: [
+      { topic: 'records', text: 'Sirius é a estrela mais brilhante do céu noturno.' },
+      { topic: 'discovery', text: 'Tem uma companheira discreta, Sirius B, uma anã branca identificada no século XIX.' },
+      { topic: 'mythology', text: 'No Egito antigo, o reaparecimento de Sirius antes do nascer do Sol anunciava a época das cheias do Nilo.' },
+    ],
     facts: [
       { label: 'Distância da Terra', value: 'cerca de 8,6 anos-luz' },
       { label: 'Componentes', value: 'Sirius A e Sirius B' },
@@ -116,6 +126,11 @@ export const deepSkyDestinations = [
     },
     history:
       'A queda incomum de brilho observada entre 2019 e 2020 foi acompanhada pelo Very Large Telescope. Os dados indicaram a participação de poeira expelida pela própria estrela.',
+    curiosities: [
+      { topic: 'phenomena', text: 'Entre 2019 e 2020, Betelgeuse escureceu de forma inesperada; observações indicaram uma grande nuvem de poeira expelida pela própria estrela.' },
+      { topic: 'records', text: 'É uma supergigante vermelha tão grande que, no lugar do Sol, ultrapassaria a órbita de Marte.' },
+      { topic: 'naming', text: 'O nome vem do árabe e costuma ser associado à "mão" ou ao "ombro" da figura de Órion.' },
+    ],
     facts: [
       { label: 'Distância da Terra', value: 'cerca de 600 anos-luz' },
       { label: 'Tipo estelar', value: 'supergigante vermelha' },
@@ -164,6 +179,11 @@ export const deepSkyDestinations = [
     },
     history:
       'A nebulosa é registrada em catálogos astronômicos desde o século XVII. Observações modernas do Hubble revelam discos e estruturas associadas ao nascimento de estrelas.',
+    curiosities: [
+      { topic: 'records', text: 'É a região de grande formação de estrelas mais próxima da Terra.' },
+      { topic: 'phenomena', text: 'Em seu interior, o Trapézio é um aglomerado de estrelas jovens e quentes que ilumina toda a nuvem.' },
+      { topic: 'missions', text: 'É visível a olho nu como uma mancha difusa na "espada" da constelação de Órion.' },
+    ],
     facts: [
       { label: 'Distância da Terra', value: 'cerca de 1.500 anos-luz' },
       { label: 'Designação', value: 'M42' },
@@ -212,6 +232,11 @@ export const deepSkyDestinations = [
     },
     history:
       'Astrônomos chineses e japoneses registraram a supernova em 1054. A nebulosa foi identificada séculos depois e se tornou o primeiro objeto do catálogo de Messier.',
+    curiosities: [
+      { topic: 'discovery', text: 'É o que restou de uma supernova registrada por astrônomos chineses em 1054, visível até de dia por semanas.' },
+      { topic: 'phenomena', text: 'No centro há um pulsar que gira cerca de 30 vezes por segundo.' },
+      { topic: 'naming', text: 'O nome vem de um desenho feito em 1844 por Lord Rosse, que lembrava um caranguejo.' },
+    ],
     facts: [
       { label: 'Distância da Terra', value: 'cerca de 6.500 anos-luz' },
       { label: 'Designações', value: 'M1 e NGC 1952' },
@@ -260,6 +285,11 @@ export const deepSkyDestinations = [
     },
     history:
       'A observação em infravermelho e raios X permitiu atravessar parte da poeira que bloqueia a visão óptica e estudar a região central com maior detalhe.',
+    curiosities: [
+      { topic: 'phenomena', text: 'A poeira interestelar bloqueia a luz visível do centro galáctico, que por isso é estudado principalmente em infravermelho, rádio e raios X.' },
+      { topic: 'records', text: 'É a região da Via Láctea com maior concentração de estrelas.' },
+      { topic: 'missions', text: 'No céu, fica na direção da constelação de Sagitário.' },
+    ],
     facts: [
       { label: 'Distância da Terra', value: 'cerca de 26 mil anos-luz' },
       { label: 'Direção no céu', value: 'constelação de Sagitário' },
@@ -308,6 +338,11 @@ export const deepSkyDestinations = [
     },
     history:
       'Antes dos telescópios, a Via Láctea era vista como uma faixa esbranquiçada. Observações posteriores mostraram que ela é composta por muitas estrelas e que o Sol está dentro dela.',
+    curiosities: [
+      { topic: 'mythology', text: 'O nome vem da mitologia greco-romana, que associava a faixa luminosa do céu a leite derramado.' },
+      { topic: 'discovery', text: 'Em 1610, Galileu observou com um telescópio que a faixa da Via Láctea é formada por inúmeras estrelas.' },
+      { topic: 'records', text: 'A Via Láctea reúne de 100 a 400 bilhões de estrelas.' },
+    ],
     facts: [
       { label: 'Tipo', value: 'galáxia espiral barrada' },
       { label: 'Diâmetro do disco', value: 'mais de 100 mil anos-luz' },
@@ -350,6 +385,11 @@ export const deepSkyDestinations = [
     },
     history:
       'Medições de décadas das órbitas estelares no Centro Galáctico sustentaram sua identificação, e o Event Horizon Telescope divulgou sua primeira imagem em 2022.',
+    curiosities: [
+      { topic: 'missions', text: 'Em 2022, o Event Horizon Telescope divulgou a primeira imagem da sombra de Sagittarius A*.' },
+      { topic: 'records', text: 'Tem cerca de 4 milhões de vezes a massa do Sol.' },
+      { topic: 'discovery', text: 'Sua massa foi medida acompanhando por décadas as órbitas de estrelas vizinhas, trabalho reconhecido pelo Nobel de Física de 2020.' },
+    ],
     facts: [
       { label: 'Massa', value: 'cerca de 4 milhões de massas solares' },
       { label: 'Distância da Terra', value: 'cerca de 27 mil anos-luz' },
@@ -374,6 +414,11 @@ export const deepSkyDestinations = [
         title: 'SIMBAD: Sgr A*',
         publisher: 'CDS, Université de Strasbourg',
         url: 'https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*',
+      },
+      {
+        title: 'The Nobel Prize in Physics 2020',
+        publisher: 'Nobel Prize Outreach',
+        url: 'https://www.nobelprize.org/prizes/physics/2020/summary/',
       },
     ],
   },

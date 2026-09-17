@@ -92,9 +92,7 @@ function validateDestination(destination) {
     }
   }
 
-  if (destination.curiosities !== undefined) {
-    errors.push(...validateCuriosities(destination.curiosities))
-  }
+  errors.push(...validateCuriosities(destination.curiosities))
 
   if (
     isNonEmptyString(destination.category) &&

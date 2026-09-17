@@ -33,6 +33,10 @@ function makeDestination(overrides = {}) {
         { label: 'Período orbital', value: 'cerca de 365,25 dias terrestres' },
       ],
     },
+    curiosities: [
+      { topic: 'records', text: 'É o único lugar conhecido com vida.' },
+      { topic: 'phenomena', text: 'A maior parte da superfície é coberta por água.' },
+    ],
     ...overrides,
   }
 }
@@ -224,8 +228,10 @@ describe('validateCatalogue', () => {
     ).toContain('earth: coordinates.entries[1] must have a non-empty label and value')
   })
 
-  it('accepts a destination without curiosities while the batch is in progress', () => {
-    expect(validateCatalogue([makeDestination()])).toEqual([])
+  it('requires curiosities', () => {
+    expect(validateCatalogue([makeDestination({ curiosities: undefined })])).toContain(
+      'earth: "curiosities" must have between 2 and 4 items',
+    )
   })
 
   it('validates curiosities when present', () => {
