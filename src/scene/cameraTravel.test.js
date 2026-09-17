@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   CAMERA_TRAVEL_DURATION_MS,
   CAMERA_TRAVEL_MAX_OVERSHOOT,
+  CAMERA_TRAVEL_MIN_DISTANCE,
   easeTravelProgress,
   getCameraPositionAt,
   getCameraTravelFrame,
@@ -13,11 +14,11 @@ describe('camera travel', () => {
     expect(CAMERA_TRAVEL_DURATION_MS).toBe(3000)
   })
 
-  it('frames a destination from an offset based on its illustrative radius', () => {
-    expect(getDestinationCameraPosition({ position: [5, -0.2, 2], radius: 0.5 })).toEqual([
+  it('frames a large destination from an offset based on its illustrative radius', () => {
+    expect(getDestinationCameraPosition({ position: [5, -0.2, 2], radius: 2 })).toEqual([
       5,
-      1.3,
-      4.5,
+      5.8,
+      12,
     ])
   })
 
@@ -27,6 +28,18 @@ describe('camera travel', () => {
       0.30000000000000027,
       29.5,
     ])
+  })
+
+  it('floors small destinations at the standard minimum camera distance instead of the radius offset', () => {
+    const position = [5, -0.2, 2]
+    const result = getDestinationCameraPosition({ position, radius: 0.5 })
+    const distanceFromTarget = Math.hypot(
+      result[0] - position[0],
+      result[1] - position[1],
+      result[2] - position[2],
+    )
+
+    expect(distanceFromTarget).toBeCloseTo(CAMERA_TRAVEL_MIN_DISTANCE)
   })
 
   it('keeps the camera at its origin before travel and at its target after travel', () => {
@@ -51,7 +64,7 @@ describe('camera travel', () => {
 })
 
 describe('camera travel frame', () => {
-  const destination = { position: [5, -0.2, 2], radius: 0.5 }
+  const destination = { position: [5, -0.2, 2], radius: 2 }
   const originPosition = [0, 9, 24]
   const originTarget = [0, 0, 0]
 
@@ -64,7 +77,7 @@ describe('camera travel frame', () => {
 
   it('ends framed on the destination and looking at its centre', () => {
     expect(getCameraTravelFrame({ originPosition, originTarget, destination, progress: 1 })).toEqual({
-      position: [5, 1.3, 4.5],
+      position: [5, 5.8, 12],
       target: [5, -0.2, 2],
     })
   })
@@ -74,7 +87,7 @@ describe('camera travel frame', () => {
     const eased = easeTravelProgress(0.5)
 
     expect(frame.target).toEqual(originTarget.map((c, i) => c + (destination.position[i] - c) * eased))
-    expect(frame.position).toEqual(originPosition.map((c, i) => c + ([5, 1.3, 4.5][i] - c) * eased))
+    expect(frame.position).toEqual(originPosition.map((c, i) => c + ([5, 5.8, 12][i] - c) * eased))
   })
 
   it('lets the camera overshoot slightly past the destination before settling', () => {

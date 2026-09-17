@@ -1,5 +1,11 @@
 export const CAMERA_TRAVEL_DURATION_MS = 3000
 
+// Must match OrbitControls' minDistance in SceneCanvas. Framing offsets scaled purely by a
+// destination's illustrative radius can land closer than that limit for small bodies, which makes
+// OrbitControls clamp the camera outward the instant the trip ends — a visible flick unrelated to
+// the destination itself. Flooring the offset at this distance keeps the arrival frame stable.
+export const CAMERA_TRAVEL_MIN_DISTANCE = 5
+
 // Subtle elastic ease-out: a fast departure, then a single gentle bounce past the
 // destination before settling. DAMPING is tuned so the measured peak overshoot (~1.4%)
 // stays under CAMERA_TRAVEL_MAX_OVERSHOOT; FREQUENCY makes the curve land exactly on 1.
@@ -15,7 +21,11 @@ export function easeTravelProgress(time) {
 }
 
 export function getDestinationCameraPosition({ position: [x, y, z], radius }) {
-  return [x, y + radius * 3, z + radius * 5]
+  const offset = [0, radius * 3, radius * 5]
+  const length = Math.hypot(...offset)
+  const scale = length > 0 ? Math.max(1, CAMERA_TRAVEL_MIN_DISTANCE / length) : 1
+
+  return [x + offset[0] * scale, y + offset[1] * scale, z + offset[2] * scale]
 }
 
 function lerpVector(origin, destination, amount) {

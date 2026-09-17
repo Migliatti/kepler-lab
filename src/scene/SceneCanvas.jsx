@@ -1,5 +1,6 @@
 import { OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { CAMERA_TRAVEL_MIN_DISTANCE } from './cameraTravel.js'
 import { CameraTraveller } from './CameraTraveller.jsx'
 import { EARTH_CAMERA_POSITION } from './layout.js'
 
@@ -19,7 +20,7 @@ export function SceneCanvas({ children, travel, sceneDestinations, onTravelCompl
         makeDefault
         enabled={travel?.status !== 'travelling'}
         enablePan
-        minDistance={5}
+        minDistance={CAMERA_TRAVEL_MIN_DISTANCE}
         maxDistance={90}
       />
     </Canvas>
