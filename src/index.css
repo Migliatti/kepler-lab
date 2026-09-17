@@ -298,7 +298,7 @@ button:focus-visible {
 }
 
 .destination-panel {
-  top: 1rem;
+  top: calc(1rem + 44px + 0.5rem);
   bottom: 1rem;
   display: flex;
   flex-direction: column;
