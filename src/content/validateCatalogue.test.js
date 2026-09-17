@@ -26,6 +26,13 @@ function makeDestination(overrides = {}) {
       { label: 'Período orbital', value: '365,26 dias' },
     ],
     sources: [{ title: 'Earth Fact Sheet', publisher: 'NASA', url: 'https://nssdc.gsfc.nasa.gov/' }],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 1 UA' },
+        { label: 'Período orbital', value: 'cerca de 365,25 dias terrestres' },
+      ],
+    },
     ...overrides,
   }
 }
@@ -169,5 +176,51 @@ describe('validateCatalogue', () => {
     expect(validateCatalogue([makeDestination(), moon])).toContain(
       'moon: search term "nosso planeta" is already used by earth',
     )
+  })
+
+  it('requires coordinates with a known kind', () => {
+    expect(validateCatalogue([makeDestination({ coordinates: undefined })])).toContain(
+      'earth: coordinates.kind must be one of equatorial, orbital',
+    )
+    expect(
+      validateCatalogue([makeDestination({ coordinates: { kind: 'galactic', entries: [] } })]),
+    ).toContain('earth: coordinates.kind must be one of equatorial, orbital')
+  })
+
+  it('never gives a Solar System body a fixed sky position', () => {
+    const coordinates = {
+      kind: 'equatorial',
+      entries: [
+        { label: 'Ascensão reta', value: '12h 00m 00s' },
+        { label: 'Declinação', value: '+00° 00′' },
+      ],
+    }
+
+    expect(validateCatalogue([makeDestination({ coordinates })])).toContain(
+      'earth: coordinates.kind must be "orbital" for this destination',
+    )
+  })
+
+  it('requires equatorial coordinates beyond the Solar System', () => {
+    const betelgeuse = makeDestination({ id: 'betelgeuse', name: 'Betelgeuse', aliases: [] })
+
+    expect(validateCatalogue([betelgeuse])).toContain(
+      'betelgeuse: coordinates.kind must be "equatorial" for this destination',
+    )
+  })
+
+  it('requires between 2 and 3 complete coordinate entries', () => {
+    const [first] = makeDestination().coordinates.entries
+
+    expect(
+      validateCatalogue([makeDestination({ coordinates: { kind: 'orbital', entries: [first] } })]),
+    ).toContain('earth: coordinates.entries must have between 2 and 3 items')
+    expect(
+      validateCatalogue([
+        makeDestination({
+          coordinates: { kind: 'orbital', entries: [first, { label: '', value: '1' }] },
+        }),
+      ]),
+    ).toContain('earth: coordinates.entries[1] must have a non-empty label and value')
   })
 })

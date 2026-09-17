@@ -1,31 +1,39 @@
-﻿/** Solar System destinations of the curated catalogue (pt-BR). Pure data. */
+/** Solar System destinations of the curated catalogue (pt-BR). Pure data. */
 export const solarSystemDestinations = [
   {
     id: 'sun',
     name: 'Sol',
     aliases: ['estrela do Sistema Solar', 'astro-rei'],
     category: 'star',
-    type: 'Estrela de sequÃªncia principal',
+    type: 'Estrela de sequência principal',
     region: 'Sistema Solar',
-    summary: 'A estrela no centro do Sistema Solar, cuja gravidade mantÃ©m planetas, luas e pequenos corpos em Ã³rbita.',
+    summary: 'A estrela no centro do Sistema Solar, cuja gravidade mantém planetas, luas e pequenos corpos em órbita.',
     featured: true,
     impact:
-      'O Sol fornece a luz e a energia que tornam possÃ­vel a vida na Terra e organiza gravitacionalmente todo o Sistema Solar.',
+      'O Sol fornece a luz e a energia que tornam possível a vida na Terra e organiza gravitacionalmente todo o Sistema Solar.',
     overview:
-      'Ã‰ uma estrela de tamanho mÃ©dio, formada principalmente por plasma, com energia produzida por fusÃ£o nuclear em seu nÃºcleo.',
+      'É uma estrela de tamanho médio, formada principalmente por plasma, com energia produzida por fusão nuclear em seu núcleo.',
     physics: {
       explanation:
-        'No nÃºcleo, a fusÃ£o de hidrogÃªnio libera energia; a pressÃ£o produzida ajuda a equilibrar a atraÃ§Ã£o da enorme massa do Sol.',
+        'No núcleo, a fusão de hidrogênio libera energia; a pressão produzida ajuda a equilibrar a atração da enorme massa do Sol.',
     },
     history:
-      'O estudo do Sol evoluiu de observaÃ§Ãµes a olho nu para mediÃ§Ãµes por telescÃ³pios e missÃµes espaciais que acompanham sua atividade.',
+      'O estudo do Sol evoluiu de observações a olho nu para medições por telescópios e missões espaciais que acompanham sua atividade.',
     facts: [
       { label: 'Raio', value: 'cerca de 700.000 km' },
       { label: 'Massa', value: 'mais de 330.000 massas terrestres' },
-      { label: 'Temperatura do nÃºcleo', value: 'cerca de 15 milhÃµes Â°C' },
-      { label: 'Temperatura da fotosfera', value: 'cerca de 5.500 Â°C' },
-      { label: 'DistÃ¢ncia mÃ©dia da Terra', value: 'cerca de 150 milhÃµes de km' },
+      { label: 'Temperatura do núcleo', value: 'cerca de 15 milhões °C' },
+      { label: 'Temperatura da fotosfera', value: 'cerca de 5.500 °C' },
+      { label: 'Distância média da Terra', value: 'cerca de 150 milhões de km' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Posição', value: 'centro do Sistema Solar' },
+        { label: 'Distância média da Terra', value: 'cerca de 1 UA' },
+        { label: 'Volta ao redor do centro galáctico', value: 'cerca de 230 milhões de anos' },
+      ],
+    },
     sources: [
       {
         title: 'Sun: Facts',
@@ -36,30 +44,37 @@ export const solarSystemDestinations = [
   },
   {
     id: 'mercury',
-    name: 'MercÃºrio',
-    aliases: ['planeta MercÃºrio', 'primeiro planeta do Sistema Solar'],
+    name: 'Mercúrio',
+    aliases: ['planeta Mercúrio', 'primeiro planeta do Sistema Solar'],
     category: 'planet',
     type: 'Planeta rochoso',
     region: 'Sistema Solar interior',
-    summary: 'O menor planeta do Sistema Solar e o mais prÃ³ximo do Sol.',
+    summary: 'O menor planeta do Sistema Solar e o mais próximo do Sol.',
     featured: false,
     impact:
-      'MercÃºrio mostra como a proximidade do Sol pode criar um mundo de extremos tÃ©rmicos e uma Ã³rbita muito rÃ¡pida.',
+      'Mercúrio mostra como a proximidade do Sol pode criar um mundo de extremos térmicos e uma órbita muito rápida.',
     overview:
-      'Sua superfÃ­cie rochosa e cheia de crateras lembra a da Lua, enquanto sua Ã³rbita oval o leva muito perto do Sol.',
+      'Sua superfície rochosa e cheia de crateras lembra a da Lua, enquanto sua órbita oval o leva muito perto do Sol.',
     physics: {
       explanation:
-        'A atmosfera extremamente tÃªnue quase nÃ£o retÃ©m calor: a superfÃ­cie aquece muito durante o dia e esfria intensamente Ã  noite.',
+        'A atmosfera extremamente tênue quase não retém calor: a superfície aquece muito durante o dia e esfria intensamente à noite.',
     },
     history:
-      'A sonda Mariner 10 foi a primeira nave a visitar MercÃºrio; mais tarde, a missÃ£o MESSENGER o estudou em Ã³rbita.',
+      'A sonda Mariner 10 foi a primeira nave a visitar Mercúrio; mais tarde, a missão MESSENGER o estudou em órbita.',
     facts: [
       { label: 'Raio', value: 'cerca de 2.440 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 58 milhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: '88 dias terrestres' },
-      { label: 'RotaÃ§Ã£o', value: '59 dias terrestres' },
-      { label: 'Temperatura na superfÃ­cie', value: 'de cerca de -180 Â°C a 430 Â°C' },
+      { label: 'Distância média do Sol', value: 'cerca de 58 milhões de km' },
+      { label: 'Período orbital', value: '88 dias terrestres' },
+      { label: 'Rotação', value: '59 dias terrestres' },
+      { label: 'Temperatura na superfície', value: 'de cerca de -180 °C a 430 °C' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 0,39 UA' },
+        { label: 'Período orbital', value: '88 dias terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Mercury: Facts',
@@ -70,30 +85,37 @@ export const solarSystemDestinations = [
   },
   {
     id: 'venus',
-    name: 'VÃªnus',
-    aliases: ['planeta VÃªnus', 'segundo planeta do Sistema Solar'],
+    name: 'Vênus',
+    aliases: ['planeta Vênus', 'segundo planeta do Sistema Solar'],
     category: 'planet',
     type: 'Planeta rochoso',
     region: 'Sistema Solar interior',
     summary: 'O segundo planeta a partir do Sol, de tamanho semelhante ao da Terra, mas com uma atmosfera extremamente densa.',
     featured: false,
     impact:
-      'VÃªnus evidencia como uma atmosfera rica em diÃ³xido de carbono pode reter calor e transformar um planeta parecido em tamanho com a Terra.',
+      'Vênus evidencia como uma atmosfera rica em dióxido de carbono pode reter calor e transformar um planeta parecido em tamanho com a Terra.',
     overview:
-      'Nuvens densas escondem uma superfÃ­cie vulcÃ¢nica, quente e sob pressÃ£o atmosfÃ©rica muito maior que a da Terra.',
+      'Nuvens densas escondem uma superfície vulcânica, quente e sob pressão atmosférica muito maior que a da Terra.',
     physics: {
       explanation:
-        'O efeito estufa intenso retÃ©m energia tÃ©rmica na atmosfera espessa, elevando a temperatura da superfÃ­cie acima da de MercÃºrio.',
+        'O efeito estufa intenso retém energia térmica na atmosfera espessa, elevando a temperatura da superfície acima da de Mercúrio.',
     },
     history:
-      'As sondas Venera alcanÃ§aram a superfÃ­cie, e a missÃ£o Magellan da NASA a mapeou por radar durante cinco anos.',
+      'As sondas Venera alcançaram a superfície, e a missão Magellan da NASA a mapeou por radar durante cinco anos.',
     facts: [
-      { label: 'DiÃ¢metro equatorial', value: 'cerca de 12.104 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 108 milhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: '225 dias terrestres' },
-      { label: 'RotaÃ§Ã£o', value: '243 dias terrestres' },
-      { label: 'Temperatura na superfÃ­cie', value: 'cerca de 467 Â°C' },
+      { label: 'Diâmetro equatorial', value: 'cerca de 12.104 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 108 milhões de km' },
+      { label: 'Período orbital', value: '225 dias terrestres' },
+      { label: 'Rotação', value: '243 dias terrestres' },
+      { label: 'Temperatura na superfície', value: 'cerca de 467 °C' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 0,72 UA' },
+        { label: 'Período orbital', value: '225 dias terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Venus: Facts',
@@ -105,29 +127,37 @@ export const solarSystemDestinations = [
   {
     id: 'moon',
     name: 'Lua',
-    aliases: ['lua da Terra', 'satÃ©lite natural da Terra'],
+    aliases: ['lua da Terra', 'satélite natural da Terra'],
     category: 'moon',
-    type: 'SatÃ©lite natural rochoso',
+    type: 'Satélite natural rochoso',
     region: 'Sistema Terra-Lua',
-    summary: 'O Ãºnico satÃ©lite natural da Terra e o Ãºnico corpo celeste alÃ©m dela jÃ¡ visitado por seres humanos.',
+    summary: 'O único satélite natural da Terra e o único corpo celeste além dela já visitado por seres humanos.',
     featured: true,
     impact:
-      'A Lua preserva crateras, rochas e gelo que ajudam a investigar a histÃ³ria do Sistema Solar e serve de destino prÃ³ximo para a exploraÃ§Ã£o humana.',
+      'A Lua preserva crateras, rochas e gelo que ajudam a investigar a história do Sistema Solar e serve de destino próximo para a exploração humana.',
     overview:
-      'Sua superfÃ­cie sÃ³lida e rochosa Ã© marcada por impactos; a rotaÃ§Ã£o sincronizada faz com que o mesmo hemisfÃ©rio fique voltado para a Terra.',
+      'Sua superfície sólida e rochosa é marcada por impactos; a rotação sincronizada faz com que o mesmo hemisfério fique voltado para a Terra.',
     physics: {
       explanation:
-        'A rotaÃ§Ã£o sincronizada acontece porque interaÃ§Ãµes gravitacionais ao longo do tempo fizeram a Lua girar no mesmo ritmo em que orbita a Terra.',
+        'A rotação sincronizada acontece porque interações gravitacionais ao longo do tempo fizeram a Lua girar no mesmo ritmo em que orbita a Terra.',
     },
     history:
-      'As missÃµes Apollo levaram doze astronautas Ã  Lua entre 1969 e 1972 e trouxeram amostras que ainda sÃ£o estudadas.',
+      'As missões Apollo levaram doze astronautas à Lua entre 1969 e 1972 e trouxeram amostras que ainda são estudadas.',
     facts: [
       { label: 'Raio', value: 'cerca de 1.740 km' },
-      { label: 'DistÃ¢ncia mÃ©dia da Terra', value: 'cerca de 384.400 km' },
-      { label: 'PerÃ­odo orbital', value: '27 dias terrestres' },
-      { label: 'RotaÃ§Ã£o', value: 'sincronizada com a Ã³rbita, em 27 dias terrestres' },
-      { label: 'Amostras Apollo trazidas Ã  Terra', value: '382 kg' },
+      { label: 'Distância média da Terra', value: 'cerca de 384.400 km' },
+      { label: 'Período orbital', value: '27 dias terrestres' },
+      { label: 'Rotação', value: 'sincronizada com a órbita, em 27 dias terrestres' },
+      { label: 'Amostras Apollo trazidas à Terra', value: '382 kg' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Corpo central', value: 'Terra' },
+        { label: 'Distância média da Terra', value: 'cerca de 384.400 km' },
+        { label: 'Período orbital', value: '27 dias terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Moon Facts',
@@ -143,25 +173,32 @@ export const solarSystemDestinations = [
     category: 'planet',
     type: 'Planeta rochoso',
     region: 'Sistema Solar interior',
-    summary: 'O quarto planeta a partir do Sol, um mundo frio e desÃ©rtico com atmosfera muito tÃªnue.',
+    summary: 'O quarto planeta a partir do Sol, um mundo frio e desértico com atmosfera muito tênue.',
     featured: true,
     impact:
-      'Marte Ã© um laboratÃ³rio para estudar a perda de Ã¡gua e atmosfera em planetas rochosos e um destino central da exploraÃ§Ã£o robÃ³tica.',
+      'Marte é um laboratório para estudar a perda de água e atmosfera em planetas rochosos e um destino central da exploração robótica.',
     overview:
-      'O solo rico em minerais de ferro oxidados dÃ¡ a Marte a aparÃªncia avermelhada; hÃ¡ calotas polares, vulcÃµes, cÃ¢nions e tempestades de poeira.',
+      'O solo rico em minerais de ferro oxidados dá a Marte a aparência avermelhada; há calotas polares, vulcões, cânions e tempestades de poeira.',
     physics: {
       explanation:
-        'Sua atmosfera fina deixa o calor escapar com facilidade, contribuindo para grandes variaÃ§Ãµes de temperatura na superfÃ­cie.',
+        'Sua atmosfera fina deixa o calor escapar com facilidade, contribuindo para grandes variações de temperatura na superfície.',
     },
     history:
-      'Desde o pouso da Viking 1 em 1976, orbitadores e robÃ´s mÃ³veis estudam o planeta e buscam evidÃªncias de ambientes antigos mais Ãºmidos.',
+      'Desde o pouso da Viking 1 em 1976, orbitadores e robôs móveis estudam o planeta e buscam evidências de ambientes antigos mais úmidos.',
     facts: [
       { label: 'Raio', value: 'cerca de 3.390 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 228 milhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: '687 dias terrestres' },
-      { label: 'DuraÃ§Ã£o do dia', value: '24,6 horas' },
+      { label: 'Distância média do Sol', value: 'cerca de 228 milhões de km' },
+      { label: 'Período orbital', value: '687 dias terrestres' },
+      { label: 'Duração do dia', value: '24,6 horas' },
       { label: 'Luas', value: '2: Fobos e Deimos' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 1,52 UA' },
+        { label: 'Período orbital', value: '687 dias terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Mars: Facts',
@@ -177,25 +214,32 @@ export const solarSystemDestinations = [
     category: 'planet',
     type: 'Planeta rochoso',
     region: 'Sistema Solar',
-    summary: 'O terceiro planeta a partir do Sol e o Ãºnico mundo conhecido que abriga vida.',
+    summary: 'O terceiro planeta a partir do Sol e o único mundo conhecido que abriga vida.',
     featured: true,
     impact:
-      'A Terra Ã© a referÃªncia para comparar outros mundos porque concentra toda a vida conhecida e a Ãºnica civilizaÃ§Ã£o capaz de estudÃ¡-los.',
+      'A Terra é a referência para comparar outros mundos porque concentra toda a vida conhecida e a única civilização capaz de estudá-los.',
     overview:
-      'Seu interior rochoso, oceanos de Ã¡gua lÃ­quida, atmosfera e campo magnÃ©tico formam um sistema que sustenta condiÃ§Ãµes habitÃ¡veis na superfÃ­cie.',
+      'Seu interior rochoso, oceanos de água líquida, atmosfera e campo magnético formam um sistema que sustenta condições habitáveis na superfície.',
     physics: {
       explanation:
-        'A gravidade da Terra mantÃ©m o ar e a Ã¡gua prÃ³ximos ao planeta; sua rotaÃ§Ã£o e a energia recebida do Sol tambÃ©m influenciam o clima.',
+        'A gravidade da Terra mantém o ar e a água próximos ao planeta; sua rotação e a energia recebida do Sol também influenciam o clima.',
     },
     history:
-      'ObservaÃ§Ãµes feitas por satÃ©lites e missÃµes espaciais transformaram a Terra de um horizonte local em um planeta medido como um sistema inteiro.',
+      'Observações feitas por satélites e missões espaciais transformaram a Terra de um horizonte local em um planeta medido como um sistema inteiro.',
     facts: [
-      { label: 'Raio mÃ©dio', value: '6.371 km' },
-      { label: 'Massa', value: '5,97 Ã— 10Â²â´ kg' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: '149,6 milhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: '365,26 dias' },
-      { label: 'Gravidade na superfÃ­cie', value: '9,8 m/sÂ²' },
+      { label: 'Raio médio', value: '6.371 km' },
+      { label: 'Massa', value: '5,97 × 10²⁴ kg' },
+      { label: 'Distância média do Sol', value: '149,6 milhões de km' },
+      { label: 'Período orbital', value: '365,26 dias' },
+      { label: 'Gravidade na superfície', value: '9,8 m/s²' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: '1 UA, por definição' },
+        { label: 'Período orbital', value: '365,26 dias' },
+      ],
+    },
     sources: [
       {
         title: 'Earth Fact Sheet',
@@ -206,30 +250,37 @@ export const solarSystemDestinations = [
   },
   {
     id: 'jupiter',
-    name: 'JÃºpiter',
-    aliases: ['planeta JÃºpiter', 'gigante gasoso JÃºpiter'],
+    name: 'Júpiter',
+    aliases: ['planeta Júpiter', 'gigante gasoso Júpiter'],
     category: 'planet',
     type: 'Gigante gasoso',
     region: 'Sistema Solar exterior',
     summary: 'O quinto planeta a partir do Sol e o maior planeta do Sistema Solar.',
     featured: true,
     impact:
-      'JÃºpiter concentra grande parte da massa planetÃ¡ria do Sistema Solar e permite estudar atmosferas profundas, campos magnÃ©ticos e sistemas de luas.',
+      'Júpiter concentra grande parte da massa planetária do Sistema Solar e permite estudar atmosferas profundas, campos magnéticos e sistemas de luas.',
     overview:
-      'Ã‰ um gigante composto principalmente de hidrogÃªnio e hÃ©lio, coberto por faixas de nuvens e tempestades, incluindo a Grande Mancha Vermelha.',
+      'É um gigante composto principalmente de hidrogênio e hélio, coberto por faixas de nuvens e tempestades, incluindo a Grande Mancha Vermelha.',
     physics: {
       explanation:
-        'A rÃ¡pida rotaÃ§Ã£o e o hidrogÃªnio eletricamente condutor em profundidade ajudam a gerar um campo magnÃ©tico muito intenso; nÃ£o hÃ¡ uma superfÃ­cie sÃ³lida onde uma nave possa pousar.',
+        'A rápida rotação e o hidrogênio eletricamente condutor em profundidade ajudam a gerar um campo magnético muito intenso; não há uma superfície sólida onde uma nave possa pousar.',
     },
     history:
-      'Observado desde a Antiguidade, JÃºpiter foi estudado de perto por missÃµes como Voyager, Galileo e Juno, que mede seu campo gravitacional e magnÃ©tico.',
+      'Observado desde a Antiguidade, Júpiter foi estudado de perto por missões como Voyager, Galileo e Juno, que mede seu campo gravitacional e magnético.',
     facts: [
       { label: 'Raio', value: '69.911 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 778 milhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 12 anos terrestres' },
-      { label: 'DuraÃ§Ã£o do dia', value: 'cerca de 9,9 horas' },
-      { label: 'Atmosfera principal', value: 'hidrogÃªnio e hÃ©lio' },
+      { label: 'Distância média do Sol', value: 'cerca de 778 milhões de km' },
+      { label: 'Período orbital', value: 'cerca de 12 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 9,9 horas' },
+      { label: 'Atmosfera principal', value: 'hidrogênio e hélio' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 5,2 UA' },
+        { label: 'Período orbital', value: 'cerca de 12 anos terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Jupiter Facts',
@@ -241,29 +292,37 @@ export const solarSystemDestinations = [
   {
     id: 'europa',
     name: 'Europa',
-    aliases: ['lua Europa de JÃºpiter', 'Europa, lua de JÃºpiter'],
+    aliases: ['lua Europa de Júpiter', 'Europa, lua de Júpiter'],
     category: 'moon',
-    type: 'SatÃ©lite natural gelado de JÃºpiter',
-    region: 'Sistema de JÃºpiter',
-    summary: 'Uma grande lua de JÃºpiter cuja crosta de gelo provavelmente encobre um oceano global de Ã¡gua lÃ­quida.',
+    type: 'Satélite natural gelado de Júpiter',
+    region: 'Sistema de Júpiter',
+    summary: 'Uma grande lua de Júpiter cuja crosta de gelo provavelmente encobre um oceano global de água líquida.',
     featured: true,
     impact:
-      'Europa Ã© um destino prioritÃ¡rio para investigar se um oceano subterrÃ¢neo em uma lua pode reunir condiÃ§Ãµes favorÃ¡veis Ã  vida como a conhecemos.',
+      'Europa é um destino prioritário para investigar se um oceano subterrâneo em uma lua pode reunir condições favoráveis à vida como a conhecemos.',
     overview:
-      'Esta lua de JÃºpiter tem uma superfÃ­cie clara e fraturada de gelo; abaixo dela, hÃ¡ fortes evidÃªncias de um oceano de Ã¡gua salgada.',
+      'Esta lua de Júpiter tem uma superfície clara e fraturada de gelo; abaixo dela, há fortes evidências de um oceano de água salgada.',
     physics: {
       explanation:
-        'A gravidade de JÃºpiter estica Europa durante sua Ã³rbita levemente oval. Esse aquecimento de marÃ© pode manter Ã¡gua lÃ­quida sob a crosta de gelo.',
+        'A gravidade de Júpiter estica Europa durante sua órbita levemente oval. Esse aquecimento de maré pode manter água líquida sob a crosta de gelo.',
     },
     history:
-      'Europa foi observada por Galileu em 1610; as missÃµes Voyager e Galileo revelaram sua superfÃ­cie fraturada, e a Europa Clipper foi projetada para investigar sua habitabilidade.',
+      'Europa foi observada por Galileu em 1610; as missões Voyager e Galileo revelaram sua superfície fraturada, e a Europa Clipper foi projetada para investigar sua habitabilidade.',
     facts: [
       { label: 'Raio', value: 'cerca de 1.561 km' },
-      { label: 'DistÃ¢ncia mÃ©dia de JÃºpiter', value: 'cerca de 671.000 km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 3,5 dias terrestres' },
-      { label: 'RotaÃ§Ã£o', value: 'sincronizada com a Ã³rbita em torno de JÃºpiter' },
-      { label: 'FenÃ´meno principal', value: 'aquecimento de marÃ© que pode sustentar um oceano interno' },
+      { label: 'Distância média de Júpiter', value: 'cerca de 671.000 km' },
+      { label: 'Período orbital', value: 'cerca de 3,5 dias terrestres' },
+      { label: 'Rotação', value: 'sincronizada com a órbita em torno de Júpiter' },
+      { label: 'Fenômeno principal', value: 'aquecimento de maré que pode sustentar um oceano interno' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Corpo central', value: 'Júpiter' },
+        { label: 'Distância média de Júpiter', value: 'cerca de 671.000 km' },
+        { label: 'Período orbital', value: 'cerca de 3,5 dias terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Europa: Facts',
@@ -275,29 +334,37 @@ export const solarSystemDestinations = [
   {
     id: 'io',
     name: 'Io',
-    aliases: ['lua Io de JÃºpiter', 'Io, lua de JÃºpiter'],
+    aliases: ['lua Io de Júpiter', 'Io, lua de Júpiter'],
     category: 'moon',
-    type: 'SatÃ©lite natural vulcÃ¢nico de JÃºpiter',
-    region: 'Sistema de JÃºpiter',
-    summary: 'Uma lua de JÃºpiter e o corpo com maior atividade vulcÃ¢nica conhecida no Sistema Solar.',
+    type: 'Satélite natural vulcânico de Júpiter',
+    region: 'Sistema de Júpiter',
+    summary: 'Uma lua de Júpiter e o corpo com maior atividade vulcânica conhecida no Sistema Solar.',
     featured: false,
     impact:
-      'Io mostra como forÃ§as gravitacionais podem aquecer o interior de uma lua e alimentar vulcanismo intenso sem depender da energia do Sol.',
+      'Io mostra como forças gravitacionais podem aquecer o interior de uma lua e alimentar vulcanismo intenso sem depender da energia do Sol.',
     overview:
-      'A superfÃ­cie desta lua de JÃºpiter Ã© continuamente renovada por erupÃ§Ãµes vulcÃ¢nicas e por depÃ³sitos ricos em enxofre.',
+      'A superfície desta lua de Júpiter é continuamente renovada por erupções vulcânicas e por depósitos ricos em enxofre.',
     physics: {
       explanation:
-        'As puxadas gravitacionais de JÃºpiter, Europa e Ganimedes deformam Io repetidamente. O atrito interno associado a essa marÃ© transforma energia orbital em calor e alimenta vulcÃµes.',
+        'As puxadas gravitacionais de Júpiter, Europa e Ganimedes deformam Io repetidamente. O atrito interno associado a essa maré transforma energia orbital em calor e alimenta vulcões.',
     },
     history:
-      'Io foi observada por Galileu em 1610; as sondas Voyager, Galileo e Juno registraram vulcÃµes ativos e ajudaram a medir as forÃ§as que os alimentam.',
+      'Io foi observada por Galileu em 1610; as sondas Voyager, Galileo e Juno registraram vulcões ativos e ajudaram a medir as forças que os alimentam.',
     facts: [
       { label: 'Raio', value: 'cerca de 1.822 km' },
-      { label: 'DistÃ¢ncia mÃ©dia de JÃºpiter', value: 'cerca de 422.000 km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 1,8 dia terrestre' },
-      { label: 'RotaÃ§Ã£o', value: 'sincronizada com a Ã³rbita em torno de JÃºpiter' },
-      { label: 'FenÃ´meno principal', value: 'vulcanismo alimentado por aquecimento de marÃ©' },
+      { label: 'Distância média de Júpiter', value: 'cerca de 422.000 km' },
+      { label: 'Período orbital', value: 'cerca de 1,8 dia terrestre' },
+      { label: 'Rotação', value: 'sincronizada com a órbita em torno de Júpiter' },
+      { label: 'Fenômeno principal', value: 'vulcanismo alimentado por aquecimento de maré' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Corpo central', value: 'Júpiter' },
+        { label: 'Distância média de Júpiter', value: 'cerca de 422.000 km' },
+        { label: 'Período orbital', value: 'cerca de 1,8 dia terrestre' },
+      ],
+    },
     sources: [
       {
         title: 'Io: Facts',
@@ -313,25 +380,32 @@ export const solarSystemDestinations = [
     category: 'planet',
     type: 'Gigante gasoso',
     region: 'Sistema Solar exterior',
-    summary: 'O sexto planeta a partir do Sol, conhecido por seu sistema de anÃ©is amplo e complexo.',
+    summary: 'O sexto planeta a partir do Sol, conhecido por seu sistema de anéis amplo e complexo.',
     featured: true,
     impact:
-      'Saturno permite estudar anÃ©is, luas e processos gravitacionais em um sistema que funciona como um laboratÃ³rio natural em escala planetÃ¡ria.',
+      'Saturno permite estudar anéis, luas e processos gravitacionais em um sistema que funciona como um laboratório natural em escala planetária.',
     overview:
-      'Ã‰ o segundo maior planeta do Sistema Solar, feito principalmente de hidrogÃªnio e hÃ©lio, com anÃ©is compostos sobretudo de gelo e rocha.',
+      'É o segundo maior planeta do Sistema Solar, feito principalmente de hidrogênio e hélio, com anéis compostos sobretudo de gelo e rocha.',
     physics: {
       explanation:
-        'Os anÃ©is sÃ£o formados por incontÃ¡veis partÃ­culas em Ã³rbitas separadas; a gravidade de Saturno e de suas luas organiza lacunas, ondas e outras estruturas.',
+        'Os anéis são formados por incontáveis partículas em órbitas separadas; a gravidade de Saturno e de suas luas organiza lacunas, ondas e outras estruturas.',
     },
     history:
-      'Conhecido desde a Antiguidade, Saturno foi visitado por Pioneer e Voyager; a missÃ£o Cassini orbitou o planeta de 2004 a 2017 e transformou o conhecimento sobre seu sistema.',
+      'Conhecido desde a Antiguidade, Saturno foi visitado por Pioneer e Voyager; a missão Cassini orbitou o planeta de 2004 a 2017 e transformou o conhecimento sobre seu sistema.',
     facts: [
-      { label: 'DiÃ¢metro equatorial', value: 'cerca de 120.500 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 1,4 bilhÃ£o de km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 29,4 anos terrestres' },
-      { label: 'DuraÃ§Ã£o do dia', value: 'cerca de 10,7 horas' },
-      { label: 'AnÃ©is', value: 'partÃ­culas de gelo e rocha em Ã³rbita' },
+      { label: 'Diâmetro equatorial', value: 'cerca de 120.500 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 1,4 bilhão de km' },
+      { label: 'Período orbital', value: 'cerca de 29,4 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 10,7 horas' },
+      { label: 'Anéis', value: 'partículas de gelo e rocha em órbita' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 9,5 UA' },
+        { label: 'Período orbital', value: 'cerca de 29,4 anos terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Saturn: Facts',
@@ -342,30 +416,38 @@ export const solarSystemDestinations = [
   },
   {
     id: 'titan',
-    name: 'TitÃ£',
-    aliases: ['lua TitÃ£ de Saturno', 'TitÃ£, lua de Saturno'],
+    name: 'Titã',
+    aliases: ['lua Titã de Saturno', 'Titã, lua de Saturno'],
     category: 'moon',
-    type: 'SatÃ©lite natural com atmosfera de Saturno',
+    type: 'Satélite natural com atmosfera de Saturno',
     region: 'Sistema de Saturno',
-    summary: 'A maior lua de Saturno, com atmosfera densa e um ciclo de lÃ­quidos de metano e etano em sua superfÃ­cie.',
+    summary: 'A maior lua de Saturno, com atmosfera densa e um ciclo de líquidos de metano e etano em sua superfície.',
     featured: true,
     impact:
-      'TitÃ£ Ã© um caso Ãºnico para comparar quÃ­mica atmosfÃ©rica e ciclos de lÃ­quidos em um mundo frio, usando metano e etano em vez de Ã¡gua lÃ­quida na superfÃ­cie.',
+      'Titã é um caso único para comparar química atmosférica e ciclos de líquidos em um mundo frio, usando metano e etano em vez de água líquida na superfície.',
     overview:
-      'Esta lua de Saturno Ã© coberta por uma nÃ©voa dourada; sob ela existem nuvens, chuva, rios, lagos e mares de hidrocarbonetos lÃ­quidos.',
+      'Esta lua de Saturno é coberta por uma névoa dourada; sob ela existem nuvens, chuva, rios, lagos e mares de hidrocarbonetos líquidos.',
     physics: {
       explanation:
-        'Na baixa temperatura de TitÃ£, metano e etano podem condensar, chover e escoar. A atmosfera densa, composta principalmente de nitrogÃªnio, sustenta esse ciclo de lÃ­quidos.',
+        'Na baixa temperatura de Titã, metano e etano podem condensar, chover e escoar. A atmosfera densa, composta principalmente de nitrogênio, sustenta esse ciclo de líquidos.',
     },
     history:
-      'Descoberto por Christiaan Huygens em 1655, TitÃ£ foi investigado pela missÃ£o Cassini-Huygens; a sonda Huygens pousou em sua superfÃ­cie em 2005.',
+      'Descoberto por Christiaan Huygens em 1655, Titã foi investigado pela missão Cassini-Huygens; a sonda Huygens pousou em sua superfície em 2005.',
     facts: [
       { label: 'Raio', value: 'cerca de 2.575 km' },
-      { label: 'DistÃ¢ncia mÃ©dia de Saturno', value: 'cerca de 1,2 milhÃ£o de km' },
-      { label: 'PerÃ­odo orbital', value: '15 dias e 22 horas' },
-      { label: 'Atmosfera', value: 'densa, principalmente de nitrogÃªnio' },
-      { label: 'FenÃ´meno principal', value: 'ciclo de metano e etano com rios, lagos e mares' },
+      { label: 'Distância média de Saturno', value: 'cerca de 1,2 milhão de km' },
+      { label: 'Período orbital', value: '15 dias e 22 horas' },
+      { label: 'Atmosfera', value: 'densa, principalmente de nitrogênio' },
+      { label: 'Fenômeno principal', value: 'ciclo de metano e etano com rios, lagos e mares' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Corpo central', value: 'Saturno' },
+        { label: 'Distância média de Saturno', value: 'cerca de 1,2 milhão de km' },
+        { label: 'Período orbital', value: '15 dias e 22 horas' },
+      ],
+    },
     sources: [
       {
         title: 'Titan: Facts',
@@ -381,25 +463,32 @@ export const solarSystemDestinations = [
     category: 'planet',
     type: 'Gigante de gelo',
     region: 'Sistema Solar exterior',
-    summary: 'O sÃ©timo planeta a partir do Sol, um gigante de gelo que parece girar de lado.',
+    summary: 'O sétimo planeta a partir do Sol, um gigante de gelo que parece girar de lado.',
     featured: false,
     impact:
       'Urano ajuda a investigar uma classe de planetas abundante fora do Sistema Solar, mas ainda pouco explorada de perto: os gigantes de gelo.',
     overview:
-      'Sua atmosfera contÃ©m hidrogÃªnio, hÃ©lio e metano; o metano absorve parte da luz vermelha e contribui para a aparÃªncia azul-esverdeada.',
+      'Sua atmosfera contém hidrogênio, hélio e metano; o metano absorve parte da luz vermelha e contribui para a aparência azul-esverdeada.',
     physics: {
       explanation:
-        'O eixo de rotaÃ§Ã£o inclinado em cerca de 98 graus faz o planeta parecer girar de lado e produz estaÃ§Ãµes extremas, com longos perÃ­odos de luz ou escuridÃ£o nos polos.',
+        'O eixo de rotação inclinado em cerca de 98 graus faz o planeta parecer girar de lado e produz estações extremas, com longos períodos de luz ou escuridão nos polos.',
     },
     history:
-      'William Herschel descobriu Urano com auxÃ­lio de telescÃ³pio em 1781; a Voyager 2 realizou a Ãºnica visita prÃ³xima ao planeta em 1986.',
+      'William Herschel descobriu Urano com auxílio de telescópio em 1781; a Voyager 2 realizou a única visita próxima ao planeta em 1986.',
     facts: [
-      { label: 'DiÃ¢metro equatorial', value: 'cerca de 51.118 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 2,9 bilhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 84 anos terrestres' },
-      { label: 'DuraÃ§Ã£o do dia', value: 'cerca de 17 horas' },
-      { label: 'InclinaÃ§Ã£o do eixo', value: '97,77 graus' },
+      { label: 'Diâmetro equatorial', value: 'cerca de 51.118 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 2,9 bilhões de km' },
+      { label: 'Período orbital', value: 'cerca de 84 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 17 horas' },
+      { label: 'Inclinação do eixo', value: '97,77 graus' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 19,2 UA' },
+        { label: 'Período orbital', value: 'cerca de 84 anos terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Uranus: Facts',
@@ -415,25 +504,32 @@ export const solarSystemDestinations = [
     category: 'planet',
     type: 'Gigante de gelo',
     region: 'Sistema Solar exterior',
-    summary: 'O oitavo e mais distante planeta do Sistema Solar, um mundo frio com ventos extremamente rÃ¡pidos.',
+    summary: 'O oitavo e mais distante planeta do Sistema Solar, um mundo frio com ventos extremamente rápidos.',
     featured: false,
     impact:
-      'Netuno mostra que uma atmosfera distante, que recebe pouca energia solar, ainda pode apresentar clima dinÃ¢mico e ventos intensos.',
+      'Netuno mostra que uma atmosfera distante, que recebe pouca energia solar, ainda pode apresentar clima dinâmico e ventos intensos.',
     overview:
-      'Ã‰ um gigante de gelo com atmosfera principalmente de hidrogÃªnio e hÃ©lio; o metano contribui para sua cor azul e nuvens congeladas sÃ£o levadas por ventos velozes.',
+      'É um gigante de gelo com atmosfera principalmente de hidrogênio e hélio; o metano contribui para sua cor azul e nuvens congeladas são levadas por ventos velozes.',
     physics: {
       explanation:
-        'A dinÃ¢mica atmosfÃ©rica de Netuno produz ventos que podem ultrapassar 2.000 km/h. O metano absorve outras cores da luz e ajuda a dar ao planeta sua tonalidade azul.',
+        'A dinâmica atmosférica de Netuno produz ventos que podem ultrapassar 2.000 km/h. O metano absorve outras cores da luz e ajuda a dar ao planeta sua tonalidade azul.',
     },
     history:
-      'Netuno foi identificado em 1846 a partir de previsÃµes matemÃ¡ticas sobre perturbaÃ§Ãµes na Ã³rbita de Urano; a Voyager 2 foi a primeira nave a passar pelo planeta, em 1989.',
+      'Netuno foi identificado em 1846 a partir de previsões matemáticas sobre perturbações na órbita de Urano; a Voyager 2 foi a primeira nave a passar pelo planeta, em 1989.',
     facts: [
-      { label: 'DiÃ¢metro equatorial', value: 'cerca de 49.528 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 4,5 bilhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 165 anos terrestres' },
-      { label: 'DuraÃ§Ã£o do dia', value: 'cerca de 16 horas' },
+      { label: 'Diâmetro equatorial', value: 'cerca de 49.528 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 4,5 bilhões de km' },
+      { label: 'Período orbital', value: 'cerca de 165 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 16 horas' },
       { label: 'Ventos', value: 'mais de 2.000 km/h em sua atmosfera' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 30 UA' },
+        { label: 'Período orbital', value: 'cerca de 165 anos terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Neptune: Facts',
@@ -444,30 +540,37 @@ export const solarSystemDestinations = [
   },
   {
     id: 'pluto',
-    name: 'PlutÃ£o',
-    aliases: ['planeta anÃ£o PlutÃ£o', 'PlutÃ£o do CinturÃ£o de Kuiper'],
+    name: 'Plutão',
+    aliases: ['planeta anão Plutão', 'Plutão do Cinturão de Kuiper'],
     category: 'dwarf-planet',
-    type: 'Planeta anÃ£o gelado',
-    region: 'CinturÃ£o de Kuiper',
-    summary: 'Um planeta anÃ£o no CinturÃ£o de Kuiper, alÃ©m de Netuno, com montanhas, planÃ­cies, crateras e geleiras.',
+    type: 'Planeta anão gelado',
+    region: 'Cinturão de Kuiper',
+    summary: 'Um planeta anão no Cinturão de Kuiper, além de Netuno, com montanhas, planícies, crateras e geleiras.',
     featured: true,
     impact:
-      'PlutÃ£o ampliou o estudo dos pequenos mundos gelados e mostrou que a classificaÃ§Ã£o cientÃ­fica descreve caracterÃ­sticas orbitais, nÃ£o uma escala de importÃ¢ncia.',
+      'Plutão ampliou o estudo dos pequenos mundos gelados e mostrou que a classificação científica descreve características orbitais, não uma escala de importância.',
     overview:
-      'Ã‰ um mundo complexo e distante, com gelo de nitrogÃªnio, metano e monÃ³xido de carbono na superfÃ­cie e uma atmosfera tÃªnue que varia ao longo de sua Ã³rbita.',
+      'É um mundo complexo e distante, com gelo de nitrogênio, metano e monóxido de carbono na superfície e uma atmosfera tênue que varia ao longo de sua órbita.',
     physics: {
       explanation:
-        'A UniÃ£o AstronÃ´mica Internacional classifica PlutÃ£o como planeta anÃ£o porque ele orbita o Sol, tem forma quase esfÃ©rica, mas nÃ£o limpou a vizinhanÃ§a de sua Ã³rbita de outros objetos.',
+        'A União Astronômica Internacional classifica Plutão como planeta anão porque ele orbita o Sol, tem forma quase esférica, mas não limpou a vizinhança de sua órbita de outros objetos.',
     },
     history:
-      'Descoberto em 1930 e reclassificado pela UniÃ£o AstronÃ´mica Internacional em 2006, PlutÃ£o foi explorado de perto pela missÃ£o New Horizons durante seu sobrevoo de 2015.',
+      'Descoberto em 1930 e reclassificado pela União Astronômica Internacional em 2006, Plutão foi explorado de perto pela missão New Horizons durante seu sobrevoo de 2015.',
     facts: [
-      { label: 'DiÃ¢metro equatorial', value: 'cerca de 2.377 km' },
-      { label: 'DistÃ¢ncia mÃ©dia do Sol', value: 'cerca de 5,9 bilhÃµes de km' },
-      { label: 'PerÃ­odo orbital', value: 'cerca de 248 anos terrestres' },
-      { label: 'DuraÃ§Ã£o do dia', value: 'cerca de 153 horas' },
+      { label: 'Diâmetro equatorial', value: 'cerca de 2.377 km' },
+      { label: 'Distância média do Sol', value: 'cerca de 5,9 bilhões de km' },
+      { label: 'Período orbital', value: 'cerca de 248 anos terrestres' },
+      { label: 'Duração do dia', value: 'cerca de 153 horas' },
       { label: 'Luas conhecidas', value: '5, incluindo Caronte' },
     ],
+    coordinates: {
+      kind: 'orbital',
+      entries: [
+        { label: 'Distância média do Sol', value: 'cerca de 39,5 UA' },
+        { label: 'Período orbital', value: 'cerca de 248 anos terrestres' },
+      ],
+    },
     sources: [
       {
         title: 'Pluto: Facts',

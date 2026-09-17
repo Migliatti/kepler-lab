@@ -1,11 +1,15 @@
 import { normalizeText } from '../utils/text.js'
 import { DESTINATION_CATEGORIES } from './categories.js'
+import { SOLAR_SYSTEM_IDS } from './regions.js'
 
 const REQUIRED_TEXT_FIELDS = ['id', 'name', 'category', 'type', 'region', 'summary']
 const PROGRESSIVE_TEXT_FIELDS = ['impact', 'overview', 'history']
 const MIN_FACTS = 4
 const MAX_FACTS = 5
 const KEBAB_CASE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const COORDINATE_KINDS = ['equatorial', 'orbital']
+const MIN_COORDINATE_ENTRIES = 2
+const MAX_COORDINATE_ENTRIES = 3
 
 const isNonEmptyString = (value) => typeof value === 'string' && value.trim() !== ''
 
@@ -81,6 +85,31 @@ function validateDestination(destination) {
   facts.forEach((fact, index) => {
     if (!isNonEmptyString(fact?.label) || !isNonEmptyString(fact?.value)) {
       errors.push(`facts[${index}] must have a non-empty label and value`)
+    }
+  })
+
+  const coordinates = destination.coordinates
+  if (!COORDINATE_KINDS.includes(coordinates?.kind)) {
+    errors.push(`coordinates.kind must be one of ${COORDINATE_KINDS.join(', ')}`)
+  } else {
+    const expectedKind = SOLAR_SYSTEM_IDS.includes(destination.id) ? 'orbital' : 'equatorial'
+    if (coordinates.kind !== expectedKind) {
+      errors.push(`coordinates.kind must be "${expectedKind}" for this destination`)
+    }
+  }
+
+  const coordinateEntries = Array.isArray(coordinates?.entries) ? coordinates.entries : []
+  if (
+    coordinateEntries.length < MIN_COORDINATE_ENTRIES ||
+    coordinateEntries.length > MAX_COORDINATE_ENTRIES
+  ) {
+    errors.push(
+      `coordinates.entries must have between ${MIN_COORDINATE_ENTRIES} and ${MAX_COORDINATE_ENTRIES} items`,
+    )
+  }
+  coordinateEntries.forEach((entry, index) => {
+    if (!isNonEmptyString(entry?.label) || !isNonEmptyString(entry?.value)) {
+      errors.push(`coordinates.entries[${index}] must have a non-empty label and value`)
     }
   })
 
