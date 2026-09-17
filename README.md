@@ -6,15 +6,18 @@ Kepler Lab é uma experiência didática e contemplativa que parte da Terra para
 
 ## Estado do projeto
 
-O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e o catálogo completo de 22 destinos já existem. A cena 3D navegável começa na Terra e permite selecionar destinos por marcadores. Viagens de câmera, retorno à Terra, painéis de destino e preferências de acessibilidade continuam planejados.
+O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e o catálogo completo de 22 destinos já existem. A cena 3D navegável começa na Terra e permite selecionar destinos por marcadores ou busca, viajar até eles com câmera animada e ilustrativa, pular a viagem, retornar à Terra e ver o local atual. Painéis de destino e preferências de acessibilidade continuam planejados.
 
 | Disponível hoje | Planejado para o MVP |
 | --- | --- |
-| Aplicação React/Vite em pt-BR | Viagem de câmera opcional e retorno à Terra |
-| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Painéis progressivos de destino |
-| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade | Busca integrada à cena |
-| Busca local, aliases e validação do catálogo sem WebGL | Onboarding e preferências locais |
-| Testes unitários para busca, texto, conteúdo e regras de cena | Ajustes de acessibilidade planejados |
+| Aplicação React/Vite em pt-BR | Painéis progressivos de destino |
+| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Onboarding e preferências locais |
+| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade | Persistência de configuração de viagem |
+| Busca local, aliases e validação do catálogo sem WebGL | Ajustes de acessibilidade planejados |
+| Busca integrada à cena, com sugestões em destaque e resultados acionáveis | |
+| Viagem de câmera ilustrativa (com opção de pular) e retorno à Terra | |
+| Local atual sempre visível, independente da cena 3D | |
+| Testes unitários para busca, texto, conteúdo, viagem e regras de cena | |
 
 ## Princípios
 

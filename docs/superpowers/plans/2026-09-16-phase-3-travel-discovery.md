@@ -10,12 +10,27 @@
 
 **Spec:** `specs/product-spec.md`; decisões: `specs/planning-context.yaml`; roteiro: `PLAN.md`; base: `docs/superpowers/plans/2026-09-16-phase-2-scene-navigation.md`.
 
+## Progresso de execução
+
+- Commits: `1784894` (Tarefa 1), `9a7af70` (Tarefa 2), `7bafb8b` (Tarefas 3–4), `edfdb48` e `4f559b9` (correções de acompanhamento da câmera pós-chegada).
+- Testes: `npm test` — 7 arquivos, 63 testes aprovados.
+- Build: `npm run build` — sucesso; aviso de chunk >500 kB do motor 3D (esperado, não é falha).
+- Lint: `npm run lint` — sem erros.
+- `git diff --check`: sem problemas de espaço em branco.
+- Inspeção desktop/mobile dos fluxos (Marte por marcador, pulo, busca "buraco negro", chegada em Sagittarius A*, retorno à Terra, toque): Pendente de levantamento.
+
 ## Nota informativa de revisão futura
 
 As tarefas 3 e 4 foram implementadas provisoriamente e deverão ser revisadas
 integralmente no futuro por outra IA. A revisão deve considerar especialmente
 a permanência da câmera no astro de destino após a chegada, além dos fluxos de
 busca, pulo, chegada e retorno à Terra.
+
+**Revisão concluída em 17/09/2026** (ver `## Progresso de execução`): a
+permanência da câmera após a chegada já havia sido corrigida em `edfdb48` e
+`4f559b9`; os fluxos de busca (`SearchOverlay.jsx`), pulo e retorno
+(`TravelOverlay.jsx`, `NavigationStatus.jsx`, `App.jsx`) foram lidos e
+conferem com as interfaces das Tarefas 3 e 4. Nenhum problema encontrado.
 
 ## Informativo para averiguação futura: uso de subagente
 
