@@ -12,16 +12,18 @@ As Fases 1 a 3 já entregaram o catálogo de 22 destinos, a cena 3D, a navegaç�
 
 Dentro:
 
-- extensão do modelo de conteúdo com curiosidades estruturadas e fórmulas contextualizadas;
+- extensão do modelo de conteúdo com curiosidades estruturadas, coordenadas e fórmulas contextualizadas;
 - aviso de escala ilustrativa compartilhado;
 - painel de destino com as quatro seções da spec de produto;
 - superfície de dados científicos ancorada na borda direita;
+- readout discreto de coordenadas e escala no canto inferior esquerdo;
 - onboarding de três telas com persistência local versionada;
 - botão de Ajuda que reabre o onboarding.
 
 Fora (Fase 5):
 
 - som ambiente, movimento reduzido, texto maior, alto contraste e rótulos descritivos;
+- modo de escala real, explicitamente fora do escopo do MVP;
 - acabamento 3D estilizado, materiais procedurais, halos e partículas;
 - validação de desempenho e responsividade final.
 
@@ -56,15 +58,32 @@ Nos treze destinos restantes a ausência é estado normal e previsto: o painel n
 
 Cada fórmula usa os valores do próprio destino nas variáveis, acompanhada da interpretação em linguagem simples, como o validador já exige.
 
+### Coordenadas
+
+Cada destino ganha `coordinates`: `{ kind, entries }`, com 2 a 3 entradas `{ label, value }` alimentando o readout da cena.
+
+`kind` assume dois valores, porque o tipo de coordenada fixa que um objeto possui depende de onde ele está:
+
+- `equatorial` — objetos fora do Sistema Solar, cuja posição no céu não muda em escala humana. Entradas: ascensão reta, declinação e distância. Aplica-se a Alpha Centauri, Sirius, Betelgeuse, Nebulosa de Órion, Nebulosa do Caranguejo, Sagittarius A*, Centro Galáctico e Via Láctea.
+- `orbital` — corpos do Sistema Solar. Ascensão reta e declinação **não** são fixas para eles: orbitam, e sua posição no céu muda a cada dia. Publicar coordenada equatorial fixa para Marte seria dado errado. As entradas trazem o que de fato é estável: distância média do Sol, período orbital e distância média da Terra.
+
+As entradas são `{ label, value }` livres, e não campos nomeados, porque os casos honestos não são uniformes: o Sol não orbita o Sol, a Lua orbita a Terra e não o Sol, e a Via Láctea não tem uma direção única no céu — nós estamos dentro dela, então suas entradas descrevem o diâmetro e a distância do Sistema Solar ao centro galáctico. Campos nomeados fixos forçariam preenchimento falso nesses quatro casos.
+
+Os valores são textos pt-BR já formatados, como os `facts` existentes. Nenhum cálculo em tempo de execução.
+
 ### Aviso de escala
 
-O aviso não é campo por destino. A distorção de tamanhos e distâncias é propriedade da cena inteira, produzida por `src/scene/layout.js` para todos os corpos. Um novo módulo `src/content/notices.js` exporta o texto único, exibido sempre na seção "Dados e fontes".
+O aviso não é campo por destino. A distorção de tamanhos e distâncias é propriedade da cena inteira, produzida por `src/scene/layout.js` para todos os corpos.
+
+`SCALE_NOTICE` já existe, mas hoje mora em `src/scene/layout.js`. Como é texto de interface, e não geometria, ele passa para um novo módulo `src/content/notices.js`, e a cena o importa de lá. Continua havendo uma única cópia do texto.
+
+O aviso aparece em dois lugares, ambos lendo a mesma constante: no readout da cena, sempre visível, e na seção "Dados e fontes" do painel, onde quem está lendo os números precisa dele ao lado.
 
 Um campo por destino seria vinte e duas cópias do mesmo texto, com vinte e duas chances de divergirem.
 
 ### Divisão do catálogo
 
-`src/content/destinations.js` tem 769 linhas. Com curiosidades e fórmulas passa de 1.150, tamanho em que o arquivo deixa de caber confortavelmente em leitura ou edição.
+`src/content/destinations.js` tem 769 linhas. Com curiosidades, coordenadas e fórmulas passa de 1.300, tamanho em que o arquivo deixa de caber confortavelmente em leitura ou edição.
 
 O catálogo passa a ser:
 
@@ -81,7 +100,10 @@ A ordem do catálogo e todos os imports existentes permanecem idênticos.
 `validateCatalogue.js` passa a exigir:
 
 - `curiosities` com 2 a 4 entradas;
-- cada entrada com `topic` no vocabulário e `text` não vazio.
+- cada entrada com `topic` no vocabulário e `text` não vazio;
+- `coordinates.kind` igual a `equatorial` ou `orbital`;
+- `coordinates.entries` com 2 a 3 entradas de `label` e `value` não vazios;
+- `kind` igual a `orbital` para todo destino da região do Sistema Solar, e `equatorial` para os demais, impedindo que um corpo em órbita receba coordenada de céu fixa.
 
 A fórmula continua opcional, com as regras atuais quando presente.
 
@@ -100,6 +122,8 @@ cabeçalho       nome, tipo, região, frase de impacto
 A ordem das seções, os rótulos e a decisão de omitir a fórmula vivem nesta função, testada sem WebGL. O componente React é um mapeador de seções para markup: não conhece a ordem nem decide o que existe.
 
 Isso atende ao princípio de testar antes de renderizar e mantém a renderização como consumidora de estado.
+
+`src/utils/sceneReadout.js` expõe `buildSceneReadout(destination)`, que devolve as entradas de `coordinates` seguidas do aviso de escala, prontas para exibição. Também pura, também testada sem WebGL.
 
 ## Estado
 
@@ -147,6 +171,14 @@ Clicar no cartão expande o painel com foco na seção "Dados e fontes", que é 
 
 A navegação lateral esquerda da Fase 3 permanece intocada.
 
+### `SceneReadout.jsx`
+
+Readout discreto no canto inferior esquerdo, consumindo `buildSceneReadout`. Instrumentação de fundo, não conteúdo curado: fonte monoespaçada pequena, cinza apagado sobre o fundo da cena, ganhando luminosidade apenas no hover e no foco por teclado. Quem não procurar por ele não o nota.
+
+Fica deliberadamente na borda oposta à superfície de conteúdo. A direita é o que a pessoa lê; a esquerda inferior é o instrumento que fica ligado.
+
+Não é clicável nesta fase e não abre o painel. É o ponto de ancoragem previsto para um futuro controle de escala real, que está fora do escopo do MVP e não é construído aqui — o aviso de escala já ocupa esse canto declarando que a escala atual é ilustrativa.
+
 ### `Onboarding.jsx`
 
 Três telas puláveis. Concluir ou pular grava `hasSeenOnboarding`.
@@ -168,8 +200,10 @@ Tratado explicitamente, nunca como exceção:
 Todos executáveis sem WebGL:
 
 - validador rejeitando curiosidades fora do vocabulário, em número inválido ou com texto vazio;
+- validador rejeitando `kind` inválido e, em especial, coordenada equatorial atribuída a corpo do Sistema Solar;
 - catálogo completo checado contra o modelo estendido;
 - `buildDestinationPanel`: ordem das seções, omissão da fórmula, presença do aviso de escala em todos os destinos;
+- `buildSceneReadout`: entradas de ambos os `kind` e aviso de escala sempre ao final;
 - `preferences`: JSON corrompido, versão divergente, ausência de `localStorage` e ida e volta de gravação;
 - `onboarding`: progressão, pulo e variação por plataforma;
 - `panel`: transições entre `card` e `expanded`, foco de seção e revelação de fórmula.
@@ -180,6 +214,7 @@ Verificação da fase, conforme `PLAN.md`: revisão manual dos 22 destinos e de 
 
 - Cada um dos 22 destinos abre um painel com as quatro seções, em pt-BR.
 - Os dados científicos do destino selecionado estão sempre visíveis na borda direita.
+- O readout discreto no canto inferior esquerdo mostra coordenadas verdadeiras para o destino selecionado, sem atribuir posição fixa de céu a corpos que orbitam.
 - Fórmulas ficam ocultas por padrão e, quando reveladas, usam os valores do próprio destino.
 - Toda representação de escala é informada como ilustrativa.
 - Todas as fontes são acessíveis e apontam para publicações confiáveis.
