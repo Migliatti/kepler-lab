@@ -59,4 +59,4 @@ Antes de declarar uma mudança concluída, execute `npm test`, `npm run build` e
 
 ## Estado atual
 
-[`PLAN.md`](./PLAN.md) foi aprovado em 16/09/2026. Fases 1 (catálogo), 2 (cena e navegação), 3 (viagem e descoberta) e 4 (conteúdo e interface) estão concluídas. A Fase 5 (acabamento e acessibilidade) é a próxima. O desenho da Fase 4 está em `docs/superpowers/specs/2026-09-17-phase-4-content-interface-design.md` e seu ledger em `.superpowers/sdd/2026-09-17-phase-4-content-interface/progress.md`.
+[`PLAN.md`](./PLAN.md) foi aprovado em 16/09/2026. Fases 1 (catálogo), 2 (cena e navegação), 3 (viagem e descoberta) e 4 (conteúdo e interface) estão concluídas. A Fase 5 (acabamento e acessibilidade) é a próxima. O desenho da Fase 4 está em `docs/superpowers/specs/2026-09-17-phase-4-content-interface-design.md` e o plano detalhado, com todas as tarefas marcadas, em [`docs/superpowers/plans/2026-09-17-phase-4-content-interface.md`](./docs/superpowers/plans/2026-09-17-phase-4-content-interface.md).

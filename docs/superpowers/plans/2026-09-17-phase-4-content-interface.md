@@ -68,7 +68,7 @@ Refatoração sem mudança de comportamento. Prepara o terreno para o cresciment
 **Interfaces:**
 - Produces: `solarSystemDestinations` (array de 14), `deepSkyDestinations` (array de 8), `SOLAR_SYSTEM_IDS` (array congelado de 14 ids), `SCALE_NOTICE` (string) em `src/content/notices.js`. `destinations` continua exportado de `src/content/destinations.js` com a mesma ordem.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 Acrescente ao final do `describe` em `src/content/catalogue.test.js`, e os imports no topo:
 
@@ -109,12 +109,12 @@ describe('notices', () => {
 })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/content`
 Expected: FAIL — `Failed to resolve import "./destinations/deepSky.js"` e `"./notices.js"`.
 
-- [ ] **Step 3: Dividir o catálogo mecanicamente**
+- [x] **Step 3: Dividir o catálogo mecanicamente**
 
 As linhas 15–490 de `src/content/destinations.js` contêm os 14 destinos do Sistema Solar (de `sun` a `pluto`); as linhas 491–768 contêm os 8 demais (de `alpha-centauri` a `sagittarius-a-star`). Confirme com `sed -n '15p;490,491p;768,769p' src/content/destinations.js` — deve imprimir `  {`, `  },`, `  {`, `  },`, `]`. Então:
 
@@ -139,7 +139,7 @@ import { solarSystemDestinations } from './destinations/solarSystem.js'
 export const destinations = [...solarSystemDestinations, ...deepSkyDestinations]
 ```
 
-- [ ] **Step 4: Criar `regions.js` e `notices.js`**
+- [x] **Step 4: Criar `regions.js` e `notices.js`**
 
 `src/content/regions.js`:
 
@@ -156,7 +156,7 @@ export const SOLAR_SYSTEM_IDS = Object.freeze([
 export const SCALE_NOTICE = 'Posições e tamanhos são ilustrativos para permitir a exploração.'
 ```
 
-- [ ] **Step 5: Tirar o aviso da cena**
+- [x] **Step 5: Tirar o aviso da cena**
 
 Em `src/scene/layout.js`, apague a linha 1 (`export const SCALE_NOTICE = ...`) e a linha em branco seguinte.
 
@@ -171,12 +171,12 @@ import { getSceneDestinations } from './layout.js'
 
 O `<p className="scale-notice">` continua renderizado até a Tarefa 7.
 
-- [ ] **Step 6: Rodar a verificação completa**
+- [x] **Step 6: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: todos os testes passam (os dois novos incluídos), build e lint limpos.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/content src/scene/layout.js src/scene/layout.test.js src/scene/ExplorationScene.jsx
@@ -197,7 +197,7 @@ git commit -m "chore(content): split catalogue by region and move scale notice t
 - Consumes: `SOLAR_SYSTEM_IDS` de `src/content/regions.js`.
 - Produces: todo destino tem `coordinates: { kind: 'equatorial' | 'orbital', entries: Array<{ label: string, value: string }> }` com 2–3 entradas.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 Em `src/content/validateCatalogue.test.js`, acrescente ao objeto retornado por `makeDestination`, logo antes de `...overrides`:
 
@@ -261,12 +261,12 @@ Acrescente ao final do `describe`:
   })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/content/validateCatalogue.test.js`
 Expected: FAIL nos quatro testes novos (nenhuma mensagem de `coordinates` é emitida).
 
-- [ ] **Step 3: Implementar a regra**
+- [x] **Step 3: Implementar a regra**
 
 Em `src/content/validateCatalogue.js`, acrescente aos imports:
 
@@ -311,12 +311,12 @@ Acrescente, dentro de `validateDestination`, logo antes do bloco `const sources 
   })
 ```
 
-- [ ] **Step 4: Rodar e ver os novos testes passarem e o catálogo falhar**
+- [x] **Step 4: Rodar e ver os novos testes passarem e o catálogo falhar**
 
 Run: `npx vitest run src/content/validateCatalogue.test.js`
 Expected: os quatro testes novos passam; `accepts the curated catalogue` e os testes de lote falham com `coordinates.kind must be one of equatorial, orbital` para os 22 destinos. É o vermelho que o passo seguinte resolve.
 
-- [ ] **Step 5: Preencher as coordenadas dos 22 destinos**
+- [x] **Step 5: Preencher as coordenadas dos 22 destinos**
 
 Acrescente a cada destino, logo depois de `facts`, o bloco correspondente. Os períodos e distâncias em km repetem literalmente os `facts` existentes; distâncias em UA são a mesma grandeza em outra unidade e estão nas páginas NASA já citadas em cada destino.
 
@@ -535,12 +535,12 @@ Formato de cada entrada: `{ title: '<título>', publisher: 'CDS, Université de 
 
 > **Atenção para a revisão manual (Tarefa 13):** o catálogo já publicava distâncias diferentes para o Centro Galáctico (26 mil anos-luz) e Sagittarius A* (27 mil anos-luz), que estão no mesmo lugar. Esta tarefa preserva os `facts` como estão; a divergência é registrada para decisão na revisão de conteúdo.
 
-- [ ] **Step 6: Rodar a verificação completa**
+- [x] **Step 6: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde, incluindo `accepts the curated catalogue`.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/content
@@ -566,7 +566,7 @@ A regra entra validando `curiosities` **quando presente**; a obrigatoriedade vem
 
 - Produces: `CURIOSITY_TOPICS` (array congelado de `{ id, label }`), `CURIOSITY_TOPIC_IDS` (array de ids), `getCuriosityTopicLabel(topicId): string | undefined`. Destinos do Sistema Solar com `curiosities: Array<{ topic: string, text: string }>`.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 `src/content/curiosityTopics.test.js`:
 
@@ -640,12 +640,12 @@ Em `src/content/catalogue.test.js`, acrescente ao final do `describe`:
   })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/content`
 Expected: FAIL — `curiosityTopics.js` não existe; testes de curiosidades sem mensagens; destinos sem `curiosities`.
 
-- [ ] **Step 3: Criar o vocabulário**
+- [x] **Step 3: Criar o vocabulário**
 
 `src/content/curiosityTopics.js`:
 
@@ -666,7 +666,7 @@ export function getCuriosityTopicLabel(topicId) {
 }
 ```
 
-- [ ] **Step 4: Implementar a regra opcional**
+- [x] **Step 4: Implementar a regra opcional**
 
 Em `src/content/validateCatalogue.js`, acrescente aos imports:
 
@@ -719,7 +719,7 @@ Dentro de `validateDestination`, logo depois do bloco de `physics.formula`:
   }
 ```
 
-- [ ] **Step 5: Escrever as curiosidades do Sistema Solar**
+- [x] **Step 5: Escrever as curiosidades do Sistema Solar**
 
 Acrescente a cada destino, logo depois de `history`, o bloco `curiosities` abaixo.
 
@@ -812,12 +812,12 @@ Regra de fonte: cada texto precisa estar sustentado por uma fonte já listada no
     ],
 ```
 
-- [ ] **Step 6: Rodar a verificação completa**
+- [x] **Step 6: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add src/content
@@ -840,7 +840,7 @@ git commit -m "feat(content): add curiosity vocabulary and Solar System curiosit
 - Consumes: `validateCuriosities` e `CURIOSITY_TOPIC_IDS` da Tarefa 3.
 - Produces: todo destino tem `curiosities` válido; o campo passa a ser obrigatório.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 Em `src/content/validateCatalogue.test.js`, **substitua** o teste `'accepts a destination without curiosities while the batch is in progress'` por:
 
@@ -871,12 +871,12 @@ Em `src/content/catalogue.test.js`, **substitua** o teste `'gives every Solar Sy
   })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/content`
 Expected: FAIL — `requires curiosities` sem a mensagem; os 8 destinos de `deepSky.js` sem `curiosities`.
 
-- [ ] **Step 3: Tornar o campo obrigatório**
+- [x] **Step 3: Tornar o campo obrigatório**
 
 Em `src/content/validateCatalogue.js`, substitua:
 
@@ -892,7 +892,7 @@ por:
   errors.push(...validateCuriosities(destination.curiosities))
 ```
 
-- [ ] **Step 4: Escrever as curiosidades dos 8 destinos**
+- [x] **Step 4: Escrever as curiosidades dos 8 destinos**
 
 Mesma regra de fonte da Tarefa 3. Para Sagittarius A*, a fonte do Event Horizon Telescope já está no destino; acrescente `{ title: 'The Nobel Prize in Physics 2020', publisher: 'Nobel Prize Outreach', url: 'https://www.nobelprize.org/prizes/physics/2020/summary/' }` para sustentar a terceira curiosidade.
 
@@ -947,12 +947,12 @@ Mesma regra de fonte da Tarefa 3. Para Sagittarius A*, a fonte do Event Horizon 
     ],
 ```
 
-- [ ] **Step 5: Rodar a verificação completa**
+- [x] **Step 5: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/content
@@ -975,7 +975,7 @@ git commit -m "feat(content): complete deep-sky curiosities and require them"
 
 - Produces: `physics.formula: { expression, variables: Array<{ symbol, meaning, value }>, interpretation }` exatamente nos nove ids abaixo.
 
-- [ ] **Step 1: Escrever o teste que falha**
+- [x] **Step 1: Escrever o teste que falha**
 
 Em `src/content/catalogue.test.js`:
 
@@ -993,12 +993,12 @@ Em `src/content/catalogue.test.js`:
   })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/content/catalogue.test.js`
 Expected: FAIL — `expected [] to deeply equal [ 'alpha-centauri', … ]`.
 
-- [ ] **Step 3: Acrescentar as fórmulas**
+- [x] **Step 3: Acrescentar as fórmulas**
 
 Em cada destino, dentro do objeto `physics` existente e depois de `explanation`, acrescente `formula`. As contas foram conferidas; os valores batem com os `facts` onde a grandeza já aparece (Terra: massa `5,97 × 10²⁴ kg`, raio `6.371 km`, gravidade `9,8 m/s²`).
 
@@ -1110,12 +1110,12 @@ Em cada destino, dentro do objeto `physics` existente e depois de `explanation`,
 
 Confirme temperatura, massa e raio de cada destino contra a fonte do próprio destino. Se a fonte trouxer valor diferente, use o da fonte e refaça a conta do resultado (primeira variável) e da interpretação.
 
-- [ ] **Step 4: Rodar a verificação completa**
+- [x] **Step 4: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/content
@@ -1150,7 +1150,7 @@ buildDestinationPanel(destination) → {
 }
 ```
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 `src/utils/destinationPanel.test.js`:
 
@@ -1219,12 +1219,12 @@ describe('buildDestinationPanel', () => {
 })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/utils/destinationPanel.test.js`
 Expected: FAIL — `Failed to resolve import "./destinationPanel.js"`.
 
-- [ ] **Step 3: Implementar**
+- [x] **Step 3: Implementar**
 
 `src/utils/destinationPanel.js`:
 
@@ -1272,12 +1272,12 @@ export function buildDestinationPanel(destination) {
 }
 ```
 
-- [ ] **Step 4: Rodar a verificação completa**
+- [x] **Step 4: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/utils/destinationPanel.js src/utils/destinationPanel.test.js
@@ -1304,7 +1304,7 @@ Substitui o aviso de escala que hoje flutua no canto inferior direito — que co
 - Consumes: `destination.coordinates` (Tarefa 2), `SCALE_NOTICE` (Tarefa 1).
 - Produces: `buildSceneReadout(destination) → { name: string, kind: 'equatorial' | 'orbital', entries: Array<{ label, value }>, scaleNotice: string }`; componente `<SceneReadout destination={destination} />`.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 `src/utils/sceneReadout.test.js`:
 
@@ -1352,12 +1352,12 @@ describe('buildSceneReadout', () => {
 })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/utils/sceneReadout.test.js`
 Expected: FAIL — `Failed to resolve import "./sceneReadout.js"`.
 
-- [ ] **Step 3: Implementar a função pura**
+- [x] **Step 3: Implementar a função pura**
 
 `src/utils/sceneReadout.js`:
 
@@ -1374,12 +1374,12 @@ export function buildSceneReadout(destination) {
 }
 ```
 
-- [ ] **Step 4: Rodar os testes**
+- [x] **Step 4: Rodar os testes**
 
 Run: `npx vitest run src/utils/sceneReadout.test.js`
 Expected: PASS.
 
-- [ ] **Step 5: Criar o componente**
+- [x] **Step 5: Criar o componente**
 
 `src/components/SceneReadout.jsx`:
 
@@ -1407,7 +1407,7 @@ export function SceneReadout({ destination }) {
 
 `tabIndex={0}` existe para que o clareamento também aconteça no foco por teclado, como a spec exige.
 
-- [ ] **Step 6: Tirar o aviso antigo da cena e montar o readout**
+- [x] **Step 6: Tirar o aviso antigo da cena e montar o readout**
 
 Em `src/scene/ExplorationScene.jsx`, apague a linha `<p className="scale-notice" role="note">{SCALE_NOTICE}</p>` e a linha `import { SCALE_NOTICE } from '../content/notices.js'`.
 
@@ -1423,7 +1423,7 @@ e, dentro do fragmento, logo depois de `<ExplorationScene … />`:
       <SceneReadout destination={selectedDestination} />
 ```
 
-- [ ] **Step 7: Estilos**
+- [x] **Step 7: Estilos**
 
 Em `src/index.css`, apague o bloco `.scale-notice { … }` (linhas 59–72) e o bloco `.scale-notice { … }` dentro de `@media (max-width: 700px)`.
 
@@ -1496,14 +1496,14 @@ Dentro de `@media (max-width: 700px)`, acrescente — no celular a folha inferio
 
 O contraste baixo é intencional (instrumento de fundo, pedido explícito). O mesmo aviso de escala também aparece com contraste pleno na seção "Dados e fontes" do painel; a preferência de alto contraste da Fase 5 deve elevar este readout.
 
-- [ ] **Step 8: Rodar a verificação completa e inspecionar**
+- [x] **Step 8: Rodar a verificação completa e inspecionar**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
 Run: `npm run dev`, abra a URL exibida. Confirme: o readout aparece apagado no canto inferior esquerdo com as entradas da Terra e o aviso; clareia no hover e ao receber foco com Tab; selecionar Betelgeuse troca para ascensão reta e declinação; o aviso antigo no canto inferior direito sumiu.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add src/utils/sceneReadout.js src/utils/sceneReadout.test.js src/components/SceneReadout.jsx src/scene/ExplorationScene.jsx src/App.jsx src/index.css
@@ -1532,7 +1532,7 @@ toggleFormula(state, destinationId) → alterna o id em revealedFormulaIds
 isFormulaRevealed(state, destinationId) → boolean
 ```
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 `src/state/panel.test.js`:
 
@@ -1587,12 +1587,12 @@ describe('panel state', () => {
 })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/state/panel.test.js`
 Expected: FAIL — `Failed to resolve import "./panel.js"`.
 
-- [ ] **Step 3: Implementar**
+- [x] **Step 3: Implementar**
 
 `src/state/panel.js`:
 
@@ -1622,12 +1622,12 @@ export function isFormulaRevealed(state, destinationId) {
 }
 ```
 
-- [ ] **Step 4: Rodar a verificação completa**
+- [x] **Step 4: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/state/panel.js src/state/panel.test.js
@@ -1649,7 +1649,7 @@ git commit -m "feat(state): add card and expanded panel transitions"
 - Consumes: `buildDestinationPanel` (Tarefa 6); `createPanelState`, `expandPanel`, `collapsePanel`, `toggleFormula`, `isFormulaRevealed` (Tarefa 8).
 - Produces: `<DestinationPanel destination panel onExpand onCollapse onToggleFormula />`, onde `onExpand()` não recebe argumentos (o cartão sempre abre em `'data'`, decidido pelo App) e `onToggleFormula()` alterna a fórmula do destino exibido.
 
-- [ ] **Step 1: Criar o componente**
+- [x] **Step 1: Criar o componente**
 
 `src/components/DestinationPanel.jsx`:
 
@@ -1805,7 +1805,7 @@ export function DestinationPanel({ destination, panel, onExpand, onCollapse, onT
 
 `scrollIntoView` usa o comportamento instantâneo padrão de propósito: rolagem suave sem checar movimento reduzido violaria a preferência que a Fase 5 vai introduzir.
 
-- [ ] **Step 2: Ligar no App**
+- [x] **Step 2: Ligar no App**
 
 Em `src/App.jsx`, acrescente os imports:
 
@@ -1840,7 +1840,7 @@ Acrescente, dentro do fragmento, logo depois de `<SceneReadout … />`:
 
 `handleSkipTravel` já chama `handleTravelComplete`, então pular a viagem também expande o painel — é a mesma chegada.
 
-- [ ] **Step 3: Estilos**
+- [x] **Step 3: Estilos**
 
 Acrescente a `src/index.css`, antes do `@media (max-width: 700px)`:
 
@@ -2029,12 +2029,12 @@ Dentro de `@media (max-width: 700px)` — folha inferior com os mesmos dois esta
   }
 ```
 
-- [ ] **Step 4: Rodar a verificação completa**
+- [x] **Step 4: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 5: Inspecionar no navegador**
+- [x] **Step 5: Inspecionar no navegador**
 
 Run: `npm run dev`. No desktop, confirme:
 
@@ -2047,7 +2047,7 @@ Run: `npm run dev`. No desktop, confirme:
 
 No DevTools, em 390 × 844: o cartão vira folha inferior com nome e dois fatos, o readout fica acima dela, e o painel expandido ocupa a parte de baixo a partir de 35% da altura.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/DestinationPanel.jsx src/App.jsx src/index.css
@@ -2079,7 +2079,7 @@ savePreferences(preferences, storage?) → boolean; nunca lança
 
 `storage` é opcional; quando omitido, usa `globalThis.localStorage`. O acesso a ele acontece dentro do `try`, porque em alguns navegadores só ler a propriedade já lança `SecurityError`.
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 `src/state/preferences.test.js`:
 
@@ -2160,12 +2160,12 @@ describe('preferences', () => {
 })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/state/preferences.test.js`
 Expected: FAIL — `Failed to resolve import "./preferences.js"`.
 
-- [ ] **Step 3: Implementar**
+- [x] **Step 3: Implementar**
 
 `src/state/preferences.js`:
 
@@ -2219,12 +2219,12 @@ export function savePreferences(preferences, storage) {
 }
 ```
 
-- [ ] **Step 4: Rodar a verificação completa**
+- [x] **Step 4: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/state/preferences.js src/state/preferences.test.js
@@ -2259,7 +2259,7 @@ isOnboardingOpen(state) → boolean
 
 Os textos de navegação refletem os controles reais: `OrbitControls` com giro, zoom e pan habilitados (`src/scene/SceneCanvas.jsx`) e seleção seguida de confirmação por segundo clique ou toque (Fase 3).
 
-- [ ] **Step 1: Escrever os testes que falham**
+- [x] **Step 1: Escrever os testes que falham**
 
 `src/content/onboardingSteps.test.js`:
 
@@ -2353,12 +2353,12 @@ describe('onboarding state', () => {
 })
 ```
 
-- [ ] **Step 2: Rodar e confirmar a falha**
+- [x] **Step 2: Rodar e confirmar a falha**
 
 Run: `npx vitest run src/content/onboardingSteps.test.js src/state/onboarding.test.js`
 Expected: FAIL — os dois módulos não existem.
 
-- [ ] **Step 3: Implementar os textos**
+- [x] **Step 3: Implementar os textos**
 
 `src/content/onboardingSteps.js`:
 
@@ -2399,7 +2399,7 @@ export function getOnboardingSteps(platform) {
 }
 ```
 
-- [ ] **Step 4: Implementar a máquina de passos**
+- [x] **Step 4: Implementar a máquina de passos**
 
 `src/state/onboarding.js`:
 
@@ -2433,12 +2433,12 @@ export function isOnboardingOpen(state) {
 }
 ```
 
-- [ ] **Step 5: Rodar a verificação completa**
+- [x] **Step 5: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/content/onboardingSteps.js src/content/onboardingSteps.test.js src/state/onboarding.js src/state/onboarding.test.js
@@ -2460,7 +2460,7 @@ git commit -m "feat(content): add onboarding steps and step state machine"
 - Consumes: `getOnboardingSteps` e a máquina de passos (Tarefa 11); `loadPreferences`, `savePreferences` (Tarefa 10).
 - Produces: `<Onboarding steps state onNext onPrevious onSkip />`, que não renderiza nada quando fechado.
 
-- [ ] **Step 1: Criar o componente**
+- [x] **Step 1: Criar o componente**
 
 `src/components/Onboarding.jsx`:
 
@@ -2516,7 +2516,7 @@ export function Onboarding({ steps, state, onNext, onPrevious, onSkip }) {
 
 A `key={step.id}` remonta o botão principal a cada passo, para que `autoFocus` devolva o foco a ele.
 
-- [ ] **Step 2: Ligar no App**
+- [x] **Step 2: Ligar no App**
 
 Em `src/App.jsx`, acrescente os imports:
 
@@ -2573,7 +2573,7 @@ Dentro do fragmento, ao final:
       />
 ```
 
-- [ ] **Step 3: Estilos**
+- [x] **Step 3: Estilos**
 
 Acrescente a `src/index.css`, antes do `@media (max-width: 700px)`:
 
@@ -2651,12 +2651,12 @@ Dentro de `@media (max-width: 700px)`:
   }
 ```
 
-- [ ] **Step 4: Rodar a verificação completa**
+- [x] **Step 4: Rodar a verificação completa**
 
 Run: `npm test && npm run build && npm run lint`
 Expected: tudo verde.
 
-- [ ] **Step 5: Inspecionar no navegador**
+- [x] **Step 5: Inspecionar no navegador**
 
 Run: `npm run dev`. Confirme:
 
@@ -2667,7 +2667,7 @@ Run: `npm run dev`. Confirme:
 5. No DevTools, apague `kepler-lab:preferences` e recarregue: abre de novo. Grave `{not json` na chave e recarregue: abre, sem erro no console.
 6. Com emulação de toque ativa no DevTools, o passo 2 fala em pinça e toque.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/Onboarding.jsx src/App.jsx src/index.css
@@ -2684,7 +2684,7 @@ git commit -m "feat(content): add skippable onboarding with help entry and persi
 - Modify: `README.md` (lista de planos detalhados)
 - Modify: conteúdo em `src/content/destinations/*.js` somente se a revisão encontrar problema
 
-- [ ] **Step 1: Checar todos os links de fonte**
+- [x] **Step 1: Checar todos os links de fonte**
 
 Run:
 
@@ -2694,7 +2694,7 @@ node -e "import('./src/content/destinations.js').then(async ({ destinations }) =
 
 Expected: `200` para cada linha. Para qualquer outro status, abra a URL no navegador — alguns sites recusam requisições automatizadas mas abrem normalmente. Link realmente quebrado: troque pela página equivalente atual do mesmo publicador.
 
-- [ ] **Step 2: Revisar os 22 destinos no navegador**
+- [x] **Step 2: Revisar os 22 destinos no navegador**
 
 Run: `npm run dev`. Para cada destino, na ordem do catálogo:
 
@@ -2706,11 +2706,11 @@ Run: `npm run dev`. Para cada destino, na ordem do catálogo:
 
 Registre a decisão sobre a divergência já existente entre Centro Galáctico (26 mil anos-luz) e Sagittarius A* (27 mil anos-luz): alinhar os dois `facts` e as `coordinates` ao valor da fonte mais recente, ou manter com justificativa. Se alinhar, rode `npm test` e faça commit separado `fix(content): align galactic center distances`.
 
-- [ ] **Step 3: Revisar em largura de celular**
+- [x] **Step 3: Revisar em largura de celular**
 
 No DevTools, em 390 × 844, percorra ao menos Terra, Sol (fórmula), Betelgeuse (coordenadas equatoriais) e Via Láctea (entradas especiais): folha inferior, painel expandido rolável, readout acima da folha, onboarding legível.
 
-- [ ] **Step 4: Atualizar a documentação**
+- [x] **Step 4: Atualizar a documentação**
 
 Em `CLAUDE.md`, substitua o parágrafo de "Estado atual" por:
 
@@ -2724,12 +2724,12 @@ Em `README.md`, logo depois da linha do plano da Fase 2, acrescente:
 - [Plano detalhado da Fase 4](./docs/superpowers/plans/2026-09-17-phase-4-content-interface.md)
 ```
 
-- [ ] **Step 5: Verificação final**
+- [x] **Step 5: Verificação final**
 
 Run: `npm test && npm run build && npm run lint && git diff --check`
 Expected: tudo verde, sem espaços sobrando.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add CLAUDE.md README.md
