@@ -46,6 +46,7 @@ function App() {
       <ExplorationScene
         destinations={destinations}
         selectedId={selectedId}
+        currentLocationId={currentLocationId}
         onSelectDestination={setSelectedId}
         travel={travel}
         onTravelComplete={handleTravelComplete}

@@ -7,6 +7,7 @@ import { EARTH_CAMERA_POSITION, getSceneDestinations, getVisibleMarkerItems, SCA
 export function ExplorationScene({
   destinations,
   selectedId,
+  currentLocationId,
   onSelectDestination,
   travel,
   onTravelComplete,
@@ -39,6 +40,7 @@ export function ExplorationScene({
           items={markerItems}
           destinationById={destinationById}
           selectedId={selectedId}
+          currentLocationId={currentLocationId}
           onSelectDestination={onSelectDestination}
         />
       </SceneCanvas>

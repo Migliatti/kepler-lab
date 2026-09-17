@@ -4,7 +4,9 @@ function stopSceneInteraction(event) {
   event.stopPropagation()
 }
 
-function DestinationMarker({ destination, isSelected, onSelectDestination }) {
+function DestinationMarker({ destination, isSelected, isCurrentLocation, onSelectDestination }) {
+  if (isCurrentLocation) return null
+
   return (
     <Billboard position={destination.position}>
       <Html center distanceFactor={12}>
@@ -54,7 +56,7 @@ function ClusterMarker({ item, destinationById, onSelectDestination }) {
   )
 }
 
-export function DestinationMarkers({ items, destinationById, selectedId, onSelectDestination }) {
+export function DestinationMarkers({ items, destinationById, selectedId, currentLocationId, onSelectDestination }) {
   return items.map((item) => {
     if (item.kind === 'cluster') {
       return (
@@ -74,6 +76,7 @@ export function DestinationMarkers({ items, destinationById, selectedId, onSelec
         key={destination.id}
         destination={{ ...item.destination, ...destination }}
         isSelected={destination.id === selectedId}
+        isCurrentLocation={destination.id === currentLocationId}
         onSelectDestination={onSelectDestination}
       />
     )
