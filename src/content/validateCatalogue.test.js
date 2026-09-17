@@ -223,4 +223,37 @@ describe('validateCatalogue', () => {
       ]),
     ).toContain('earth: coordinates.entries[1] must have a non-empty label and value')
   })
+
+  it('accepts a destination without curiosities while the batch is in progress', () => {
+    expect(validateCatalogue([makeDestination()])).toEqual([])
+  })
+
+  it('validates curiosities when present', () => {
+    const curiosities = [
+      { topic: 'gossip', text: 'Texto válido.' },
+      { topic: 'records', text: '' },
+    ]
+
+    expect(validateCatalogue([makeDestination({ curiosities })])).toEqual(
+      expect.arrayContaining([
+        'earth: curiosities[0].topic must be one of discovery, naming, mythology, missions, records, phenomena',
+        'earth: curiosities[1] must have a non-empty text',
+      ]),
+    )
+  })
+
+  it('requires between 2 and 4 curiosities with distinct topics', () => {
+    const single = [{ topic: 'records', text: 'Único lugar conhecido com vida.' }]
+    const repeated = [
+      { topic: 'records', text: 'Primeiro recorde.' },
+      { topic: 'records', text: 'Segundo recorde.' },
+    ]
+
+    expect(validateCatalogue([makeDestination({ curiosities: single })])).toContain(
+      'earth: "curiosities" must have between 2 and 4 items',
+    )
+    expect(validateCatalogue([makeDestination({ curiosities: repeated })])).toContain(
+      'earth: curiosities[1].topic "records" is repeated',
+    )
+  })
 })

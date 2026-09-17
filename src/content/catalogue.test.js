@@ -72,4 +72,10 @@ describe('launch catalogue', () => {
     expect(solarSystemDestinations.map(({ id }) => id)).toEqual([...SOLAR_SYSTEM_IDS])
     expect(deepSkyDestinations.some(({ id }) => SOLAR_SYSTEM_IDS.includes(id))).toBe(false)
   })
+
+  it('gives every Solar System destination its curiosities', () => {
+    for (const destination of solarSystemDestinations) {
+      expect(destination.curiosities, destination.id).toBeInstanceOf(Array)
+    }
+  })
 })

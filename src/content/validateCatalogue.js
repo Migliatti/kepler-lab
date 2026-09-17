@@ -1,5 +1,6 @@
 import { normalizeText } from '../utils/text.js'
 import { DESTINATION_CATEGORIES } from './categories.js'
+import { CURIOSITY_TOPIC_IDS } from './curiosityTopics.js'
 import { SOLAR_SYSTEM_IDS } from './regions.js'
 
 const REQUIRED_TEXT_FIELDS = ['id', 'name', 'category', 'type', 'region', 'summary']
@@ -10,8 +11,36 @@ const KEBAB_CASE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const COORDINATE_KINDS = ['equatorial', 'orbital']
 const MIN_COORDINATE_ENTRIES = 2
 const MAX_COORDINATE_ENTRIES = 3
+const MIN_CURIOSITIES = 2
+const MAX_CURIOSITIES = 4
 
 const isNonEmptyString = (value) => typeof value === 'string' && value.trim() !== ''
+
+function validateCuriosities(curiosities) {
+  const errors = []
+  const items = Array.isArray(curiosities) ? curiosities : []
+
+  if (items.length < MIN_CURIOSITIES || items.length > MAX_CURIOSITIES) {
+    errors.push(`"curiosities" must have between ${MIN_CURIOSITIES} and ${MAX_CURIOSITIES} items`)
+  }
+
+  const seenTopics = new Set()
+  items.forEach((curiosity, index) => {
+    if (!CURIOSITY_TOPIC_IDS.includes(curiosity?.topic)) {
+      errors.push(`curiosities[${index}].topic must be one of ${CURIOSITY_TOPIC_IDS.join(', ')}`)
+    } else if (seenTopics.has(curiosity.topic)) {
+      errors.push(`curiosities[${index}].topic "${curiosity.topic}" is repeated`)
+    } else {
+      seenTopics.add(curiosity.topic)
+    }
+
+    if (!isNonEmptyString(curiosity?.text)) {
+      errors.push(`curiosities[${index}] must have a non-empty text`)
+    }
+  })
+
+  return errors
+}
 
 function validateDestination(destination) {
   const errors = []
@@ -61,6 +90,10 @@ function validateDestination(destination) {
     if (!isNonEmptyString(formula?.interpretation)) {
       errors.push('physics.formula.interpretation must be a non-empty string')
     }
+  }
+
+  if (destination.curiosities !== undefined) {
+    errors.push(...validateCuriosities(destination.curiosities))
   }
 
   if (

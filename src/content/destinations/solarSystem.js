@@ -19,6 +19,11 @@ export const solarSystemDestinations = [
     },
     history:
       'O estudo do Sol evoluiu de observações a olho nu para medições por telescópios e missões espaciais que acompanham sua atividade.',
+    curiosities: [
+      { topic: 'phenomena', text: 'A luz que sai da superfície do Sol leva cerca de 8 minutos e 20 segundos para chegar à Terra.' },
+      { topic: 'records', text: 'O Sol concentra cerca de 99,8% de toda a massa do Sistema Solar.' },
+      { topic: 'missions', text: 'A sonda Parker Solar Probe, lançada em 2018, é o objeto construído por humanos que mais se aproximou do Sol.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 700.000 km' },
       { label: 'Massa', value: 'mais de 330.000 massas terrestres' },
@@ -61,6 +66,11 @@ export const solarSystemDestinations = [
     },
     history:
       'A sonda Mariner 10 foi a primeira nave a visitar Mercúrio; mais tarde, a missão MESSENGER o estudou em órbita.',
+    curiosities: [
+      { topic: 'naming', text: 'Recebeu o nome do mensageiro dos deuses romanos, veloz como o planeta que dá uma volta no Sol em apenas 88 dias.' },
+      { topic: 'phenomena', text: 'Apesar de ser o planeta mais próximo do Sol, Mercúrio não é o mais quente: Vênus o supera por causa de sua atmosfera densa.' },
+      { topic: 'missions', text: 'A missão BepiColombo, da ESA e da JAXA, foi lançada em 2018 para estudar Mercúrio a partir de sua órbita.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 2.440 km' },
       { label: 'Distância média do Sol', value: 'cerca de 58 milhões de km' },
@@ -102,6 +112,11 @@ export const solarSystemDestinations = [
     },
     history:
       'As sondas Venera alcançaram a superfície, e a missão Magellan da NASA a mapeou por radar durante cinco anos.',
+    curiosities: [
+      { topic: 'phenomena', text: 'Vênus gira no sentido contrário ao da maioria dos planetas; por lá, o Sol nasce a oeste.' },
+      { topic: 'records', text: 'É o planeta mais quente do Sistema Solar, com superfície quente o bastante para derreter chumbo.' },
+      { topic: 'naming', text: 'Leva o nome da deusa romana do amor e da beleza e é o objeto natural mais brilhante do céu noturno depois da Lua.' },
+    ],
     facts: [
       { label: 'Diâmetro equatorial', value: 'cerca de 12.104 km' },
       { label: 'Distância média do Sol', value: 'cerca de 108 milhões de km' },
@@ -143,6 +158,11 @@ export const solarSystemDestinations = [
     },
     history:
       'As missões Apollo levaram doze astronautas à Lua entre 1969 e 1972 e trouxeram amostras que ainda são estudadas.',
+    curiosities: [
+      { topic: 'missions', text: 'Em 1969, a missão Apollo 11 levou Neil Armstrong e Buzz Aldrin a caminhar pela primeira vez em outro mundo.' },
+      { topic: 'phenomena', text: 'A Lua se afasta da Terra cerca de 3,8 centímetros por ano.' },
+      { topic: 'records', text: 'É a quinta maior lua do Sistema Solar.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 1.740 km' },
       { label: 'Distância média da Terra', value: 'cerca de 384.400 km' },
@@ -185,6 +205,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Desde o pouso da Viking 1 em 1976, orbitadores e robôs móveis estudam o planeta e buscam evidências de ambientes antigos mais úmidos.',
+    curiosities: [
+      { topic: 'naming', text: 'Recebeu o nome do deus romano da guerra por causa de sua cor avermelhada.' },
+      { topic: 'records', text: 'O Monte Olimpo, em Marte, é o maior vulcão conhecido do Sistema Solar, cerca de três vezes mais alto que o Monte Everest.' },
+      { topic: 'missions', text: 'Em 2021, o helicóptero Ingenuity fez o primeiro voo motorizado e controlado em outro planeta.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 3.390 km' },
       { label: 'Distância média do Sol', value: 'cerca de 228 milhões de km' },
@@ -226,6 +251,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Observações feitas por satélites e missões espaciais transformaram a Terra de um horizonte local em um planeta medido como um sistema inteiro.',
+    curiosities: [
+      { topic: 'records', text: 'É o único lugar conhecido do universo onde existe vida.' },
+      { topic: 'phenomena', text: 'Cerca de 71% da superfície da Terra é coberta por água.' },
+      { topic: 'naming', text: 'É o único planeta do Sistema Solar cujo nome não vem de uma divindade grega ou romana.' },
+    ],
     facts: [
       { label: 'Raio médio', value: '6.371 km' },
       { label: 'Massa', value: '5,97 × 10²⁴ kg' },
@@ -267,6 +297,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Observado desde a Antiguidade, Júpiter foi estudado de perto por missões como Voyager, Galileo e Juno, que mede seu campo gravitacional e magnético.',
+    curiosities: [
+      { topic: 'records', text: 'Júpiter tem mais que o dobro da massa de todos os outros planetas do Sistema Solar somados.' },
+      { topic: 'phenomena', text: 'A Grande Mancha Vermelha é uma tempestade maior que a Terra, observada há mais de 150 anos.' },
+      { topic: 'discovery', text: 'Em 1610, Galileu Galilei descobriu suas quatro maiores luas, a primeira evidência de corpos orbitando outro astro que não a Terra.' },
+    ],
     facts: [
       { label: 'Raio', value: '69.911 km' },
       { label: 'Distância média do Sol', value: 'cerca de 778 milhões de km' },
@@ -308,6 +343,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Europa foi observada por Galileu em 1610; as missões Voyager e Galileo revelaram sua superfície fraturada, e a Europa Clipper foi projetada para investigar sua habitabilidade.',
+    curiosities: [
+      { topic: 'phenomena', text: 'Sob a crosta de gelo, Europa provavelmente esconde um oceano de água salgada com mais água do que todos os oceanos da Terra.' },
+      { topic: 'discovery', text: 'Foi descoberta por Galileu Galilei em 1610, junto com Io, Ganimedes e Calisto.' },
+      { topic: 'missions', text: 'A sonda Europa Clipper, lançada em 2024, vai investigar se o oceano de Europa reúne condições para a vida.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 1.561 km' },
       { label: 'Distância média de Júpiter', value: 'cerca de 671.000 km' },
@@ -350,6 +390,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Io foi observada por Galileu em 1610; as sondas Voyager, Galileo e Juno registraram vulcões ativos e ajudaram a medir as forças que os alimentam.',
+    curiosities: [
+      { topic: 'records', text: 'Io é o corpo com maior atividade vulcânica do Sistema Solar.' },
+      { topic: 'phenomena', text: 'O calor dos vulcões vem das marés: a gravidade de Júpiter e de outras luas deforma e aquece o interior de Io.' },
+      { topic: 'missions', text: 'Suas erupções ativas foram vistas pela primeira vez pela sonda Voyager 1, em 1979.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 1.822 km' },
       { label: 'Distância média de Júpiter', value: 'cerca de 422.000 km' },
@@ -392,6 +437,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Conhecido desde a Antiguidade, Saturno foi visitado por Pioneer e Voyager; a missão Cassini orbitou o planeta de 2004 a 2017 e transformou o conhecimento sobre seu sistema.',
+    curiosities: [
+      { topic: 'phenomena', text: 'Os anéis são feitos principalmente de pedaços de gelo e rocha, de grãos de poeira a blocos do tamanho de casas.' },
+      { topic: 'records', text: 'Saturno é o planeta menos denso do Sistema Solar, menos denso até que a água.' },
+      { topic: 'missions', text: 'A sonda Cassini estudou Saturno por 13 anos e encerrou a missão mergulhando no planeta em 2017.' },
+    ],
     facts: [
       { label: 'Diâmetro equatorial', value: 'cerca de 120.500 km' },
       { label: 'Distância média do Sol', value: 'cerca de 1,4 bilhão de km' },
@@ -433,6 +483,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Descoberto por Christiaan Huygens em 1655, Titã foi investigado pela missão Cassini-Huygens; a sonda Huygens pousou em sua superfície em 2005.',
+    curiosities: [
+      { topic: 'records', text: 'Titã é a segunda maior lua do Sistema Solar e é maior que o planeta Mercúrio.' },
+      { topic: 'phenomena', text: 'É o único lugar conhecido além da Terra com lagos e mares líquidos na superfície, formados por metano e etano.' },
+      { topic: 'missions', text: 'Em 2005, a sonda Huygens pousou em Titã, o pouso mais distante já realizado pela humanidade.' },
+    ],
     facts: [
       { label: 'Raio', value: 'cerca de 2.575 km' },
       { label: 'Distância média de Saturno', value: 'cerca de 1,2 milhão de km' },
@@ -475,6 +530,11 @@ export const solarSystemDestinations = [
     },
     history:
       'William Herschel descobriu Urano com auxílio de telescópio em 1781; a Voyager 2 realizou a única visita próxima ao planeta em 1986.',
+    curiosities: [
+      { topic: 'phenomena', text: 'Urano gira praticamente deitado, com o eixo inclinado cerca de 98 graus.' },
+      { topic: 'discovery', text: 'Foi o primeiro planeta descoberto com um telescópio, por William Herschel, em 1781.' },
+      { topic: 'missions', text: 'A Voyager 2 é a única nave que visitou Urano, em 1986.' },
+    ],
     facts: [
       { label: 'Diâmetro equatorial', value: 'cerca de 51.118 km' },
       { label: 'Distância média do Sol', value: 'cerca de 2,9 bilhões de km' },
@@ -516,6 +576,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Netuno foi identificado em 1846 a partir de previsões matemáticas sobre perturbações na órbita de Urano; a Voyager 2 foi a primeira nave a passar pelo planeta, em 1989.',
+    curiosities: [
+      { topic: 'discovery', text: 'Netuno foi o primeiro planeta localizado por cálculos matemáticos antes de ser observado, em 1846.' },
+      { topic: 'records', text: 'Tem os ventos mais fortes do Sistema Solar, que passam de 2.000 km/h.' },
+      { topic: 'missions', text: 'A Voyager 2 é a única nave que visitou Netuno, em 1989.' },
+    ],
     facts: [
       { label: 'Diâmetro equatorial', value: 'cerca de 49.528 km' },
       { label: 'Distância média do Sol', value: 'cerca de 4,5 bilhões de km' },
@@ -557,6 +622,11 @@ export const solarSystemDestinations = [
     },
     history:
       'Descoberto em 1930 e reclassificado pela União Astronômica Internacional em 2006, Plutão foi explorado de perto pela missão New Horizons durante seu sobrevoo de 2015.',
+    curiosities: [
+      { topic: 'discovery', text: 'Plutão foi descoberto por Clyde Tombaugh em 1930 e reclassificado como planeta anão em 2006.' },
+      { topic: 'missions', text: 'Em 2015, a sonda New Horizons revelou em Plutão uma grande planície de gelo em forma de coração.' },
+      { topic: 'naming', text: 'O nome foi sugerido por Venetia Burney, uma menina inglesa de 11 anos.' },
+    ],
     facts: [
       { label: 'Diâmetro equatorial', value: 'cerca de 2.377 km' },
       { label: 'Distância média do Sol', value: 'cerca de 5,9 bilhões de km' },
