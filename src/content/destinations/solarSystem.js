@@ -16,6 +16,17 @@ export const solarSystemDestinations = [
     physics: {
       explanation:
         'No núcleo, a fusão de hidrogênio libera energia; a pressão produzida ajuda a equilibrar a atração da enorme massa do Sol.',
+      formula: {
+        expression: 'L = 4πR²σT⁴',
+        variables: [
+          { symbol: 'L', meaning: 'luminosidade: a energia emitida a cada segundo', value: 'cerca de 3,8 × 10²⁶ W' },
+          { symbol: 'R', meaning: 'raio do Sol', value: '6,96 × 10⁸ m' },
+          { symbol: 'σ', meaning: 'constante de Stefan-Boltzmann', value: '5,67 × 10⁻⁸ W/(m²·K⁴)' },
+          { symbol: 'T', meaning: 'temperatura da superfície', value: 'cerca de 5.772 K' },
+        ],
+        interpretation:
+          'A energia que uma estrela irradia cresce muito depressa com a temperatura: dobrar T multiplicaria a luminosidade por 16. Com o raio e a temperatura do Sol, a conta chega a cerca de 3,8 × 10²⁶ watts a cada segundo.',
+      },
     },
     history:
       'O estudo do Sol evoluiu de observações a olho nu para medições por telescópios e missões espaciais que acompanham sua atividade.',
@@ -155,6 +166,17 @@ export const solarSystemDestinations = [
     physics: {
       explanation:
         'A rotação sincronizada acontece porque interações gravitacionais ao longo do tempo fizeram a Lua girar no mesmo ritmo em que orbita a Terra.',
+      formula: {
+        expression: 'g = GM / R²',
+        variables: [
+          { symbol: 'g', meaning: 'aceleração da gravidade na superfície', value: 'cerca de 1,62 m/s²' },
+          { symbol: 'G', meaning: 'constante gravitacional', value: '6,67 × 10⁻¹¹ N·m²/kg²' },
+          { symbol: 'M', meaning: 'massa da Lua', value: '7,35 × 10²² kg' },
+          { symbol: 'R', meaning: 'raio da Lua', value: '1,74 × 10⁶ m' },
+        ],
+        interpretation:
+          'A mesma conta da Terra, com a massa bem menor da Lua, dá cerca de um sexto da gravidade terrestre — por isso os astronautas da Apollo avançavam aos saltos.',
+      },
     },
     history:
       'As missões Apollo levaram doze astronautas à Lua entre 1969 e 1972 e trouxeram amostras que ainda são estudadas.',
@@ -248,6 +270,17 @@ export const solarSystemDestinations = [
     physics: {
       explanation:
         'A gravidade da Terra mantém o ar e a água próximos ao planeta; sua rotação e a energia recebida do Sol também influenciam o clima.',
+      formula: {
+        expression: 'g = GM / R²',
+        variables: [
+          { symbol: 'g', meaning: 'aceleração da gravidade na superfície', value: '9,8 m/s²' },
+          { symbol: 'G', meaning: 'constante gravitacional', value: '6,67 × 10⁻¹¹ N·m²/kg²' },
+          { symbol: 'M', meaning: 'massa da Terra', value: '5,97 × 10²⁴ kg' },
+          { symbol: 'R', meaning: 'raio médio da Terra', value: '6,371 × 10⁶ m' },
+        ],
+        interpretation:
+          'Mais massa puxa com mais força; estar mais longe do centro enfraquece a atração. Com a massa e o raio da Terra, cada segundo de queda livre acrescenta cerca de 9,8 m/s à velocidade.',
+      },
     },
     history:
       'Observações feitas por satélites e missões espaciais transformaram a Terra de um horizonte local em um planeta medido como um sistema inteiro.',
@@ -294,6 +327,17 @@ export const solarSystemDestinations = [
     physics: {
       explanation:
         'A rápida rotação e o hidrogênio eletricamente condutor em profundidade ajudam a gerar um campo magnético muito intenso; não há uma superfície sólida onde uma nave possa pousar.',
+      formula: {
+        expression: 'v = √(2GM / R)',
+        variables: [
+          { symbol: 'v', meaning: 'velocidade de escape: a mínima para deixar o planeta sem propulsão', value: 'cerca de 60 km/s' },
+          { symbol: 'G', meaning: 'constante gravitacional', value: '6,67 × 10⁻¹¹ N·m²/kg²' },
+          { symbol: 'M', meaning: 'massa de Júpiter', value: '1,90 × 10²⁷ kg' },
+          { symbol: 'R', meaning: 'raio equatorial de Júpiter', value: '6,99 × 10⁷ m' },
+        ],
+        interpretation:
+          'Quanto mais massa concentrada, mais rápido é preciso ir para escapar. Em Júpiter são cerca de 60 km/s, mais de cinco vezes os 11 km/s necessários para deixar a Terra.',
+      },
     },
     history:
       'Observado desde a Antiguidade, Júpiter foi estudado de perto por missões como Voyager, Galileo e Juno, que mede seu campo gravitacional e magnético.',
@@ -434,6 +478,16 @@ export const solarSystemDestinations = [
     physics: {
       explanation:
         'Os anéis são formados por incontáveis partículas em órbitas separadas; a gravidade de Saturno e de suas luas organiza lacunas, ondas e outras estruturas.',
+      formula: {
+        expression: 'ρ = M / (4⁄3 · πR³)',
+        variables: [
+          { symbol: 'ρ', meaning: 'densidade média', value: 'cerca de 0,69 g/cm³' },
+          { symbol: 'M', meaning: 'massa de Saturno', value: '5,68 × 10²⁶ kg' },
+          { symbol: 'R', meaning: 'raio médio de Saturno', value: '5,82 × 10⁷ m' },
+        ],
+        interpretation:
+          'Densidade é massa dividida pelo volume. Saturno é enorme, mas feito sobretudo de hidrogênio e hélio: sua densidade média, cerca de 0,69 g/cm³, é menor que a da água (1 g/cm³).',
+      },
     },
     history:
       'Conhecido desde a Antiguidade, Saturno foi visitado por Pioneer e Voyager; a missão Cassini orbitou o planeta de 2004 a 2017 e transformou o conhecimento sobre seu sistema.',

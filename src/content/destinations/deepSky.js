@@ -17,6 +17,16 @@ export const deepSkyDestinations = [
     physics: {
       explanation:
         'As estrelas do sistema permanecem ligadas pela gravidade. Alpha Centauri A e B orbitam uma à outra, enquanto Proxima Centauri está muito mais distante delas.',
+      formula: {
+        expression: 't = d / c',
+        variables: [
+          { symbol: 't', meaning: 'tempo que a luz leva para chegar até nós', value: 'cerca de 4,3 anos' },
+          { symbol: 'd', meaning: 'distância até Alpha Centauri', value: 'cerca de 4,1 × 10¹⁶ m' },
+          { symbol: 'c', meaning: 'velocidade da luz', value: '3,00 × 10⁸ m/s' },
+        ],
+        interpretation:
+          'Tempo é distância dividida por velocidade. A luz de Alpha Centauri que vemos hoje saiu de lá há cerca de 4,3 anos — olhar para o céu é sempre olhar para o passado.',
+      },
     },
     history:
       'Conhecido desde a Antiguidade no céu do hemisfério sul, o sistema é estudado como referência para medir distâncias estelares e procurar planetas em estrelas próximas.',
@@ -123,6 +133,16 @@ export const deepSkyDestinations = [
     physics: {
       explanation:
         'Em supergigantes vermelhas, enormes movimentos de gás e a perda de matéria afetam a superfície e o brilho. A poeira expelida pode também escurecer a estrela quando vista da Terra.',
+      formula: {
+        expression: 'λ = b / T',
+        variables: [
+          { symbol: 'λ', meaning: 'comprimento de onda em que a estrela brilha mais', value: 'cerca de 800 nm' },
+          { symbol: 'b', meaning: 'constante de deslocamento de Wien', value: '2,898 × 10⁻³ m·K' },
+          { symbol: 'T', meaning: 'temperatura da superfície', value: 'cerca de 3.600 K' },
+        ],
+        interpretation:
+          'Quanto mais fria a estrela, maior o comprimento de onda do seu brilho mais intenso. Em Betelgeuse o pico cai no infravermelho, logo além do vermelho visível — por isso a vemos alaranjada.',
+      },
     },
     history:
       'A queda incomum de brilho observada entre 2019 e 2020 foi acompanhada pelo Very Large Telescope. Os dados indicaram a participação de poeira expelida pela própria estrela.',
@@ -229,6 +249,15 @@ export const deepSkyDestinations = [
     physics: {
       explanation:
         'O pulsar gira cerca de 30 vezes por segundo e acelera partículas em campos magnéticos intensos. Essas partículas produzem radiação e ajudam a iluminar a nebulosa em vários comprimentos de onda.',
+      formula: {
+        expression: 'f = 1 / P',
+        variables: [
+          { symbol: 'f', meaning: 'frequência: voltas por segundo', value: 'cerca de 30 voltas/s' },
+          { symbol: 'P', meaning: 'período de rotação do pulsar central', value: 'cerca de 0,033 s' },
+        ],
+        interpretation:
+          'Se uma volta dura 0,033 segundo, cabem cerca de 30 voltas em um segundo. É um objeto com mais massa que o Sol, espremido em poucas dezenas de quilômetros, girando mais rápido que uma hélice.',
+      },
     },
     history:
       'Astrônomos chineses e japoneses registraram a supernova em 1054. A nebulosa foi identificada séculos depois e se tornou o primeiro objeto do catálogo de Messier.',
@@ -382,6 +411,17 @@ export const deepSkyDestinations = [
     physics: {
       explanation:
         'A gravidade de um buraco negro curva intensamente o espaço-tempo; as órbitas das estrelas próximas revelam a massa concentrada em Sagittarius A*.',
+      formula: {
+        expression: 'rₛ = 2GM / c²',
+        variables: [
+          { symbol: 'rₛ', meaning: 'raio de Schwarzschild: o tamanho do horizonte de eventos', value: 'cerca de 1,3 × 10¹⁰ m' },
+          { symbol: 'G', meaning: 'constante gravitacional', value: '6,67 × 10⁻¹¹ N·m²/kg²' },
+          { symbol: 'M', meaning: 'massa de Sagittarius A*', value: 'cerca de 8,6 × 10³⁶ kg (4 milhões de sóis)' },
+          { symbol: 'c', meaning: 'velocidade da luz', value: '3,00 × 10⁸ m/s' },
+        ],
+        interpretation:
+          'O horizonte de eventos é a fronteira de onde nem a luz escapa, e seu tamanho cresce na mesma proporção da massa. Para Sagittarius A* são cerca de 13 milhões de km — algo como um quinto da distância entre o Sol e Mercúrio.',
+      },
     },
     history:
       'Medições de décadas das órbitas estelares no Centro Galáctico sustentaram sua identificação, e o Event Horizon Telescope divulgou sua primeira imagem em 2022.',

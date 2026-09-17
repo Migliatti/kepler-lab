@@ -78,4 +78,16 @@ describe('launch catalogue', () => {
       expect(destination.curiosities, destination.id).toBeInstanceOf(Array)
     }
   })
+
+  it('offers a contextualized formula exactly where it teaches something', () => {
+    const withFormula = destinations
+      .filter(({ physics }) => physics.formula !== undefined)
+      .map(({ id }) => id)
+      .sort()
+
+    expect(withFormula).toEqual([
+      'alpha-centauri', 'betelgeuse', 'crab-nebula', 'earth', 'jupiter',
+      'moon', 'sagittarius-a-star', 'saturn', 'sun',
+    ])
+  })
 })
