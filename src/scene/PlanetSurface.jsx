@@ -1,24 +1,23 @@
-// Reusable r3f planet component using the "flat illustrated" art direction.
-// Copy this file into kepler-lab/src/scene/PlanetSurface.jsx — I can't write
-// into your local project folder directly, only read from it, so drop it in
-// yourself and wire it up where CelestialBodies renders each body.
+// Reusable r3f body surface in the "flat illustrated" art direction: a graded
+// sphere, flat filled land with a darker outline, and a thin atmosphere rim.
+//
+// It draws two kinds of land. `patches` are outlines in geographic coordinates
+// ([longitude, latitude] degrees) — that is how the Earth gets real continents,
+// via buildEarthPatches() in earthSurface.js. `continents` are the procedural
+// blobs, for bodies whose surface only needs to read as texture.
 //
 // Usage:
-//   <PlanetSurface
-//     radius={radius}
-//     oceanLow="#0d2e3f" oceanHigh="#2f7a8c"
-//     landFill="#7fa563" landLine="#2c4321"
-//     continents={[{ center: [0.55, 0.35, 0.6], points: 11, baseR: 0.42, jitter: 0.35, seed: 1.1 }]}
-//     craters={[{ center: [-0.75, -0.2, 0.4], r: 0.045 }]}
-//     orbitRings={[{ scale: 1.7, tilt: 0.18 }, { scale: 2.05, tilt: -0.35 }]}
-//   />
+//   <PlanetSurface radius={radius} patches={buildEarthPatches()} gradient="poles" />
+//   <PlanetSurface radius={radius} craters={[{ center: [-0.75, -0.2, 0.4], r: 0.045 }]} />
 //
-// Every prop has a sane default so it also works as <PlanetSurface radius={radius} />
-// for a quick generic body — swap the color props per celestial body (e.g. rustier
-// tones + no ocean gradient for Mars, no continents/rings for the Moon, etc).
+// The component is decoration only: nothing here answers the raycaster, so the
+// caller keeps a single interaction mesh and pointer handling stays in one place.
 
 import { useMemo } from 'react'
 import * as THREE from 'three'
+import { buildOutlineSegments, buildPatchGeometry } from './sphericalPatch.js'
+
+const NO_RAYCAST = () => null
 
 function tangentBasis(normal) {
   const up = Math.abs(normal.y) > 0.95 ? new THREE.Vector3(1, 0, 0) : new THREE.Vector3(0, 1, 0)
@@ -37,7 +36,7 @@ function blobPoints(count, baseR, jitter, seed) {
   return pts
 }
 
-function buildPatch(radius, centerDir, points2D, lift) {
+function buildBlob(radius, centerDir, points2D, lift) {
   const normal = centerDir.clone().normalize()
   const { u, v } = tangentBasis(normal)
   const dir = new THREE.Vector3()
@@ -94,15 +93,26 @@ export function PlanetSurface({
   radius = 1,
   oceanLow = '#0d2e3f',
   oceanHigh = '#2f7a8c',
+  gradient = 'latitude',
   landFill = '#7fa563',
   landLine = '#2c4321',
   craterLine = '#0a1a22',
   orbitLine = '#bcd7e6',
-  continents = DEFAULT_CONTINENTS,
+  patches = [],
+  continents,
   craters = [],
   orbitRings = [],
   showAtmosphere = true,
+  atmosphereColor,
+  atmosphereOpacity = 0.08,
 }) {
+  // Procedural blobs are the fallback surface: a body that brings its own
+  // patches does not get them unless it asks.
+  const blobs = useMemo(
+    () => continents ?? (patches.length > 0 ? [] : DEFAULT_CONTINENTS),
+    [continents, patches]
+  )
+
   const sphereGeo = useMemo(() => {
     const geo = new THREE.SphereGeometry(radius, 96, 64)
     const pos = geo.attributes.position
@@ -111,7 +121,10 @@ export function PlanetSurface({
     const high = new THREE.Color(oceanHigh)
     const tmp = new THREE.Color()
     for (let i = 0; i < pos.count; i++) {
-      const t = Math.pow((pos.getY(i) / radius + 1) / 2, 0.85)
+      const height = pos.getY(i) / radius
+      // 'poles' grades from the equator outwards, which is how an illustrated
+      // globe reads; 'latitude' grades south to north.
+      const t = gradient === 'poles' ? Math.pow(Math.abs(height), 0.9) : Math.pow((height + 1) / 2, 0.85)
       tmp.copy(low).lerp(high, t)
       colors[i * 3] = tmp.r
       colors[i * 3 + 1] = tmp.g
@@ -119,14 +132,29 @@ export function PlanetSurface({
     }
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
     return geo
-  }, [radius, oceanLow, oceanHigh])
+  }, [radius, oceanLow, oceanHigh, gradient])
 
-  const patches = useMemo(
+  const surfacePatches = useMemo(
     () =>
-      continents.map((c) =>
-        buildPatch(radius, new THREE.Vector3(...c.center), blobPoints(c.points, c.baseR, c.jitter, c.seed), radius * 0.025)
+      patches.map((patch) => {
+        const lift = radius * (patch.liftFactor ?? 0.02)
+        return {
+          ...patch,
+          fillGeo: buildPatchGeometry(radius, patch.outline, { lift }),
+          lineGeos: patch.line
+            ? buildOutlineSegments(radius, patch.outline, { lift: lift + radius * 0.002, breaks: patch.breaks })
+            : [],
+        }
+      }),
+    [radius, patches]
+  )
+
+  const blobGeos = useMemo(
+    () =>
+      blobs.map((c) =>
+        buildBlob(radius, new THREE.Vector3(...c.center), blobPoints(c.points, c.baseR, c.jitter, c.seed), radius * 0.025)
       ),
-    [radius, continents]
+    [radius, blobs]
   )
 
   const craterRings = useMemo(
@@ -136,36 +164,61 @@ export function PlanetSurface({
 
   return (
     <group>
-      <mesh castShadow receiveShadow geometry={sphereGeo}>
+      <mesh castShadow receiveShadow geometry={sphereGeo} raycast={NO_RAYCAST}>
         <meshStandardMaterial vertexColors roughness={0.85} metalness={0.02} />
       </mesh>
 
       {showAtmosphere && (
-        <mesh scale={1.035}>
+        <mesh scale={1.035} raycast={NO_RAYCAST}>
           <sphereGeometry args={[radius, 48, 32]} />
-          <meshBasicMaterial color={oceanHigh} transparent opacity={0.08} side={THREE.BackSide} />
+          <meshBasicMaterial
+            color={atmosphereColor ?? oceanHigh}
+            transparent
+            opacity={atmosphereOpacity}
+            side={THREE.BackSide}
+          />
         </mesh>
       )}
 
-      {patches.map((p, i) => (
+      {surfacePatches.map((patch) => (
+        <group key={patch.id}>
+          <mesh geometry={patch.fillGeo} raycast={NO_RAYCAST}>
+            <meshStandardMaterial
+              color={patch.fill ?? landFill}
+              roughness={0.95}
+              metalness={0}
+              side={THREE.DoubleSide}
+              transparent={(patch.opacity ?? 1) < 1}
+              opacity={patch.opacity ?? 1}
+            />
+          </mesh>
+          {patch.lineGeos.map((geometry, index) => (
+            <line key={index} geometry={geometry} raycast={NO_RAYCAST}>
+              <lineBasicMaterial color={patch.line} transparent opacity={0.85} />
+            </line>
+          ))}
+        </group>
+      ))}
+
+      {blobGeos.map((p, i) => (
         <group key={i}>
-          <mesh geometry={p.fillGeo}>
+          <mesh geometry={p.fillGeo} raycast={NO_RAYCAST}>
             <meshStandardMaterial color={landFill} roughness={0.95} metalness={0} side={THREE.DoubleSide} />
           </mesh>
-          <lineLoop geometry={p.lineGeo}>
+          <lineLoop geometry={p.lineGeo} raycast={NO_RAYCAST}>
             <lineBasicMaterial color={landLine} />
           </lineLoop>
         </group>
       ))}
 
       {craterRings.map((geo, i) => (
-        <line key={i} geometry={geo}>
+        <line key={i} geometry={geo} raycast={NO_RAYCAST}>
           <lineBasicMaterial color={craterLine} transparent opacity={0.4} />
         </line>
       ))}
 
       {orbitRings.map((r, i) => (
-        <mesh key={i} rotation-x={Math.PI / 2 + r.tilt}>
+        <mesh key={i} rotation-x={Math.PI / 2 + r.tilt} raycast={NO_RAYCAST}>
           <ringGeometry args={[radius * r.scale - radius * 0.002, radius * r.scale, 128, 1]} />
           <meshBasicMaterial color={orbitLine} transparent opacity={0.3} side={THREE.DoubleSide} />
         </mesh>
