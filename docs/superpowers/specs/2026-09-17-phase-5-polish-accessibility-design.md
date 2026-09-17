@@ -130,6 +130,65 @@ Consomem o perfil e nada mais:
 2. **Movimento reduzido chega até a cena.** Rotações, pulsações e deriva de partículas param; o corpo continua visível e navegável. Isso é verificável no nível do perfil, sem renderizar.
 3. **Rótulos.** `always` desenha o nome junto de cada corpo, via `Html` do drei (já instalado). `hover` mantém o comportamento atual de `src/components/HoverLabel.jsx`. `none` suprime ambos — mas o `SceneReadout` continua anunciando a seleção, senão `none` quebraria o acesso por leitor de tela.
 
+## Acabamento por corpo
+
+### Direção de arte
+
+`src/scene/PlanetSurface.jsx` fixa o vocabulário visual de todo corpo com superfície: esfera com gradiente por vértice, relevo chapado preenchido com contorno mais escuro, atmosfera como casca `BackSide` de baixa opacidade e anéis como `ringGeometry` fino. Nada de textura, nada carregado da rede, tudo procedural e determinístico.
+
+A Terra é a referência da direção e já está implementada:
+
+- `src/scene/sphericalPatch.js` — puro. Converte contornos em `[longitude, latitude]` para geometria sobre a esfera: projeção gnomônica em torno do centro do contorno, triangulação e subdivisão até que os triângulos acompanhem a curvatura. Também gera elipses e círculos (ilhas e calotas) e recorta linhas de costa em segmentos, para que uma massa dividida em dois retalhos não desenhe a emenda.
+- `src/scene/earthSurface.js` — puro. Os contornos simplificados dos continentes, ilhas, desertos, Amazônia e gelo, mais as cores. A Eurásia é dividida no meridiano 80°, que é o limite de largura de um único retalho.
+- `PlanetSurface` é só decoração: nada nele responde ao raycaster, e `CelestialBodies` mantém uma esfera invisível para ponteiro, seleção e viagem.
+
+### Primitivas que faltam
+
+Cada uma vira campo do perfil em `src/scene/appearance.js`:
+
+| primitiva | para quem | forma |
+| --- | --- | --- |
+| faixas latitudinais | Júpiter, Saturno, Urano, Netuno | cores por faixa de latitude no mesmo gradiente de vértice |
+| manchas e crateras | Lua, Mercúrio, Plutão, Io | `craters` (já existe) e retalhos sem contorno, com dados por corpo |
+| calotas polares | Marte, Terra | `circleOutline` no polo, já implementado |
+| anel como dado | Saturno (largo, com divisão de Cassini), Urano (fino e quase vertical) | remove o `if (id === 'saturn')` de `CelestialBodies.jsx` |
+| halo aditivo | Sol, estrelas, nebulosas, buraco negro | `Halo.jsx` |
+| disco e partículas | Sgr A*, nebulosas, centro galáctico, Via Láctea | `points` instanciado em `CategoryEffects.jsx` |
+
+### Por corpo
+
+Corpos com superfície, todos por `PlanetSurface`:
+
+- **Mercúrio** — cinza `#8d8880`, sem atmosfera, campo denso de crateras.
+- **Vênus** — creme `#e3c98d` uniforme, atmosfera opaca; nenhum relevo visível, que é justamente o fato científico.
+- **Terra** — oceano `#0b3358` → `#2b7ea6`, terra `#6f9d57`, deserto `#c9a86c`, gelo `#e6f0f5`.
+- **Lua** — `#b9b6b0`, sem atmosfera, crateras grandes e mares escuros como retalhos sem contorno.
+- **Marte** — `#c1613a`, retalhos escuros (Syrtis Major, Valles Marineris) e calotas brancas pequenas; atmosfera tênue.
+- **Júpiter** — faixas creme e ocre; a Grande Mancha Vermelha é uma elipse em 60° O, 22° S.
+- **Europa** — gelo `#dfe7ec` com fraturas: só segmentos de linha, sem preenchimento.
+- **Io** — amarelo-enxofre `#e8c95a` com manchas vermelhas irregulares.
+- **Saturno** — faixas suaves e anel largo em duas partes.
+- **Titã** — laranja `#d9a25c` com atmosfera espessa que quase esconde a superfície.
+- **Urano e Netuno** — `#8fd6d9` e `#3b63c4`, faixas fracas; Urano com anel fino quase vertical.
+- **Plutão** — `#c8b49c` com a região clara de Tombaugh como retalho.
+
+Corpos sem superfície, por halo e partículas: Sol (disco emissivo e halo em dois níveis), Alpha Centauri, Sirius e Betelgeuse (branco-azulado, branco e vermelho grande), nebulosas de Órion e do Caranguejo, centro galáctico e Via Láctea.
+
+### Buraco negro
+
+Sgr A* é o único corpo cuja aparência real é um efeito óptico, não uma superfície. A lente gravitacional de verdade — o fundo deformado ao redor da sombra — exige deslocar a imagem já renderizada da cena, isto é, um segundo passe com render target e shader próprio. É exatamente o que esta fase excluiu junto com bloom e pós-processamento, e é o passe mais caro em celular.
+
+O que entra na fase é a leitura fiel montada por geometria, que é o que as imagens do Event Horizon Telescope e a referência de Interstellar mostram:
+
+1. **sombra** — esfera preta pura, sem material emissivo, com raio um pouco menor que o anel;
+2. **anel de fótons** — toro fino e emissivo voltado à câmera, o contorno brilhante da sombra;
+3. **disco de acreção** — anel plano inclinado, mais um arco desenhado por cima da sombra, imitando o topo do disco "dobrado" pela lente. É geometria imitando o efeito, não o efeito;
+4. **assimetria Doppler** — o lado que se aproxima é mais claro e mais azul, por gradiente de cor ao longo do ângulo do disco.
+
+Isso é honesto desde que a interface diga o que é: o aviso de representação ilustrativa vale para o disco dobrado, como já vale para tamanho e distância.
+
+A lente de verdade fica no Pós-MVP, e em uma versão barata: deformar apenas o campo de estrelas.
+
 ## Testes
 
 Unitários, ao lado do módulo, sem WebGL:
@@ -164,4 +223,5 @@ Itens levantados no desenho desta fase, deliberadamente adiados:
 
 - **Malha de espaço-tempo.** Poço local ancorado no destino selecionado, com profundidade derivada da massa em escala logarítmica, preferência própria para ligar e desligar, e aviso de representação ilustrativa. Depende de um campo novo no catálogo: `gravity: { massEarths, source } | null`, já que hoje a massa existe apenas como texto legível dentro de `facts`. Recebem `null` — e portanto não mostram malha — as nebulosas, a região do centro galáctico e a Via Láctea, cuja massa é difusa ou não pertence a um corpo único.
 - **Bloom e pós-processamento** via `@react-three/postprocessing`, para estrelas e núcleo galáctico. Dependência nova, custo de GPU em celular e necessidade de desligamento sob movimento reduzido.
+- **Lente gravitacional em Sgr A\***, deformando apenas o campo de estrelas. Como as estrelas são pontos gerados por semente, a deflexão `α ≈ 4GM/(c²b)` pode ser aplicada no vertex shader, por ponto, sem render target nem segundo passe — bem mais barato que deformar a cena inteira. Limites a assumir: só o fundo se deforma, os outros corpos não; e não aparecem imagens secundárias nem anel de Einstein, que continuam sendo o toro emissivo desenhado à mão. Depende de um `ShaderMaterial` próprio no `Starfield.jsx` e precisa desligar sob movimento reduzido.
 - **Áudio ambiente**, procedural via Web Audio API ou por faixa licenciada, ligado à preferência `sound` já entregue nesta fase.
