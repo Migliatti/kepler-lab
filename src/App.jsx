@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { NavigationStatus } from './components/NavigationStatus.jsx'
 import { SearchOverlay } from './components/SearchOverlay.jsx'
+import { SelectionCard } from './components/SelectionCard.jsx'
 import { TravelOverlay } from './components/TravelOverlay.jsx'
 import { destinations } from './content/destinations.js'
 import { ExplorationScene } from './scene/ExplorationScene.jsx'
@@ -48,13 +49,14 @@ function App() {
         travel={travel}
         onTravelComplete={handleTravelComplete}
       />
-      <NavigationStatus destination={selectedDestination} onReturnToEarth={handleReturnToEarth} />
+      <NavigationStatus destination={currentLocation} onReturnToEarth={handleReturnToEarth} />
       <TravelOverlay destination={selectedDestination} travel={travel} onSkip={handleSkipTravel} />
-      {selectedDestination && selectedDestination.id !== 'earth' && (
-        <button type="button" className="selection-summary" onClick={() => handleTravelTo(selectedDestination.id)}>
-          Ir até {selectedDestination.name}
-        </button>
-      )}
+      <SelectionCard
+        destination={selectedDestination}
+        currentLocationId={currentLocationId}
+        travel={travel}
+        onTravelTo={handleTravelTo}
+      />
       <button type="button" className="search-trigger" onClick={() => setIsSearchOpen(true)}>
         Buscar destinos
       </button>

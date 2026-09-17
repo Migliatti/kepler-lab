@@ -70,10 +70,10 @@ body,
 }
 
 .scale-notice,
-.selection-summary,
 .navigation-status,
 .travel-overlay,
-.search-overlay {
+.search-overlay,
+.selection-card {
   position: fixed;
   z-index: 2;
   margin: 0;
@@ -111,14 +111,26 @@ button:focus-visible {
   max-width: min(29rem, calc(100vw - 2rem));
 }
 
-.selection-summary {
-  left: 1rem;
-  bottom: 1rem;
-}
-
 .navigation-status {
   top: 1rem;
   left: 1rem;
+}
+
+.selection-card {
+  top: 38%;
+  left: 50%;
+  width: min(22rem, calc(100vw - 2rem));
+  padding: 1rem;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.selection-card h2 {
+  margin: 0.2rem 0 0.6rem;
+}
+
+.selection-card button {
+  margin-top: 0.4rem;
 }
 
 .navigation-status p,
@@ -130,6 +142,11 @@ button:focus-visible {
 
 .navigation-status button {
   margin-top: 0.35rem;
+}
+
+.navigation-status__type {
+  color: #c8d5ee;
+  font-size: 0.7rem;
 }
 
 .travel-overlay {
@@ -243,10 +260,8 @@ button:focus-visible {
     top: 8rem;
   }
 
-  .selection-summary {
-    right: 0.75rem;
-    bottom: 0.75rem;
-    left: 0.75rem;
+  .selection-card {
+    width: calc(100vw - 2rem);
   }
 
   .scale-notice {
