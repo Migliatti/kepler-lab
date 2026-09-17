@@ -48,7 +48,6 @@ function App() {
       setCurrentLocationId(current.destinationId)
       return completeTravel(current)
     })
-    setPanel((current) => expandPanel(current, 'overview'))
   }
 
   function handleSkipTravel() {
