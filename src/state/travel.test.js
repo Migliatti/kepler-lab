@@ -2,29 +2,45 @@ import { describe, expect, it } from 'vitest'
 import { completeTravel, returnToEarth, startTravel } from './travel.js'
 
 describe('travel state', () => {
-  it('starts an animated journey when camera travel is enabled', () => {
-    expect(startTravel('mars', true)).toEqual({ destinationId: 'mars', status: 'travelling' })
+  it('animates the full trip by default', () => {
+    expect(startTravel('mars')).toEqual({
+      destinationId: 'mars', travelMode: 'full', status: 'travelling',
+    })
   })
 
-  it('arrives immediately when camera travel is disabled', () => {
-    expect(startTravel('mars', false)).toEqual({ destinationId: 'mars', status: 'arrived' })
+  it('animates the short trip too', () => {
+    expect(startTravel('mars', 'short')).toEqual({
+      destinationId: 'mars', travelMode: 'short', status: 'travelling',
+    })
+  })
+
+  it('arrives immediately in instant mode', () => {
+    expect(startTravel('mars', 'instant')).toEqual({
+      destinationId: 'mars', travelMode: 'instant', status: 'arrived',
+    })
+  })
+
+  it('treats an unknown mode as the full trip', () => {
+    expect(startTravel('mars', 'warp')).toEqual({
+      destinationId: 'mars', travelMode: 'full', status: 'travelling',
+    })
   })
 
   it('marks the same destination as arrived when a journey is skipped', () => {
-    const travel = { destinationId: 'mars', status: 'travelling' }
+    const travel = { destinationId: 'mars', travelMode: 'full', status: 'travelling' }
 
     expect(completeTravel(travel)).toEqual({
-      destinationId: 'mars',
-      status: 'arrived',
+      destinationId: 'mars', travelMode: 'full', status: 'arrived',
     })
-    expect(travel).toEqual({ destinationId: 'mars', status: 'travelling' })
+    expect(travel.status).toBe('travelling')
   })
 
-  it('returns to Earth with camera travel enabled', () => {
-    expect(returnToEarth(true)).toEqual({ destinationId: 'earth', status: 'travelling' })
-  })
-
-  it('returns to Earth immediately when camera travel is disabled', () => {
-    expect(returnToEarth(false)).toEqual({ destinationId: 'earth', status: 'arrived' })
+  it('returns to Earth in the chosen mode', () => {
+    expect(returnToEarth('short')).toEqual({
+      destinationId: 'earth', travelMode: 'short', status: 'travelling',
+    })
+    expect(returnToEarth('instant')).toEqual({
+      destinationId: 'earth', travelMode: 'instant', status: 'arrived',
+    })
   })
 })

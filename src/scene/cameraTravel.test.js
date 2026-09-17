@@ -7,6 +7,8 @@ import {
   getCameraPositionAt,
   getCameraTravelFrame,
   getDestinationCameraPosition,
+  getTravelDurationMs,
+  TRAVEL_DURATIONS_MS,
 } from './cameraTravel.js'
 
 describe('camera travel', () => {
@@ -130,5 +132,18 @@ describe('easeTravelProgress', () => {
     expect(peak).toBeGreaterThan(1)
     expect(peak).toBeLessThanOrEqual(1 + CAMERA_TRAVEL_MAX_OVERSHOOT)
     expect(CAMERA_TRAVEL_MAX_OVERSHOOT).toBeLessThanOrEqual(0.03)
+  })
+})
+
+describe('travel durations', () => {
+  it('keeps one duration per travel mode, with the full trip unchanged', () => {
+    expect(TRAVEL_DURATIONS_MS).toEqual({ full: 3000, short: 1200, instant: 0 })
+    expect(getTravelDurationMs('short')).toBe(1200)
+    expect(getTravelDurationMs('instant')).toBe(0)
+  })
+
+  it('falls back to the full duration for an unknown mode', () => {
+    expect(getTravelDurationMs('warp')).toBe(3000)
+    expect(getTravelDurationMs(undefined)).toBe(3000)
   })
 })

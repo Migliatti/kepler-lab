@@ -1,6 +1,6 @@
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
-import { CAMERA_TRAVEL_DURATION_MS, getCameraTravelFrame } from './cameraTravel.js'
+import { getCameraTravelFrame, getTravelDurationMs } from './cameraTravel.js'
 
 function applyFrame(camera, controls, { position, target }) {
   camera.position.fromArray(position)
@@ -54,10 +54,10 @@ export function CameraTraveller({ travel, sceneDestinations, onTravelComplete })
       startedAtRef.current = clock.getElapsedTime()
     }
 
-    const progress = Math.min(
-      1,
-      ((clock.getElapsedTime() - startedAtRef.current) * 1000) / CAMERA_TRAVEL_DURATION_MS,
-    )
+    const durationMs = getTravelDurationMs(travel?.travelMode)
+    const progress = durationMs <= 0
+      ? 1
+      : Math.min(1, ((clock.getElapsedTime() - startedAtRef.current) * 1000) / durationMs)
 
     applyFrame(camera, controls, getCameraTravelFrame({
       originPosition: originRef.current.position,

@@ -39,7 +39,7 @@ function App() {
 
   function handleTravelTo(destinationId) {
     setSelectedId(destinationId)
-    setTravel(startTravel(destinationId, true))
+    setTravel(startTravel(destinationId, 'full'))
   }
 
   function handleTravelComplete() {
@@ -56,7 +56,7 @@ function App() {
 
   function handleReturnToEarth() {
     setSelectedId('earth')
-    setTravel(returnToEarth(true))
+    setTravel(returnToEarth('full'))
   }
 
   function updateOnboarding(nextState) {

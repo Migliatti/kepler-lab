@@ -1,5 +1,19 @@
 export const CAMERA_TRAVEL_DURATION_MS = 3000
 
+// Um mapa único por modo, para que não haja número mágico de duração espalhado
+// pela cena. 'instant' é zero porque a viagem nunca chega a animar.
+export const TRAVEL_DURATIONS_MS = Object.freeze({
+  full: CAMERA_TRAVEL_DURATION_MS,
+  short: 1200,
+  instant: 0,
+})
+
+export function getTravelDurationMs(travelMode) {
+  return Object.hasOwn(TRAVEL_DURATIONS_MS, travelMode)
+    ? TRAVEL_DURATIONS_MS[travelMode]
+    : TRAVEL_DURATIONS_MS.full
+}
+
 // Must match OrbitControls' minDistance in SceneCanvas. Framing offsets scaled purely by a
 // destination's illustrative radius can land closer than that limit for small bodies, which makes
 // OrbitControls clamp the camera outward the instant the trip ends — a visible flick unrelated to
