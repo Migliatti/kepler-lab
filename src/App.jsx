@@ -8,9 +8,12 @@ import { completeTravel, returnToEarth, startTravel } from './state/travel.js'
 
 function App() {
   const [selectedId, setSelectedId] = useState('earth')
+  const [currentLocationId, setCurrentLocationId] = useState('earth')
   const [travel, setTravel] = useState(null)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const selectedDestination = destinations.find(({ id }) => id === selectedId)
+    ?? destinations.find(({ id }) => id === 'earth')
+  const currentLocation = destinations.find(({ id }) => id === currentLocationId)
     ?? destinations.find(({ id }) => id === 'earth')
 
   function handleTravelTo(destinationId) {
@@ -20,7 +23,11 @@ function App() {
   }
 
   function handleTravelComplete() {
-    setTravel((current) => current && completeTravel(current))
+    setTravel((current) => {
+      if (!current) return current
+      setCurrentLocationId(current.destinationId)
+      return completeTravel(current)
+    })
   }
 
   function handleSkipTravel() {
