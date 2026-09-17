@@ -3,6 +3,8 @@
   --color-text: #e8ecf8;
   --color-text-muted: #9aa3bd;
   --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --sheet-card-height: 7.5rem;
 
   color-scheme: dark;
   font: 18px/1.5 var(--font-sans);
@@ -54,21 +56,6 @@ button:hover,
 button:focus-visible {
   outline: 2px solid #ffe38a;
   outline-offset: 2px;
-}
-
-.scale-notice {
-  position: fixed;
-  z-index: 2;
-  right: 1rem;
-  bottom: 1rem;
-  margin: 0;
-  padding: 0.4rem 0.7rem;
-  max-width: min(29rem, calc(100vw - 2rem));
-  border: 1px solid #7183a9;
-  border-radius: 0.4rem;
-  color: #f1f5ff;
-  background: rgb(3 9 23 / 88%);
-  font-size: 0.78rem;
 }
 
 .travel-status {
@@ -206,14 +193,60 @@ button:focus-visible {
   font-size: 0.78rem;
 }
 
+.scene-readout {
+  position: fixed;
+  z-index: 2;
+  bottom: 1rem;
+  left: 1rem;
+  max-width: min(22rem, calc(100vw - 2rem));
+  color: rgb(154 163 189 / 45%);
+  font: 0.66rem/1.45 var(--font-mono);
+  letter-spacing: 0.02em;
+  transition: color 200ms ease;
+}
+
+.scene-readout:hover,
+.scene-readout:focus-visible {
+  color: rgb(200 213 238 / 85%);
+}
+
+.scene-readout:focus-visible {
+  outline: 1px dashed rgb(200 213 238 / 40%);
+  outline-offset: 4px;
+}
+
+.scene-readout__entries {
+  display: grid;
+  gap: 0.05rem;
+  margin: 0;
+}
+
+.scene-readout__entries div {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.scene-readout__entries dd {
+  margin: 0;
+}
+
+.scene-readout__notice {
+  margin: 0.3rem 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-readout {
+    transition: none;
+  }
+}
+
 @media (max-width: 700px) {
   .nav-sidebar {
     width: 100%;
   }
 
-  .scale-notice {
-    right: 0.75rem;
-    bottom: 0.75rem;
+  .scene-readout {
+    bottom: calc(var(--sheet-card-height) + 1.25rem);
     left: 0.75rem;
   }
 

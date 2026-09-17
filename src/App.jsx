@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavSidebar } from './components/NavSidebar.jsx'
+import { SceneReadout } from './components/SceneReadout.jsx'
 import { TravelOverlay } from './components/TravelOverlay.jsx'
 import { destinations } from './content/destinations.js'
 import { ExplorationScene } from './scene/ExplorationScene.jsx'
@@ -47,6 +48,7 @@ function App() {
         travel={travel}
         onTravelComplete={handleTravelComplete}
       />
+      <SceneReadout destination={selectedDestination} />
       <TravelOverlay destination={selectedDestination} travel={travel} onSkip={handleSkipTravel} />
       <NavSidebar
         destinations={destinations}

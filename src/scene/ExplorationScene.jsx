@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react'
 import { HoverLabel } from '../components/HoverLabel.jsx'
 import { CelestialBodies } from './CelestialBodies.jsx'
 import { SceneCanvas } from './SceneCanvas.jsx'
-import { SCALE_NOTICE } from '../content/notices.js'
 import { getSceneDestinations } from './layout.js'
 
 export function ExplorationScene({
@@ -34,7 +33,6 @@ export function ExplorationScene({
         />
       </SceneCanvas>
       <HoverLabel destination={hoveredDestination} isSelected={hoveredId === selectedId} />
-      <p className="scale-notice" role="note">{SCALE_NOTICE}</p>
     </main>
   )
 }
