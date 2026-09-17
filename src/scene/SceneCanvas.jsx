@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { CameraTraveller } from './CameraTraveller.jsx'
 import { EARTH_CAMERA_POSITION } from './layout.js'
 
-export function SceneCanvas({ children, onControlsChange, travel, sceneDestinations, onTravelComplete }) {
+export function SceneCanvas({ children, travel, sceneDestinations, onTravelComplete }) {
   return (
     <Canvas camera={{ position: EARTH_CAMERA_POSITION, fov: 48 }} dpr={[1, 1.5]}>
       <color attach="background" args={['#03050c']} />
@@ -21,7 +21,6 @@ export function SceneCanvas({ children, onControlsChange, travel, sceneDestinati
         enablePan
         minDistance={5}
         maxDistance={90}
-        onChange={onControlsChange}
       />
     </Canvas>
   )

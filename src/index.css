@@ -36,43 +36,6 @@ body,
   height: 100dvh;
 }
 
-.destination-marker {
-  display: grid;
-  gap: 0.1rem;
-  justify-items: center;
-  padding: 0.15rem 0.3rem;
-  border: none;
-  border-radius: 0.3rem;
-  color: #dbe6ff;
-  background: transparent;
-  font: inherit;
-  font-size: 0.72rem;
-  text-align: center;
-  text-shadow: 0 1px 3px rgb(0 0 0 / 85%);
-  cursor: pointer;
-  min-height: 0;
-}
-
-.destination-marker:hover,
-.destination-marker:focus-visible {
-  color: #ffffff;
-}
-
-.destination-marker[aria-pressed='true'] {
-  color: #ffe38a;
-  text-shadow: 0 0 8px rgb(255 227 138 / 70%);
-}
-
-.destination-marker small {
-  color: inherit;
-  font-size: 0.6rem;
-  opacity: 0.85;
-}
-
-.destination-marker--cluster {
-  padding: 0.2rem 0.4rem;
-}
-
 button,
 input {
   font: inherit;
@@ -132,6 +95,35 @@ button:focus-visible {
   color: #ffe38a;
   background: none;
   text-decoration: underline;
+}
+
+.hover-label {
+  position: fixed;
+  z-index: 2;
+  top: 1rem;
+  left: 50%;
+  display: grid;
+  gap: 0.1rem;
+  justify-items: center;
+  margin: 0;
+  padding: 0.35rem 1rem;
+  transform: translateX(-50%);
+  border: 1px solid #7183a9;
+  border-radius: 999px;
+  color: #f1f5ff;
+  background: rgb(3 9 23 / 88%);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hover-label strong {
+  font-size: 1.05rem;
+}
+
+.hover-label span {
+  color: #c8d5ee;
+  font-size: 0.72rem;
 }
 
 .nav-toggle {
