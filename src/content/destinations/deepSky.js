@@ -320,7 +320,7 @@ export const deepSkyDestinations = [
       { topic: 'missions', text: 'No céu, fica na direção da constelação de Sagitário.' },
     ],
     facts: [
-      { label: 'Distância da Terra', value: 'cerca de 26 mil anos-luz' },
+      { label: 'Distância da Terra', value: 'cerca de 27 mil anos-luz' },
       { label: 'Direção no céu', value: 'constelação de Sagitário' },
       { label: 'Observação óptica', value: 'fortemente bloqueada por poeira' },
       { label: 'Objeto central associado', value: 'Sagittarius A*' },
@@ -331,7 +331,7 @@ export const deepSkyDestinations = [
       entries: [
         { label: 'Ascensão reta', value: '17h 45m 40s' },
         { label: 'Declinação', value: '−29° 00′' },
-        { label: 'Distância da Terra', value: 'cerca de 26 mil anos-luz' },
+        { label: 'Distância da Terra', value: 'cerca de 27 mil anos-luz' },
       ],
     },
     sources: [
@@ -383,7 +383,7 @@ export const deepSkyDestinations = [
       kind: 'equatorial',
       entries: [
         { label: 'Diâmetro do disco', value: 'cerca de 100 mil anos-luz' },
-        { label: 'Distância do Sol ao centro', value: 'cerca de 26 mil anos-luz' },
+        { label: 'Distância do Sol ao centro', value: 'cerca de 27 mil anos-luz' },
         { label: 'Direção do centro no céu', value: 'constelação de Sagitário' },
       ],
     },
