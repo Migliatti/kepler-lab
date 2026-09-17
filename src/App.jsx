@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavigationStatus } from './components/NavigationStatus.jsx'
+import { ReturnToEarthButton } from './components/ReturnToEarthButton.jsx'
 import { SearchOverlay } from './components/SearchOverlay.jsx'
 import { SelectionCard } from './components/SelectionCard.jsx'
 import { TravelOverlay } from './components/TravelOverlay.jsx'
@@ -49,7 +50,8 @@ function App() {
         travel={travel}
         onTravelComplete={handleTravelComplete}
       />
-      <NavigationStatus destination={currentLocation} onReturnToEarth={handleReturnToEarth} />
+      <NavigationStatus destination={currentLocation} />
+      <ReturnToEarthButton currentLocationId={currentLocationId} onReturnToEarth={handleReturnToEarth} />
       <TravelOverlay destination={selectedDestination} travel={travel} onSkip={handleSkipTravel} />
       <SelectionCard
         destination={selectedDestination}
