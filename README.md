@@ -54,6 +54,7 @@ npm run lint    # verifica o código com Oxlint
 
 ## Documentação do projeto
 
+- [Instruções para Claude Code e outros agentes](./CLAUDE.md)
 - [Especificação do produto](./specs/product-spec.md)
 - [Plano de implementação](./PLAN.md)
 - [Plano detalhado da Fase 1](./docs/superpowers/plans/2026-09-16-phase-1-catalogue.md)
