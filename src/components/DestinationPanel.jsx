@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { isFormulaRevealed } from '../state/panel.js'
 import { buildDestinationPanel } from '../utils/destinationPanel.js'
 
@@ -87,7 +87,15 @@ function SectionBody({ section, isRevealed, onToggleFormula }) {
 
 export function DestinationPanel({ destination, panel, onExpand, onCollapse, onToggleFormula }) {
   const bodyRef = useRef(null)
+  const cardRef = useRef(null)
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false)
+  const [summaryDestinationId, setSummaryDestinationId] = useState(destination.id)
   const content = buildDestinationPanel(destination)
+
+  if (destination.id !== summaryDestinationId) {
+    setSummaryDestinationId(destination.id)
+    setIsSummaryOpen(false)
+  }
 
   useEffect(() => {
     if (panel.mode !== 'expanded' || !panel.focusSectionId) return
@@ -96,20 +104,48 @@ export function DestinationPanel({ destination, panel, onExpand, onCollapse, onT
       ?.scrollIntoView({ block: 'start' })
   }, [panel.mode, panel.focusSectionId, destination.id])
 
+  useEffect(() => {
+    if (panel.mode !== 'card' || !isSummaryOpen) return
+
+    function handlePointerDown(event) {
+      if (!cardRef.current?.contains(event.target)) setIsSummaryOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    return () => document.removeEventListener('pointerdown', handlePointerDown)
+  }, [panel.mode, isSummaryOpen])
+
   if (panel.mode === 'card') {
     return (
-      <button type="button" className="destination-surface destination-card" onClick={onExpand}>
-        <span className="destination-card__name">{content.header.name}</span>
-        <span className="destination-card__facts">
-          {destination.facts.map(({ label, value }) => (
-            <span key={label} className="destination-card__fact">
-              <span>{label}</span>
-              <strong>{value}</strong>
+      <div
+        ref={cardRef}
+        className={`destination-surface destination-card${isSummaryOpen ? ' destination-card--open' : ''}`}
+        onMouseEnter={() => setIsSummaryOpen(true)}
+        onMouseLeave={() => setIsSummaryOpen(false)}
+      >
+        <button
+          type="button"
+          className="destination-card__tab"
+          onClick={() => (isSummaryOpen ? onExpand() : setIsSummaryOpen(true))}
+        >
+          {content.header.name}
+        </button>
+        {isSummaryOpen && (
+          <div className="destination-card__summary">
+            <span className="destination-card__facts">
+              {destination.facts.map(({ label, value }) => (
+                <span key={label} className="destination-card__fact">
+                  <span>{label}</span>
+                  <strong>{value}</strong>
+                </span>
+              ))}
             </span>
-          ))}
-        </span>
-        <span className="destination-card__hint">Ver painel completo</span>
-      </button>
+            <button type="button" className="destination-card__hint" onClick={onExpand}>
+              Ver painel completo
+            </button>
+          </div>
+        )}
+      </div>
     )
   }
 

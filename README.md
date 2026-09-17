@@ -6,16 +6,17 @@ Kepler Lab é uma experiência didática e contemplativa que parte da Terra para
 
 ## Estado do projeto
 
-O MVP está em desenvolvimento. A fundação React/Vite, a busca local testável e o catálogo completo de 22 destinos já existem. A cena 3D navegável começa na Terra e permite selecionar destinos por marcadores ou busca, viajar até eles com câmera animada e ilustrativa, pular a viagem, retornar à Terra e ver o local atual. Painéis de destino e preferências de acessibilidade continuam planejados.
+As Fases 1 a 4 estão concluídas: catálogo curado, cena 3D navegável, viagem com descoberta e painéis de conteúdo e interface (incluindo onboarding). A próxima etapa é a Fase 5 (acabamento visual e acessibilidade).
 
-| Disponível hoje | Planejado para o MVP |
+| Disponível hoje | Planejado para a Fase 5 |
 | --- | --- |
-| Aplicação React/Vite em pt-BR | Painéis progressivos de destino |
-| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Onboarding e preferências locais |
-| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade | Persistência de configuração de viagem |
-| Busca local, aliases e validação do catálogo sem WebGL | Ajustes de acessibilidade planejados |
+| Aplicação React/Vite em pt-BR | Ajustes de acessibilidade (redução de movimento, contraste, texto) |
+| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Acabamento visual e polish geral da cena 3D |
+| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade | |
+| Busca local, aliases e validação do catálogo sem WebGL | |
 | Busca integrada à cena, com sugestões em destaque e resultados acionáveis | |
 | Viagem de câmera ilustrativa (com opção de pular) e retorno à Terra | |
+| Painel de destino progressivo e onboarding com dispensa persistida | |
 | Local atual sempre visível, independente da cena 3D | |
 | Testes unitários para busca, texto, conteúdo, viagem e regras de cena | |
 
@@ -62,6 +63,7 @@ npm run lint    # verifica o código com Oxlint
 - [Plano de implementação](./PLAN.md)
 - [Plano detalhado da Fase 1](./docs/superpowers/plans/2026-09-16-phase-1-catalogue.md)
 - [Plano detalhado da Fase 2](./docs/superpowers/plans/2026-09-16-phase-2-scene-navigation.md)
+- [Plano detalhado da Fase 3](./docs/superpowers/plans/2026-09-16-phase-3-travel-discovery.md)
 - [Plano detalhado da Fase 4](./docs/superpowers/plans/2026-09-17-phase-4-content-interface.md)
 - [Arquitetura e regras de contribuição](./AGENTS.md)
 
