@@ -10,3 +10,10 @@ export function getCameraPositionAt(origin, destination, progress) {
 
   return origin.map((coordinate, index) => coordinate + (destination[index] - coordinate) * progress)
 }
+
+export function getCameraTravelFrame({ originPosition, originTarget, destination, progress }) {
+  return {
+    position: getCameraPositionAt(originPosition, getDestinationCameraPosition(destination), progress),
+    target: getCameraPositionAt(originTarget, destination.position, progress),
+  }
+}

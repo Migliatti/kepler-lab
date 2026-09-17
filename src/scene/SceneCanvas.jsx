@@ -15,7 +15,14 @@ export function SceneCanvas({ children, onControlsChange, travel, sceneDestinati
         sceneDestinations={sceneDestinations}
         onTravelComplete={onTravelComplete}
       />
-      <OrbitControls enablePan minDistance={5} maxDistance={90} onChange={onControlsChange} />
+      <OrbitControls
+        makeDefault
+        enabled={travel?.status !== 'travelling'}
+        enablePan
+        minDistance={5}
+        maxDistance={90}
+        onChange={onControlsChange}
+      />
     </Canvas>
   )
 }
