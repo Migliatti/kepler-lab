@@ -9,6 +9,7 @@ export function ExplorationScene({
   selectedId,
   currentLocationId,
   onSelectDestination,
+  onConfirmTravel,
   travel,
   onTravelComplete,
 }) {
@@ -42,6 +43,7 @@ export function ExplorationScene({
           selectedId={selectedId}
           currentLocationId={currentLocationId}
           onSelectDestination={onSelectDestination}
+          onConfirmTravel={onConfirmTravel}
         />
       </SceneCanvas>
       <p className="scale-notice" role="note">{SCALE_NOTICE}</p>

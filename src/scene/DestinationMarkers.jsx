@@ -4,8 +4,17 @@ function stopSceneInteraction(event) {
   event.stopPropagation()
 }
 
-function DestinationMarker({ destination, isSelected, isCurrentLocation, onSelectDestination }) {
+function DestinationMarker({ destination, isSelected, isCurrentLocation, onSelectDestination, onConfirmTravel }) {
   if (isCurrentLocation) return null
+
+  function handleActivate(event) {
+    stopSceneInteraction(event)
+    if (isSelected) {
+      onConfirmTravel(destination.id)
+      return
+    }
+    onSelectDestination(destination.id)
+  }
 
   return (
     <Billboard position={destination.position}>
@@ -14,17 +23,12 @@ function DestinationMarker({ destination, isSelected, isCurrentLocation, onSelec
           className="destination-marker"
           type="button"
           aria-pressed={isSelected}
-          onClick={(event) => {
-            stopSceneInteraction(event)
-            onSelectDestination(destination.id)
-          }}
-          onPointerDown={(event) => {
-            stopSceneInteraction(event)
-            onSelectDestination(destination.id)
-          }}
+          aria-label={isSelected ? `Viajar até ${destination.name}` : `Selecionar ${destination.name}`}
+          onClick={handleActivate}
+          onPointerDown={handleActivate}
         >
           <span>{destination.name}</span>
-          <small>{destination.type}</small>
+          {isSelected && <small>Toque de novo para viajar</small>}
         </button>
       </Html>
     </Billboard>
@@ -56,7 +60,14 @@ function ClusterMarker({ item, destinationById, onSelectDestination }) {
   )
 }
 
-export function DestinationMarkers({ items, destinationById, selectedId, currentLocationId, onSelectDestination }) {
+export function DestinationMarkers({
+  items,
+  destinationById,
+  selectedId,
+  currentLocationId,
+  onSelectDestination,
+  onConfirmTravel,
+}) {
   return items.map((item) => {
     if (item.kind === 'cluster') {
       return (
@@ -78,6 +89,7 @@ export function DestinationMarkers({ items, destinationById, selectedId, current
         isSelected={destination.id === selectedId}
         isCurrentLocation={destination.id === currentLocationId}
         onSelectDestination={onSelectDestination}
+        onConfirmTravel={onConfirmTravel}
       />
     )
   })

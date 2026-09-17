@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import { NavigationStatus } from './components/NavigationStatus.jsx'
-import { ReturnToEarthButton } from './components/ReturnToEarthButton.jsx'
-import { SearchOverlay } from './components/SearchOverlay.jsx'
-import { SelectionCard } from './components/SelectionCard.jsx'
+import { NavSidebar } from './components/NavSidebar.jsx'
 import { TravelOverlay } from './components/TravelOverlay.jsx'
 import { destinations } from './content/destinations.js'
 import { ExplorationScene } from './scene/ExplorationScene.jsx'
@@ -12,7 +9,6 @@ function App() {
   const [selectedId, setSelectedId] = useState('earth')
   const [currentLocationId, setCurrentLocationId] = useState('earth')
   const [travel, setTravel] = useState(null)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const selectedDestination = destinations.find(({ id }) => id === selectedId)
     ?? destinations.find(({ id }) => id === 'earth')
   const currentLocation = destinations.find(({ id }) => id === currentLocationId)
@@ -21,7 +17,6 @@ function App() {
   function handleTravelTo(destinationId) {
     setSelectedId(destinationId)
     setTravel(startTravel(destinationId, true))
-    setIsSearchOpen(false)
   }
 
   function handleTravelComplete() {
@@ -48,26 +43,19 @@ function App() {
         selectedId={selectedId}
         currentLocationId={currentLocationId}
         onSelectDestination={setSelectedId}
+        onConfirmTravel={handleTravelTo}
         travel={travel}
         onTravelComplete={handleTravelComplete}
       />
-      <NavigationStatus destination={currentLocation} />
-      <ReturnToEarthButton currentLocationId={currentLocationId} onReturnToEarth={handleReturnToEarth} />
       <TravelOverlay destination={selectedDestination} travel={travel} onSkip={handleSkipTravel} />
-      <SelectionCard
-        destination={selectedDestination}
-        currentLocationId={currentLocationId}
-        travel={travel}
-        onTravelTo={handleTravelTo}
-      />
-      <button type="button" className="search-trigger" onClick={() => setIsSearchOpen(true)}>
-        Buscar destinos
-      </button>
-      <SearchOverlay
+      <NavSidebar
         destinations={destinations}
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
-        onTravelTo={handleTravelTo}
+        currentLocation={currentLocation}
+        selectedId={selectedId}
+        currentLocationId={currentLocationId}
+        onSelectDestination={setSelectedId}
+        onConfirmTravel={handleTravelTo}
+        onReturnToEarth={handleReturnToEarth}
       />
     </>
   )
