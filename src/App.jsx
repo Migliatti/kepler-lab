@@ -1,18 +1,37 @@
 import { useState } from 'react'
 import { DestinationPanel } from './components/DestinationPanel.jsx'
 import { NavSidebar } from './components/NavSidebar.jsx'
+import { Onboarding } from './components/Onboarding.jsx'
 import { SceneReadout } from './components/SceneReadout.jsx'
 import { TravelOverlay } from './components/TravelOverlay.jsx'
 import { destinations } from './content/destinations.js'
+import { getOnboardingSteps } from './content/onboardingSteps.js'
 import { ExplorationScene } from './scene/ExplorationScene.jsx'
+import {
+  createOnboardingState,
+  isOnboardingOpen,
+  nextOnboardingStep,
+  previousOnboardingStep,
+  reopenOnboarding,
+  skipOnboarding,
+} from './state/onboarding.js'
 import { collapsePanel, createPanelState, expandPanel, toggleFormula } from './state/panel.js'
+import { loadPreferences, savePreferences } from './state/preferences.js'
 import { completeTravel, returnToEarth, startTravel } from './state/travel.js'
+
+function detectOnboardingPlatform() {
+  return window.matchMedia?.('(pointer: coarse)').matches ? 'touch' : 'desktop'
+}
 
 function App() {
   const [selectedId, setSelectedId] = useState('earth')
   const [currentLocationId, setCurrentLocationId] = useState('earth')
   const [travel, setTravel] = useState(null)
   const [panel, setPanel] = useState(createPanelState)
+  const [onboardingSteps] = useState(() => getOnboardingSteps(detectOnboardingPlatform()))
+  const [onboarding, setOnboarding] = useState(
+    () => createOnboardingState(!loadPreferences().hasSeenOnboarding),
+  )
   const selectedDestination = destinations.find(({ id }) => id === selectedId)
     ?? destinations.find(({ id }) => id === 'earth')
   const currentLocation = destinations.find(({ id }) => id === currentLocationId)
@@ -39,6 +58,13 @@ function App() {
   function handleReturnToEarth() {
     setSelectedId('earth')
     setTravel(returnToEarth(true))
+  }
+
+  function updateOnboarding(nextState) {
+    setOnboarding(nextState)
+    if (!isOnboardingOpen(nextState)) {
+      savePreferences({ ...loadPreferences(), hasSeenOnboarding: true })
+    }
   }
 
   return (
@@ -69,6 +95,16 @@ function App() {
         onSelectDestination={setSelectedId}
         onConfirmTravel={handleTravelTo}
         onReturnToEarth={handleReturnToEarth}
+      />
+      <button type="button" className="help-toggle" onClick={() => setOnboarding(reopenOnboarding())}>
+        Ajuda
+      </button>
+      <Onboarding
+        steps={onboardingSteps}
+        state={onboarding}
+        onNext={() => updateOnboarding(nextOnboardingStep(onboarding, onboardingSteps.length))}
+        onPrevious={() => setOnboarding(previousOnboardingStep(onboarding))}
+        onSkip={() => updateOnboarding(skipOnboarding(onboarding))}
       />
     </>
   )

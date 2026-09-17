@@ -396,6 +396,69 @@ button:focus-visible {
   font: 1.05rem var(--font-mono);
 }
 
+.help-toggle {
+  position: fixed;
+  z-index: 3;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.onboarding-backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(2 4 10 / 55%);
+}
+
+.onboarding {
+  width: min(28rem, 100%);
+  padding: 1.5rem;
+  border: 1px solid rgb(113 131 169 / 60%);
+  border-radius: 1rem;
+  color: #f1f5ff;
+  background: rgb(3 9 23 / 78%);
+  backdrop-filter: blur(16px);
+}
+
+.onboarding h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.onboarding p {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+}
+
+.onboarding .onboarding__progress {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.onboarding__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.onboarding__actions button {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+.onboarding__skip {
+  margin-right: auto;
+  border-color: transparent;
+  background: transparent;
+}
+
 @media (max-width: 700px) {
   .nav-sidebar {
     width: 100%;
@@ -432,5 +495,10 @@ button:focus-visible {
   .destination-panel {
     top: 35dvh;
     width: auto;
+  }
+
+  .help-toggle {
+    top: 0.75rem;
+    right: 0.75rem;
   }
 }
