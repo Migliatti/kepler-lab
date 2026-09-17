@@ -65,7 +65,7 @@ Cada destino ganha `coordinates`: `{ kind, entries }`, com 2 a 3 entradas `{ lab
 `kind` assume dois valores, porque o tipo de coordenada fixa que um objeto possui depende de onde ele está:
 
 - `equatorial` — objetos fora do Sistema Solar, cuja posição no céu não muda em escala humana. Entradas: ascensão reta, declinação e distância. Aplica-se a Alpha Centauri, Sirius, Betelgeuse, Nebulosa de Órion, Nebulosa do Caranguejo, Sagittarius A*, Centro Galáctico e Via Láctea.
-- `orbital` — corpos do Sistema Solar. Ascensão reta e declinação **não** são fixas para eles: orbitam, e sua posição no céu muda a cada dia. Publicar coordenada equatorial fixa para Marte seria dado errado. As entradas trazem o que de fato é estável: distância média do Sol, período orbital e distância média da Terra.
+- `orbital` — corpos do Sistema Solar. Ascensão reta e declinação **não** são fixas para eles: orbitam, e sua posição no céu muda a cada dia. Publicar coordenada equatorial fixa para Marte seria dado errado. As entradas trazem o que de fato é estável: distância média do Sol e período orbital. Luas trazem o corpo central, a distância média até ele e o período orbital. A distância até a Terra fica de fora para planetas porque varia muito ao longo das órbitas — Marte, por exemplo, oscila entre cerca de 0,4 e 2,7 UA.
 
 As entradas são `{ label, value }` livres, e não campos nomeados, porque os casos honestos não são uniformes: o Sol não orbita o Sol, a Lua orbita a Terra e não o Sol, e a Via Láctea não tem uma direção única no céu — nós estamos dentro dela, então suas entradas descrevem o diâmetro e a distância do Sistema Solar ao centro galáctico. Campos nomeados fixos forçariam preenchimento falso nesses quatro casos.
 
@@ -113,10 +113,10 @@ A fórmula continua opcional, com as regras atuais quando presente.
 
 ```text
 cabeçalho       nome, tipo, região, frase de impacto
-'conhecer'      overview
-'fisica'        explanation, formula quando existir
-'curiosidades'  history seguido das curiosities rotuladas
-'dados'         facts, sources, aviso de escala
+'overview'      Conhecer: overview
+'physics'       Entender a física: explanation, formula quando existir
+'curiosities'   Curiosidades e história: history seguido das curiosities rotuladas
+'data'          Dados e fontes: facts, sources, aviso de escala
 ```
 
 A ordem das seções, os rótulos e a decisão de omitir a fórmula vivem nesta função, testada sem WebGL. O componente React é um mapeador de seções para markup: não conhece a ordem nem decide o que existe.
@@ -157,7 +157,9 @@ Nenhum dado sensível é persistido.
 
 ### `onboarding.js`
 
-Máquina pura de três passos, com avançar, pular e concluir. Recebe `'desktop'` ou `'touch'` como argumento porque o texto do passo 2 muda; a detecção de plataforma fica no componente.
+Máquina pura de três passos, com avançar, voltar, pular e concluir.
+
+Os textos dos passos são conteúdo e ficam em `src/content/onboardingSteps.js`, que expõe `getOnboardingSteps(platform)`. Recebe `'desktop'` ou `'touch'` como argumento porque o texto do passo 2 muda; a detecção de plataforma fica na interface.
 
 Os três passos são os da spec de produto: boas-vindas, orientações de navegação e descoberta de destinos.
 
