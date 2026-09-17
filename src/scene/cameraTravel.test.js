@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import {
   CAMERA_TRAVEL_DURATION_MS,
+  CAMERA_TRAVEL_MAX_OVERSHOOT,
+  easeTravelProgress,
   getCameraPositionAt,
   getCameraTravelFrame,
   getDestinationCameraPosition,
@@ -8,7 +10,7 @@ import {
 
 describe('camera travel', () => {
   it('uses a short, stable illustrative duration', () => {
-    expect(CAMERA_TRAVEL_DURATION_MS).toBe(4500)
+    expect(CAMERA_TRAVEL_DURATION_MS).toBe(3000)
   })
 
   it('frames a destination from an offset based on its illustrative radius', () => {
@@ -69,8 +71,51 @@ describe('camera travel frame', () => {
 
   it('moves the orbit target along with the camera so orientation never snaps', () => {
     const frame = getCameraTravelFrame({ originPosition, originTarget, destination, progress: 0.5 })
+    const eased = easeTravelProgress(0.5)
 
-    expect(frame.target).toEqual([2.5, -0.1, 1])
-    expect(frame.position).toEqual([2.5, 5.15, 14.25])
+    expect(frame.target).toEqual(originTarget.map((c, i) => c + (destination.position[i] - c) * eased))
+    expect(frame.position).toEqual(originPosition.map((c, i) => c + ([5, 1.3, 4.5][i] - c) * eased))
+  })
+
+  it('lets the camera overshoot slightly past the destination before settling', () => {
+    const peak = Math.max(
+      ...Array.from({ length: 300 }, (_, i) => easeTravelProgress(i / 300)),
+    )
+    const frame = getCameraTravelFrame({ originPosition, originTarget, destination, progress: 2 / 3 })
+
+    expect(peak).toBeGreaterThan(1)
+    expect(frame.target[0]).toBeGreaterThan(destination.position[0])
+  })
+})
+
+describe('easeTravelProgress', () => {
+  it('starts at the origin and ends exactly at the destination', () => {
+    expect(easeTravelProgress(0)).toBe(0)
+    expect(easeTravelProgress(1)).toBe(1)
+  })
+
+  it('clamps time outside the journey', () => {
+    expect(easeTravelProgress(-0.5)).toBe(0)
+    expect(easeTravelProgress(1.5)).toBe(1)
+  })
+
+  it('accelerates quickly and never moves backwards before first reaching the destination', () => {
+    let previous = 0
+    for (let i = 1; i <= 100; i += 1) {
+      const value = easeTravelProgress(i / 300)
+      expect(value).toBeGreaterThanOrEqual(previous)
+      previous = value
+    }
+    expect(easeTravelProgress(0.1)).toBeGreaterThan(0.1)
+  })
+
+  it('keeps the elastic overshoot subtle', () => {
+    const peak = Math.max(
+      ...Array.from({ length: 1000 }, (_, i) => easeTravelProgress(i / 1000)),
+    )
+
+    expect(peak).toBeGreaterThan(1)
+    expect(peak).toBeLessThanOrEqual(1 + CAMERA_TRAVEL_MAX_OVERSHOOT)
+    expect(CAMERA_TRAVEL_MAX_OVERSHOOT).toBeLessThanOrEqual(0.03)
   })
 })
