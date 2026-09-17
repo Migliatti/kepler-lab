@@ -1,5 +1,3 @@
-export const SCALE_NOTICE = 'Posições e tamanhos são ilustrativos para permitir a exploração.'
-
 export const EARTH_CAMERA_POSITION = Object.freeze([0, 9, 24])
 
 const PRESENTATION_BY_ID = Object.freeze({

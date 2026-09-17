@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 import { destinations } from '../content/destinations.js'
 import {
   EARTH_CAMERA_POSITION,
-  SCALE_NOTICE,
   getCategoryAppearance,
   getSceneDestination,
   getSceneDestinations,
@@ -31,10 +30,5 @@ describe('scene layout', () => {
   it('provides a visible appearance for every rendered category', () => {
     expect(getCategoryAppearance('planet')).toMatchObject({ color: expect.stringMatching(/^#/) })
     expect(getCategoryAppearance('nebula')).toMatchObject({ transparent: true, opacity: expect.any(Number) })
-  })
-
-  it('states explicitly that visual positions and sizes are illustrative', () => {
-    expect(SCALE_NOTICE).toMatch(/posições e tamanhos/i)
-    expect(SCALE_NOTICE).toMatch(/ilustrativ/i)
   })
 })
