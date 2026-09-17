@@ -1,0 +1,175 @@
+// Reusable r3f planet component using the "flat illustrated" art direction.
+// Copy this file into kepler-lab/src/scene/PlanetSurface.jsx — I can't write
+// into your local project folder directly, only read from it, so drop it in
+// yourself and wire it up where CelestialBodies renders each body.
+//
+// Usage:
+//   <PlanetSurface
+//     radius={radius}
+//     oceanLow="#0d2e3f" oceanHigh="#2f7a8c"
+//     landFill="#7fa563" landLine="#2c4321"
+//     continents={[{ center: [0.55, 0.35, 0.6], points: 11, baseR: 0.42, jitter: 0.35, seed: 1.1 }]}
+//     craters={[{ center: [-0.75, -0.2, 0.4], r: 0.045 }]}
+//     orbitRings={[{ scale: 1.7, tilt: 0.18 }, { scale: 2.05, tilt: -0.35 }]}
+//   />
+//
+// Every prop has a sane default so it also works as <PlanetSurface radius={radius} />
+// for a quick generic body — swap the color props per celestial body (e.g. rustier
+// tones + no ocean gradient for Mars, no continents/rings for the Moon, etc).
+
+import { useMemo } from 'react'
+import * as THREE from 'three'
+
+function tangentBasis(normal) {
+  const up = Math.abs(normal.y) > 0.95 ? new THREE.Vector3(1, 0, 0) : new THREE.Vector3(0, 1, 0)
+  const u = up.clone().cross(normal).normalize()
+  const v = normal.clone().cross(u).normalize()
+  return { u, v }
+}
+
+function blobPoints(count, baseR, jitter, seed) {
+  const pts = []
+  for (let i = 0; i < count; i++) {
+    const a = (i / count) * Math.PI * 2
+    const r = baseR * (1 - jitter + jitter * Math.abs(Math.sin(a * 2.3 + seed) + Math.cos(a * 1.7 + seed * 1.3)) * 0.5)
+    pts.push({ x: Math.cos(a) * r, y: Math.sin(a) * r })
+  }
+  return pts
+}
+
+function buildPatch(radius, centerDir, points2D, lift) {
+  const normal = centerDir.clone().normalize()
+  const { u, v } = tangentBasis(normal)
+  const dir = new THREE.Vector3()
+  const verts = points2D.map((p) => {
+    dir.copy(normal).addScaledVector(u, p.x).addScaledVector(v, p.y).normalize()
+    return dir.clone().multiplyScalar(radius + lift)
+  })
+
+  const centroid = new THREE.Vector3()
+  verts.forEach((p) => centroid.add(p))
+  centroid.divideScalar(verts.length).normalize().multiplyScalar(radius + lift)
+
+  const positions = []
+  for (let i = 0; i < verts.length; i++) {
+    const a = verts[i]
+    const b = verts[(i + 1) % verts.length]
+    positions.push(centroid.x, centroid.y, centroid.z, a.x, a.y, a.z, b.x, b.y, b.z)
+  }
+  const fillGeo = new THREE.BufferGeometry()
+  fillGeo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+  fillGeo.computeVertexNormals()
+
+  const linePositions = []
+  verts.forEach((p) => linePositions.push(p.x, p.y, p.z))
+  const lineGeo = new THREE.BufferGeometry()
+  lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3))
+
+  return { fillGeo, lineGeo }
+}
+
+function buildCraterRing(radius, centerDir, r) {
+  const normal = centerDir.clone().normalize()
+  const { u, v } = tangentBasis(normal)
+  const dir = new THREE.Vector3()
+  const positions = []
+  for (let i = 0; i <= 24; i++) {
+    const a = (i / 24) * Math.PI * 2
+    dir.copy(normal).addScaledVector(u, Math.cos(a) * r).addScaledVector(v, Math.sin(a) * r).normalize()
+    const p = dir.clone().multiplyScalar(radius + 0.004 * radius)
+    positions.push(p.x, p.y, p.z)
+  }
+  const geo = new THREE.BufferGeometry()
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+  return geo
+}
+
+const DEFAULT_CONTINENTS = [
+  { center: [0.55, 0.35, 0.6], points: 11, baseR: 0.42, jitter: 0.35, seed: 1.1 },
+  { center: [0.15, -0.15, 0.75], points: 9, baseR: 0.28, jitter: 0.4, seed: 3.4 },
+  { center: [0.75, -0.55, -0.05], points: 8, baseR: 0.2, jitter: 0.4, seed: 5.7 },
+]
+
+export function PlanetSurface({
+  radius = 1,
+  oceanLow = '#0d2e3f',
+  oceanHigh = '#2f7a8c',
+  landFill = '#7fa563',
+  landLine = '#2c4321',
+  craterLine = '#0a1a22',
+  orbitLine = '#bcd7e6',
+  continents = DEFAULT_CONTINENTS,
+  craters = [],
+  orbitRings = [],
+  showAtmosphere = true,
+}) {
+  const sphereGeo = useMemo(() => {
+    const geo = new THREE.SphereGeometry(radius, 96, 64)
+    const pos = geo.attributes.position
+    const colors = new Float32Array(pos.count * 3)
+    const low = new THREE.Color(oceanLow)
+    const high = new THREE.Color(oceanHigh)
+    const tmp = new THREE.Color()
+    for (let i = 0; i < pos.count; i++) {
+      const t = Math.pow((pos.getY(i) / radius + 1) / 2, 0.85)
+      tmp.copy(low).lerp(high, t)
+      colors[i * 3] = tmp.r
+      colors[i * 3 + 1] = tmp.g
+      colors[i * 3 + 2] = tmp.b
+    }
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
+    return geo
+  }, [radius, oceanLow, oceanHigh])
+
+  const patches = useMemo(
+    () =>
+      continents.map((c) =>
+        buildPatch(radius, new THREE.Vector3(...c.center), blobPoints(c.points, c.baseR, c.jitter, c.seed), radius * 0.025)
+      ),
+    [radius, continents]
+  )
+
+  const craterRings = useMemo(
+    () => craters.map((c) => buildCraterRing(radius, new THREE.Vector3(...c.center), c.r)),
+    [radius, craters]
+  )
+
+  return (
+    <group>
+      <mesh castShadow receiveShadow geometry={sphereGeo}>
+        <meshStandardMaterial vertexColors roughness={0.85} metalness={0.02} />
+      </mesh>
+
+      {showAtmosphere && (
+        <mesh scale={1.035}>
+          <sphereGeometry args={[radius, 48, 32]} />
+          <meshBasicMaterial color={oceanHigh} transparent opacity={0.08} side={THREE.BackSide} />
+        </mesh>
+      )}
+
+      {patches.map((p, i) => (
+        <group key={i}>
+          <mesh geometry={p.fillGeo}>
+            <meshStandardMaterial color={landFill} roughness={0.95} metalness={0} side={THREE.DoubleSide} />
+          </mesh>
+          <lineLoop geometry={p.lineGeo}>
+            <lineBasicMaterial color={landLine} />
+          </lineLoop>
+        </group>
+      ))}
+
+      {craterRings.map((geo, i) => (
+        <line key={i} geometry={geo}>
+          <lineBasicMaterial color={craterLine} transparent opacity={0.4} />
+        </line>
+      ))}
+
+      {orbitRings.map((r, i) => (
+        <mesh key={i} rotation-x={Math.PI / 2 + r.tilt}>
+          <ringGeometry args={[radius * r.scale - radius * 0.002, radius * r.scale, 128, 1]} />
+          <meshBasicMaterial color={orbitLine} transparent opacity={0.3} side={THREE.DoubleSide} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
