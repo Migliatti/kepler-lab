@@ -62,6 +62,7 @@ npm run lint    # verifica o código com Oxlint
 - [Plano de implementação](./PLAN.md)
 - [Plano detalhado da Fase 1](./docs/superpowers/plans/2026-09-16-phase-1-catalogue.md)
 - [Plano detalhado da Fase 2](./docs/superpowers/plans/2026-09-16-phase-2-scene-navigation.md)
+- [Plano detalhado da Fase 4](./docs/superpowers/plans/2026-09-17-phase-4-content-interface.md)
 - [Arquitetura e regras de contribuição](./AGENTS.md)
 
 ## Escopo do MVP
