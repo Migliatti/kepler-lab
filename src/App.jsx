@@ -16,7 +16,7 @@ import {
   skipOnboarding,
 } from './state/onboarding.js'
 import { collapsePanel, createPanelState, expandPanel, toggleFormula } from './state/panel.js'
-import { loadPreferences, savePreferences } from './state/preferences.js'
+import { usePreferences } from './state/PreferencesProvider.jsx'
 import { completeTravel, returnToEarth, startTravel } from './state/travel.js'
 
 function detectOnboardingPlatform() {
@@ -24,13 +24,14 @@ function detectOnboardingPlatform() {
 }
 
 function App() {
+  const { preferences, setPreference } = usePreferences()
   const [selectedId, setSelectedId] = useState('earth')
   const [currentLocationId, setCurrentLocationId] = useState('earth')
   const [travel, setTravel] = useState(null)
   const [panel, setPanel] = useState(createPanelState)
   const [onboardingSteps] = useState(() => getOnboardingSteps(detectOnboardingPlatform()))
   const [onboarding, setOnboarding] = useState(
-    () => createOnboardingState(!loadPreferences().hasSeenOnboarding),
+    () => createOnboardingState(!preferences.hasSeenOnboarding),
   )
   const selectedDestination = destinations.find(({ id }) => id === selectedId)
     ?? destinations.find(({ id }) => id === 'earth')
@@ -61,9 +62,7 @@ function App() {
 
   function updateOnboarding(nextState) {
     setOnboarding(nextState)
-    if (!isOnboardingOpen(nextState)) {
-      savePreferences({ ...loadPreferences(), hasSeenOnboarding: true })
-    }
+    if (!isOnboardingOpen(nextState)) setPreference('hasSeenOnboarding', true)
   }
 
   return (
