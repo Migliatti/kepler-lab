@@ -59,4 +59,4 @@ Antes de declarar uma mudança concluída, execute `npm test`, `npm run build` e
 
 ## Estado atual
 
-[`PLAN.md`](./PLAN.md) foi aprovado em 16/09/2026. Fases 1 (catálogo), 2 (cena e navegação), 3 (viagem e descoberta) e 4 (conteúdo e interface) estão concluídas. A Fase 5 (acabamento e acessibilidade) é a próxima. O desenho da Fase 4 está em `docs/superpowers/specs/2026-09-17-phase-4-content-interface-design.md` e o plano detalhado, com todas as tarefas marcadas, em [`docs/superpowers/plans/2026-09-17-phase-4-content-interface.md`](./docs/superpowers/plans/2026-09-17-phase-4-content-interface.md).
+[`PLAN.md`](./PLAN.md) foi aprovado em 16/09/2026. As cinco fases do MVP estão concluídas: catálogo, cena e navegação, viagem e descoberta, conteúdo e interface, e acabamento e acessibilidade. O desenho da Fase 5 está em `docs/superpowers/specs/2026-09-17-phase-5-polish-accessibility-design.md` e o plano detalhado, com todas as tarefas marcadas, em [`docs/superpowers/plans/2026-09-17-phase-5-polish-accessibility.md`](./docs/superpowers/plans/2026-09-17-phase-5-polish-accessibility.md). Os itens deliberadamente adiados estão na seção "Pós-MVP" do desenho da Fase 5.
