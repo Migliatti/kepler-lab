@@ -6,19 +6,20 @@ Kepler Lab é uma experiência didática e contemplativa que parte da Terra para
 
 ## Estado do projeto
 
-As Fases 1 a 4 estão concluídas: catálogo curado, cena 3D navegável, viagem com descoberta e painéis de conteúdo e interface (incluindo onboarding). A próxima etapa é a Fase 5 (acabamento visual e acessibilidade).
+As cinco fases do MVP estão concluídas: catálogo curado, cena 3D navegável, viagem com descoberta, painéis de conteúdo e interface (incluindo onboarding) e acabamento visual com acessibilidade.
 
-| Disponível hoje | Planejado para a Fase 5 |
-| --- | --- |
-| Aplicação React/Vite em pt-BR | Ajustes de acessibilidade (redução de movimento, contraste, texto) |
-| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo | Acabamento visual e polish geral da cena 3D |
-| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade | |
-| Busca local, aliases e validação do catálogo sem WebGL | |
-| Busca integrada à cena, com sugestões em destaque e resultados acionáveis | |
-| Viagem de câmera ilustrativa (com opção de pular) e retorno à Terra | |
-| Painel de destino progressivo e onboarding com dispensa persistida | |
-| Local atual sempre visível, independente da cena 3D | |
-| Testes unitários para busca, texto, conteúdo, viagem e regras de cena | |
+| Disponível hoje |
+| --- |
+| Aplicação React/Vite em pt-BR |
+| Catálogo curado completo: 22 destinos com fontes e conteúdo progressivo |
+| Cena 3D navegável, iniciando na Terra, com marcadores e descoberta por proximidade |
+| Busca local, aliases e validação do catálogo sem WebGL |
+| Busca integrada à cena, com sugestões em destaque e resultados acionáveis |
+| Viagem de câmera ilustrativa (com opção de pular) e retorno à Terra |
+| Painel de destino progressivo e onboarding com dispensa persistida |
+| Local atual sempre visível, independente da cena 3D |
+| Acabamento visual estilizado e procedural, com ajustes de acessibilidade (redução de movimento, contraste, texto) |
+| Testes unitários para busca, texto, conteúdo, viagem e regras de cena |
 
 ## Princípios
 
@@ -71,3 +72,7 @@ npm run lint    # verifica o código com Oxlint
 ## Escopo do MVP
 
 O MVP é uma experiência de exploração científica, não um simulador astronômico em escala real. Ficam fora do escopo laboratórios interativos, contas, nuvem, conteúdo em tempo real, busca na web e simulações físicas completas.
+
+## Licença
+
+Distribuído sob a licença MIT. Veja [`LICENSE`](./LICENSE) para o texto completo.
