@@ -64,7 +64,7 @@ describe('appearance profiles', () => {
     const sun = getBodyAppearance('sun', 'star-system')
 
     expect(sun.halo.scale).toBeGreaterThan(getAppearanceProfile('star-system').halo.scale)
-    expect(sun.color).toBe(getAppearanceProfile('star-system').color)
+    expect(sun.spin).toBe(getAppearanceProfile('star-system').spin)
   })
 
   it('still silences an overridden body under reduced motion', () => {
@@ -72,5 +72,34 @@ describe('appearance profiles', () => {
       spin: 0,
       particles: { drift: 0 },
     })
+  })
+
+  it('gives each luminous body its own colour instead of the category default', () => {
+    const categoryStar = getAppearanceProfile('star').color
+
+    expect(getBodyAppearance('sirius', 'star').color).not.toBe(categoryStar)
+    expect(getBodyAppearance('betelgeuse', 'star').color).not.toBe(categoryStar)
+    expect(getBodyAppearance('betelgeuse', 'star').color).not.toBe(
+      getBodyAppearance('sirius', 'star').color,
+    )
+    expect(getBodyAppearance('orion-nebula', 'nebula').color).not.toBe(
+      getBodyAppearance('crab-nebula', 'nebula').color,
+    )
+  })
+
+  it('reads Betelgeuse as red and Sirius as white-blue', () => {
+    const red = getBodyAppearance('betelgeuse', 'star').color
+    const white = getBodyAppearance('sirius', 'star').color
+    const channel = (hex, index) => Number.parseInt(hex.slice(1 + index * 2, 3 + index * 2), 16)
+
+    expect(channel(red, 0)).toBeGreaterThan(channel(red, 2))
+    expect(channel(white, 2)).toBeGreaterThanOrEqual(channel(white, 0))
+  })
+
+  it('keeps the Sun emissive enough to read as the source of light', () => {
+    const sun = getBodyAppearance('sun', 'star-system')
+
+    expect(sun.emissive).toMatch(/^#[0-9a-f]{6}$/i)
+    expect(sun.halo.scale).toBeGreaterThanOrEqual(3)
   })
 })

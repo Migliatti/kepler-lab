@@ -56,25 +56,51 @@ const CATEGORY_PROFILES = deepFreeze({
 })
 
 // Exceções por corpo. Existem porque Saturno e Urano são a mesma categoria com
-// anéis diferentes, e porque o Sol precisa de um halo maior que o das demais
-// estrelas para ler como o corpo central da cena.
+// anéis diferentes, e porque estrelas e nebulosas da mesma categoria têm cores
+// que o visitante reconhece: Betelgeuse é vermelha, Sirius é branco-azulada.
 const OVERRIDES_BY_ID = deepFreeze({
-  sun: { halo: { scale: 3.2, opacity: 0.42, color: '#ffd166' } },
-  sirius: { halo: { scale: 2.6, opacity: 0.4, color: '#dbe9ff' } },
-  betelgeuse: { halo: { scale: 3.0, opacity: 0.32, color: '#ff8a5c' } },
-  'alpha-centauri': { halo: { scale: 2.3, opacity: 0.32, color: '#ffe9c4' } },
+  sun: {
+    color: '#ffcf5c', emissive: '#ff9a13',
+    halo: { scale: 3.2, opacity: 0.42, color: '#ffd166' },
+  },
+  'alpha-centauri': {
+    color: '#ffe0a8', emissive: '#a8720f',
+    halo: { scale: 2.3, opacity: 0.32, color: '#ffe9c4' },
+  },
+  sirius: {
+    color: '#dfe9ff', emissive: '#4a6ba8',
+    halo: { scale: 2.6, opacity: 0.4, color: '#dbe9ff' },
+  },
+  betelgeuse: {
+    color: '#ff7a4a', emissive: '#8c2b08',
+    halo: { scale: 3.0, opacity: 0.32, color: '#ff8a5c' },
+  },
+  'orion-nebula': {
+    color: '#ff9ac4', emissive: '#6d1b48',
+    halo: { scale: 2.0, opacity: 0.24, color: '#ffb6d4' },
+    particles: { count: 220, spread: 2.8, color: '#ffd0e4', drift: 0.05, shape: 'cloud' },
+  },
+  'crab-nebula': {
+    color: '#8fb8ff', emissive: '#1f3a78',
+    halo: { scale: 1.9, opacity: 0.24, color: '#a8c8ff' },
+    particles: { count: 200, spread: 2.5, color: '#c6dcff', drift: 0.07, shape: 'cloud' },
+  },
+  'galactic-center': {
+    color: '#ffc98f', emissive: '#7a3d0a',
+    halo: { scale: 1.9, opacity: 0.24, color: '#ffd9ae' },
+    particles: { count: 280, spread: 2.9, color: '#ffe3c0', drift: 0.05, shape: 'disc' },
+  },
+  'milky-way': {
+    color: '#7f9ce0', emissive: '#1b2a63',
+    halo: { scale: 1.6, opacity: 0.16, color: '#b6c8ff' },
+    particles: { count: 420, spread: 4.6, color: '#c3d2ff', drift: 0.03, shape: 'disc' },
+  },
   saturn: {
     ring: { inner: 1.35, outer: 2.0, color: '#d8bb75', opacity: 0.72, tilt: 0.12, gap: [1.66, 1.74] },
   },
   uranus: {
     // Quase vertical: é a inclinação que faz de Urano o planeta "deitado".
     ring: { inner: 1.5, outer: 1.66, color: '#9fd9dd', opacity: 0.5, tilt: 1.45, gap: null },
-  },
-  'milky-way': {
-    particles: { count: 420, spread: 4.6, color: '#c3d2ff', drift: 0.03, shape: 'disc' },
-  },
-  'orion-nebula': {
-    particles: { count: 220, spread: 2.8, color: '#ffd0e4', drift: 0.05, shape: 'cloud' },
   },
 })
 
