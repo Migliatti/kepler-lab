@@ -7,30 +7,10 @@ import { useRef } from 'react'
 import { getBodyAppearance } from './appearance.js'
 import { BodyLabel } from './BodyLabel.jsx'
 import { BodyRing } from './BodyRing.jsx'
+import { BodySurface } from './BodySurface.jsx'
+import { hasBodySurface } from './bodySurfaces.js'
 import { CategoryEffects } from './CategoryEffects.jsx'
-import { buildEarthPatches, EARTH_APPEARANCE } from './earthSurface.js'
 import { Halo } from './Halo.jsx'
-import { PlanetSurface } from './PlanetSurface.jsx'
-
-// Construída uma vez: a geometria é determinística, então toda Terra em todo
-// render compartilha os mesmos contornos.
-const EARTH_PATCHES = buildEarthPatches()
-
-const BODIES_WITH_SURFACE = new Set(['earth'])
-
-function EarthSurface({ radius, highlighted }) {
-  return (
-    <PlanetSurface
-      radius={radius}
-      patches={EARTH_PATCHES}
-      gradient="poles"
-      oceanLow={EARTH_APPEARANCE.oceanDeep}
-      oceanHigh={EARTH_APPEARANCE.oceanPolar}
-      atmosphereColor={EARTH_APPEARANCE.atmosphere}
-      atmosphereOpacity={highlighted ? 0.26 : 0.14}
-    />
-  )
-}
 
 function SpinningGroup({ spin, children }) {
   const ref = useRef(null)
@@ -60,7 +40,7 @@ export function CelestialBodies({
     const isSelected = id === selectedId
     const isHovered = id === hoveredId
     const isCurrentLocation = id === currentLocationId
-    const hasSurface = BODIES_WITH_SURFACE.has(id)
+    const hasSurface = hasBodySurface(id)
 
     function handlePointerOver(event) {
       event.stopPropagation()
@@ -87,7 +67,7 @@ export function CelestialBodies({
     return (
       <group key={id} position={position} scale={isSelected ? 1.25 : 1}>
         <SpinningGroup spin={appearance.spin}>
-          {hasSurface && <EarthSurface radius={radius} highlighted={isSelected || isHovered} />}
+          {hasSurface && <BodySurface id={id} radius={radius} highlighted={isSelected || isHovered} />}
 
           {/* Um corpo com superfície própria guarda uma esfera invisível para os
               eventos de ponteiro, para que a decoração nunca responda ao
