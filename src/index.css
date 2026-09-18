@@ -625,9 +625,10 @@ button:focus-visible {
     width: 100%;
   }
 
+  /* Em celular a tela é pequena demais para telemetria de fundo: o cartão do
+     destino já carrega os mesmos dados e os avisos de escala. */
   .scene-readout {
-    bottom: calc(var(--sheet-card-height) + 1.25rem);
-    left: 0.75rem;
+    display: none;
   }
 
   .nav-toggle {

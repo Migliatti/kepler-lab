@@ -1,5 +1,5 @@
 import { getCuriosityTopicLabel } from '../content/curiosityTopics.js'
-import { SCALE_NOTICE } from '../content/notices.js'
+import { getAppearanceNotice, SCALE_NOTICE } from '../content/notices.js'
 
 export const PANEL_SECTION_IDS = Object.freeze(['overview', 'physics', 'curiosities', 'data'])
 
@@ -35,6 +35,9 @@ export function buildDestinationPanel(destination) {
         facts: destination.facts,
         sources: destination.sources,
         scaleNotice: SCALE_NOTICE,
+        // Duplicado de propósito com o readout da cena: no celular o readout
+        // não aparece e o aviso precisa continuar ao alcance.
+        appearanceNotice: getAppearanceNotice(destination.id),
       },
     ],
   }

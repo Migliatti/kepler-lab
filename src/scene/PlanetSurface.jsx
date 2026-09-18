@@ -17,6 +17,7 @@ import { useMemo } from 'react'
 import * as THREE from 'three'
 import { buildOutlineSegments, buildPatchGeometry } from './sphericalPatch.js'
 import { bandStops } from './latitudeBands.js'
+import { resolveContinents } from './continents.js'
 
 const NO_RAYCAST = () => null
 
@@ -84,12 +85,6 @@ function buildCraterRing(radius, centerDir, r) {
   return geo
 }
 
-const DEFAULT_CONTINENTS = [
-  { center: [0.55, 0.35, 0.6], points: 11, baseR: 0.42, jitter: 0.35, seed: 1.1 },
-  { center: [0.15, -0.15, 0.75], points: 9, baseR: 0.28, jitter: 0.4, seed: 3.4 },
-  { center: [0.75, -0.55, -0.05], points: 8, baseR: 0.2, jitter: 0.4, seed: 5.7 },
-]
-
 export function PlanetSurface({
   radius = 1,
   oceanLow = '#0d2e3f',
@@ -108,12 +103,7 @@ export function PlanetSurface({
   atmosphereColor,
   atmosphereOpacity = 0.08,
 }) {
-  // Procedural blobs are the fallback surface: a body that brings its own
-  // patches does not get them unless it asks.
-  const blobs = useMemo(
-    () => continents ?? (patches.length > 0 ? [] : DEFAULT_CONTINENTS),
-    [continents, patches]
-  )
+  const blobs = useMemo(() => resolveContinents(continents), [continents])
 
   const sphereGeo = useMemo(() => {
     const geo = new THREE.SphereGeometry(radius, 96, 64)
@@ -162,7 +152,11 @@ export function PlanetSurface({
             ? null
             : buildPatchGeometry(radius, patch.outline, { lift }),
           lineGeos: patch.line
-            ? buildOutlineSegments(radius, patch.outline, { lift: lift + radius * 0.002, breaks: patch.breaks })
+            ? buildOutlineSegments(radius, patch.outline, {
+                lift: lift + radius * 0.002,
+                breaks: patch.breaks,
+                closed: patch.closed !== false,
+              })
             : [],
         }
       }),

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { SCALE_NOTICE } from '../content/notices.js'
+import { BLACK_HOLE_NOTICE, SCALE_NOTICE } from '../content/notices.js'
 import { destinations } from '../content/destinations.js'
 import { buildDestinationPanel, PANEL_SECTION_IDS } from './destinationPanel.js'
 
@@ -50,6 +50,15 @@ describe('buildDestinationPanel', () => {
       expect(data.facts).toBe(destination.facts)
       expect(data.sources).toBe(destination.sources)
     }
+  })
+
+  it('carries the appearance notice where the body has one', () => {
+    // O readout da cena some no celular; o aviso de aparência não pode sumir
+    // junto, então ele também vive na seção de dados.
+    const data = (id) => buildDestinationPanel(byId(id)).sections[3]
+
+    expect(data('sagittarius-a-star').appearanceNotice).toBe(BLACK_HOLE_NOTICE)
+    expect(data('earth').appearanceNotice).toBeNull()
   })
 
   it('does not mutate the catalogue', () => {

@@ -1,9 +1,4 @@
-import { BLACK_HOLE_NOTICE, SCALE_NOTICE } from '../content/notices.js'
-
-// Corpos cuja aparência precisa de um aviso próprio, além do de escala.
-const APPEARANCE_NOTICES = Object.freeze({
-  'sagittarius-a-star': BLACK_HOLE_NOTICE,
-})
+import { getAppearanceNotice, SCALE_NOTICE } from '../content/notices.js'
 
 export function buildSceneReadout(destination) {
   return {
@@ -11,6 +6,6 @@ export function buildSceneReadout(destination) {
     kind: destination.coordinates.kind,
     entries: destination.coordinates.entries.map(({ label, value }) => ({ label, value })),
     scaleNotice: SCALE_NOTICE,
-    appearanceNotice: APPEARANCE_NOTICES[destination.id] ?? null,
+    appearanceNotice: getAppearanceNotice(destination.id),
   }
 }

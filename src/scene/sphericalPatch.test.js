@@ -94,6 +94,14 @@ describe('buildOutlineSegments', () => {
 
     expect(segments).toHaveLength(0)
   })
+
+  it('leaves an open line open: no edge back to the first point', () => {
+    const segments = buildOutlineSegments(1, TRIANGLE, { maxEdgeAngle: 10, closed: false })
+
+    expect(segments).toHaveLength(1)
+    // Fechada seriam quatro pontos (o primeiro repetido no fim); aberta, três.
+    expect(segments[0].attributes.position.count).toBe(3)
+  })
 })
 
 describe('ellipseOutline', () => {

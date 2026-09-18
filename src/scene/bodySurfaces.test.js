@@ -57,6 +57,9 @@ describe('body surfaces', () => {
     // As fraturas de Europa são só linha, sem preenchimento.
     const fractures = getBodySurface('europa').patches.filter(({ fill }) => fill === null)
     expect(fractures.length).toBeGreaterThan(3)
+    // E são linhas abertas: fechar a curva desenharia um risco atravessando o
+    // globo de volta ao primeiro ponto.
+    for (const fracture of fractures) expect(fracture.closed).toBe(false)
   })
 
   it('is deterministic: the same surface every call', () => {

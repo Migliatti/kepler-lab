@@ -78,6 +78,9 @@ function SectionBody({ section, isRevealed, onToggleFormula }) {
             ))}
           </ul>
           <p className="destination-panel__notice" role="note">{section.scaleNotice}</p>
+          {section.appearanceNotice && (
+            <p className="destination-panel__notice" role="note">{section.appearanceNotice}</p>
+          )}
         </>
       )
     default:
