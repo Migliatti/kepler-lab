@@ -25,7 +25,7 @@ function detectOnboardingPlatform() {
 }
 
 function App() {
-  const { preferences, setPreference } = usePreferences()
+  const { preferences, reducedMotion, setPreference } = usePreferences()
   const [selectedId, setSelectedId] = useState('earth')
   const [currentLocationId, setCurrentLocationId] = useState('earth')
   const [travel, setTravel] = useState(null)
@@ -77,6 +77,8 @@ function App() {
         onConfirmTravel={handleTravelTo}
         travel={travel}
         onTravelComplete={handleTravelComplete}
+        labels={preferences.labels}
+        reducedMotion={reducedMotion}
       />
       <SceneReadout destination={selectedDestination} />
       <DestinationPanel

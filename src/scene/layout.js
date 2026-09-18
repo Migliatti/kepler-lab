@@ -34,6 +34,7 @@ export function getSceneDestination(destination) {
 
   return {
     id: destination.id,
+    name: destination.name,
     category: destination.category,
     featured: destination.featured,
     ...presentation,

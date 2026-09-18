@@ -11,6 +11,7 @@ describe('scene layout', () => {
     expect(getSceneDestination(destinations.find(({ id }) => id === 'earth'))).toMatchObject({
       id: 'earth', position: [0, 0, 0], radius: 1,
     })
+    expect(getSceneDestination(destinations.find(({ id }) => id === 'earth')).name).toBe('Terra')
     expect(EARTH_CAMERA_POSITION).toEqual([0, 9, 24])
   })
 
