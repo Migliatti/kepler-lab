@@ -625,11 +625,6 @@ button:focus-visible {
     width: 100%;
   }
 
-  .scene-readout {
-    bottom: calc(var(--sheet-card-height) + 1.25rem);
-    left: 0.75rem;
-  }
-
   .nav-toggle {
     top: 0.75rem;
     left: 0.75rem;

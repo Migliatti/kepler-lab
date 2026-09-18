@@ -24,8 +24,10 @@ function cap(id, latitude, angularRadius, fill) {
 }
 
 function fracture(id, outline, line) {
-  // fill: null é o que faz o PlanetSurface desenhar só o contorno.
-  return { id, outline, fill: null, line }
+  // fill: null é o que faz o PlanetSurface desenhar só o contorno; closed:
+  // false impede que a linha volte do último ponto ao primeiro atravessando o
+  // globo — uma lineae de Europa é um risco, não um laço.
+  return { id, outline, fill: null, line, closed: false }
 }
 
 const MERCURY_CRATERS = [

@@ -117,10 +117,15 @@ function densifyArc(from, to, maxEdgeAngle) {
  * Coast line for an outline. `breaks` holds vertex indices whose following edge
  * is not drawn, which is how a landmass split across two patches hides the seam
  * where the split happens.
+ *
+ * `closed` is what separates a coastline from a fracture: a closed outline gets
+ * the edge from the last vertex back to the first, an open one stops at the
+ * last vertex instead of striping the globe on the way back.
  */
-export function buildOutlineSegments(radius, outline, { lift = 0, maxEdgeAngle = 0.08, breaks = [] } = {}) {
+export function buildOutlineSegments(radius, outline, { lift = 0, maxEdgeAngle = 0.08, breaks = [], closed = true } = {}) {
   const vectors = outlineToVectors(outline)
   const skipped = new Set(breaks)
+  if (!closed) skipped.add(vectors.length - 1)
   const surface = radius + lift
   const segments = []
   let current = []

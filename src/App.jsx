@@ -17,12 +17,9 @@ import {
   skipOnboarding,
 } from './state/onboarding.js'
 import { collapsePanel, createPanelState, expandPanel, toggleFormula } from './state/panel.js'
+import { readPlatform, showsSceneReadout } from './state/platform.js'
 import { usePreferences } from './state/PreferencesProvider.jsx'
 import { completeTravel, locationAfterTravelStart, returnToEarth, startTravel } from './state/travel.js'
-
-function detectOnboardingPlatform() {
-  return window.matchMedia?.('(pointer: coarse)').matches ? 'touch' : 'desktop'
-}
 
 function App() {
   const { preferences, reducedMotion, setPreference } = usePreferences()
@@ -30,7 +27,8 @@ function App() {
   const [currentLocationId, setCurrentLocationId] = useState('earth')
   const [travel, setTravel] = useState(null)
   const [panel, setPanel] = useState(createPanelState)
-  const [onboardingSteps] = useState(() => getOnboardingSteps(detectOnboardingPlatform()))
+  const [platform] = useState(() => readPlatform(globalThis))
+  const [onboardingSteps] = useState(() => getOnboardingSteps(platform))
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [onboarding, setOnboarding] = useState(
     () => createOnboardingState(!preferences.hasSeenOnboarding),
@@ -84,7 +82,7 @@ function App() {
         labels={preferences.labels}
         reducedMotion={reducedMotion}
       />
-      <SceneReadout destination={selectedDestination} />
+      {showsSceneReadout(platform) && <SceneReadout destination={selectedDestination} />}
       <DestinationPanel
         destination={selectedDestination}
         panel={panel}
