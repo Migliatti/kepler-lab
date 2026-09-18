@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { completeTravel, returnToEarth, startTravel } from './travel.js'
+import { completeTravel, locationAfterTravelStart, returnToEarth, startTravel } from './travel.js'
 
 describe('travel state', () => {
   it('animates the full trip by default', () => {
@@ -42,5 +42,14 @@ describe('travel state', () => {
     expect(returnToEarth('instant')).toEqual({
       destinationId: 'earth', travelMode: 'instant', status: 'arrived',
     })
+  })
+
+  it('updates the current location when an instant journey starts', () => {
+    expect(locationAfterTravelStart('earth', startTravel('mars', 'instant'))).toBe('mars')
+    expect(locationAfterTravelStart('mars', returnToEarth('instant'))).toBe('earth')
+  })
+
+  it('keeps the current location while an animated journey is in progress', () => {
+    expect(locationAfterTravelStart('earth', startTravel('mars', 'short'))).toBe('earth')
   })
 })

@@ -2,7 +2,7 @@
 // região galáctica. Um único `points` por corpo — nunca meshes soltas.
 
 import { useFrame } from '@react-three/fiber'
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 import { buildParticleField } from './particleField.js'
@@ -31,6 +31,8 @@ export function CategoryEffects({ id, radius, particles }) {
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     return geo
   }, [id, radius, particles])
+
+  useEffect(() => () => geometry?.dispose(), [geometry])
 
   // `drift` já vem zerado do perfil sob movimento reduzido: não há segunda
   // regra aqui, só a consequência.

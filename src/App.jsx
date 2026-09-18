@@ -18,7 +18,7 @@ import {
 } from './state/onboarding.js'
 import { collapsePanel, createPanelState, expandPanel, toggleFormula } from './state/panel.js'
 import { usePreferences } from './state/PreferencesProvider.jsx'
-import { completeTravel, returnToEarth, startTravel } from './state/travel.js'
+import { completeTravel, locationAfterTravelStart, returnToEarth, startTravel } from './state/travel.js'
 
 function detectOnboardingPlatform() {
   return window.matchMedia?.('(pointer: coarse)').matches ? 'touch' : 'desktop'
@@ -42,7 +42,9 @@ function App() {
 
   function handleTravelTo(destinationId) {
     setSelectedId(destinationId)
-    setTravel(startTravel(destinationId, preferences.travel))
+    const nextTravel = startTravel(destinationId, preferences.travel)
+    setTravel(nextTravel)
+    setCurrentLocationId((current) => locationAfterTravelStart(current, nextTravel))
   }
 
   function handleTravelComplete() {
@@ -59,7 +61,9 @@ function App() {
 
   function handleReturnToEarth() {
     setSelectedId('earth')
-    setTravel(returnToEarth(preferences.travel))
+    const nextTravel = returnToEarth(preferences.travel)
+    setTravel(nextTravel)
+    setCurrentLocationId((current) => locationAfterTravelStart(current, nextTravel))
   }
 
   function updateOnboarding(nextState) {

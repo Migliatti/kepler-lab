@@ -22,6 +22,7 @@ function readSystemHints() {
 export function PreferencesProvider({ children }) {
   const [preferences, setPreferences] = useState(() => loadPreferences())
   const [systemHints, setSystemHints] = useState(readSystemHints)
+  const reducedMotion = resolveReducedMotion(preferences, systemHints)
 
   // Quem nunca escolheu segue o sistema; se o sistema mudar com a página
   // aberta, a cena acompanha sem recarregar.
@@ -48,15 +49,16 @@ export function PreferencesProvider({ children }) {
     if (!root) return
     root.dataset.textSize = preferences.textSize
     root.dataset.contrast = preferences.contrast
-  }, [preferences.textSize, preferences.contrast])
+    root.dataset.reducedMotion = reducedMotion ? 'on' : 'off'
+  }, [preferences.textSize, preferences.contrast, reducedMotion])
 
   const value = useMemo(() => ({
     preferences,
     setPreference: (key, nextValue) => {
       setPreferences((current) => updatePreference(current, key, nextValue))
     },
-    reducedMotion: resolveReducedMotion(preferences, systemHints),
-  }), [preferences, systemHints])
+    reducedMotion,
+  }), [preferences, reducedMotion])
 
   return <PreferencesContext.Provider value={value}>{children}</PreferencesContext.Provider>
 }

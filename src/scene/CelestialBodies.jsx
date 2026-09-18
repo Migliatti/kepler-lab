@@ -2,7 +2,7 @@
 // o perfil vem de appearance.js e cada decoração tem seu próprio adaptador.
 
 import { useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 
 import { getBodyAppearance } from './appearance.js'
 import { BlackHole } from './BlackHole.jsx'
@@ -25,8 +25,8 @@ function SpinningGroup({ spin, children }) {
   return <group ref={ref}>{children}</group>
 }
 
-export function CelestialBodies({
-  destinations,
+function CelestialBody({
+  destination,
   selectedId,
   currentLocationId,
   hoveredId,
@@ -36,8 +36,11 @@ export function CelestialBodies({
   onSelectDestination,
   onConfirmTravel,
 }) {
-  return destinations.map(({ id, name, category, position, radius }) => {
-    const appearance = getBodyAppearance(id, category, { reducedMotion })
+    const { id, name, category, position, radius } = destination
+    const appearance = useMemo(
+      () => getBodyAppearance(id, category, { reducedMotion }),
+      [id, category, reducedMotion],
+    )
     const isSelected = id === selectedId
     const isHovered = id === hoveredId
     const isCurrentLocation = id === currentLocationId
@@ -68,10 +71,9 @@ export function CelestialBodies({
     }
 
     return (
-      <group key={id} position={position} scale={isSelected ? 1.25 : 1}>
+      <group position={position} scale={isSelected ? 1.25 : 1}>
         <SpinningGroup spin={appearance.spin}>
           {hasSurface && <BodySurface id={id} radius={radius} highlighted={isSelected || isHovered} />}
-          {isBlackHole && <BlackHole radius={radius} appearance={appearance} />}
 
           {/* Um corpo com superfície própria guarda uma esfera invisível para os
               eventos de ponteiro, para que a decoração nunca responda ao
@@ -92,6 +94,7 @@ export function CelestialBodies({
           </mesh>
         </SpinningGroup>
 
+        {isBlackHole && <BlackHole radius={radius} appearance={appearance} />}
         <Halo radius={radius} halo={appearance.halo} />
         <BodyRing radius={radius} ring={appearance.ring} />
         <CategoryEffects id={id} radius={radius} particles={appearance.particles} />
@@ -99,5 +102,10 @@ export function CelestialBodies({
         {showSceneLabels && <BodyLabel name={name} radius={radius} />}
       </group>
     )
+}
+
+export function CelestialBodies({ destinations, ...props }) {
+  return destinations.map((destination) => {
+    return <CelestialBody key={destination.id} destination={destination} {...props} />
   })
 }

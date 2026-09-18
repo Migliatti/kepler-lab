@@ -21,6 +21,10 @@ export function completeTravel(travel) {
   return { ...travel, status: 'arrived' }
 }
 
+export function locationAfterTravelStart(currentLocationId, travel) {
+  return travel.status === 'arrived' ? travel.destinationId : currentLocationId
+}
+
 export function returnToEarth(travelMode) {
   return startTravel('earth', travelMode)
 }
