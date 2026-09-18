@@ -1,10 +1,17 @@
+// Este componente cuida de ponteiro, seleção e viagem. Aparência é delegada:
+// o perfil vem de appearance.js e cada decoração tem seu próprio adaptador.
+
 import { getBodyAppearance } from './appearance.js'
+import { BodyRing } from './BodyRing.jsx'
 import { buildEarthPatches, EARTH_APPEARANCE } from './earthSurface.js'
+import { Halo } from './Halo.jsx'
 import { PlanetSurface } from './PlanetSurface.jsx'
 
-// Built once: the geometry is deterministic, so every Earth in every render
-// shares the same outlines.
+// Construída uma vez: a geometria é determinística, então toda Terra em todo
+// render compartilha os mesmos contornos.
 const EARTH_PATCHES = buildEarthPatches()
+
+const BODIES_WITH_SURFACE = new Set(['earth'])
 
 function EarthSurface({ radius, highlighted }) {
   return (
@@ -34,7 +41,7 @@ export function CelestialBodies({
     const isSelected = id === selectedId
     const isHovered = id === hoveredId
     const isCurrentLocation = id === currentLocationId
-    const hasSurface = id === 'earth'
+    const hasSurface = BODIES_WITH_SURFACE.has(id)
 
     function handlePointerOver(event) {
       event.stopPropagation()
@@ -62,8 +69,12 @@ export function CelestialBodies({
       <group key={id} position={position} scale={isSelected ? 1.25 : 1}>
         {hasSurface && <EarthSurface radius={radius} highlighted={isSelected || isHovered} />}
 
-        {/* A body with its own surface keeps an invisible sphere for pointer
-            events, so the decoration never has to answer the raycaster. */}
+        <Halo radius={radius} halo={appearance.halo} />
+        <BodyRing radius={radius} ring={appearance.ring} />
+
+        {/* Um corpo com superfície própria guarda uma esfera invisível para os
+            eventos de ponteiro, para que a decoração nunca responda ao
+            raycaster. */}
         <mesh onPointerOver={handlePointerOver} onPointerOut={handlePointerOut} onClick={handleClick}>
           <sphereGeometry args={[hasSurface ? radius * 1.05 : radius, 20, 14]} />
           {hasSurface ? (
@@ -78,13 +89,6 @@ export function CelestialBodies({
             />
           )}
         </mesh>
-
-        {id === 'saturn' && (
-          <mesh rotation={[Math.PI / 2, 0, 0]}>
-            <ringGeometry args={[radius * 1.35, radius * 2, 32]} />
-            <meshStandardMaterial color="#d8bb75" side={2} transparent opacity={0.7} />
-          </mesh>
-        )}
       </group>
     )
   })
