@@ -41,6 +41,7 @@ describe('appearance profiles', () => {
     expect(nebula.particles.count).toBeGreaterThan(0)
     expect(nebula.opacity).toBe(getAppearanceProfile('nebula').opacity)
     expect(getAppearanceProfile('planet', { reducedMotion: true }).spin).toBe(0)
+    expect(getAppearanceProfile('planet', { reducedMotion: true }).particles).toBeNull()
   })
 
   it('keeps some motion when reduced motion is off', () => {

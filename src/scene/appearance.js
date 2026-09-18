@@ -5,9 +5,22 @@
 // Distâncias de halo, anel e partículas são múltiplos do raio ilustrativo do
 // corpo; quem converte para unidades de cena é o adaptador R3F.
 
+// Congela recursivamente para que nenhum consumidor (ex.: um efeito por
+// quadro na cena) possa mutar halo/particles/ring e corromper o perfil
+// compartilhado de uma categoria ou corpo para todas as próximas consultas.
+function deepFreeze(value) {
+  if (value === null || typeof value !== 'object' || Object.isFrozen(value)) return value
+
+  for (const key of Object.keys(value)) {
+    deepFreeze(value[key])
+  }
+
+  return Object.freeze(value)
+}
+
 const NEUTRAL = Object.freeze({ spin: 0, halo: null, particles: null, ring: null })
 
-const CATEGORY_PROFILES = Object.freeze({
+const CATEGORY_PROFILES = deepFreeze({
   planet: {
     color: '#3d9ee8', emissive: '#082744', transparent: false, opacity: 1, spin: 0.06,
   },
@@ -45,7 +58,7 @@ const CATEGORY_PROFILES = Object.freeze({
 // Exceções por corpo. Existem porque Saturno e Urano são a mesma categoria com
 // anéis diferentes, e porque o Sol precisa de um halo maior que o das demais
 // estrelas para ler como o corpo central da cena.
-const OVERRIDES_BY_ID = Object.freeze({
+const OVERRIDES_BY_ID = deepFreeze({
   sun: { halo: { scale: 3.2, opacity: 0.42, color: '#ffd166' } },
   sirius: { halo: { scale: 2.6, opacity: 0.4, color: '#dbe9ff' } },
   betelgeuse: { halo: { scale: 3.0, opacity: 0.32, color: '#ff8a5c' } },
@@ -80,16 +93,19 @@ function build(base, { reducedMotion = false } = {}) {
   return reducedMotion ? withoutMotion(profile) : profile
 }
 
-export function getAppearanceProfile(category, options = {}) {
+function resolveCategoryBase(category) {
   const base = CATEGORY_PROFILES[category]
   if (!base) throw new Error(`Missing appearance profile for category "${category}"`)
 
-  return build(base, options)
+  return base
+}
+
+export function getAppearanceProfile(category, options = {}) {
+  return build(resolveCategoryBase(category), options)
 }
 
 export function getBodyAppearance(id, category, options = {}) {
-  const base = CATEGORY_PROFILES[category]
-  if (!base) throw new Error(`Missing appearance profile for category "${category}"`)
+  const base = resolveCategoryBase(category)
 
   return build({ ...base, ...OVERRIDES_BY_ID[id] }, options)
 }
