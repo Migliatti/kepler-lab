@@ -158,7 +158,9 @@ export function PlanetSurface({
         const lift = radius * (patch.liftFactor ?? 0.02)
         return {
           ...patch,
-          fillGeo: buildPatchGeometry(radius, patch.outline, { lift }),
+          fillGeo: patch.fill === null
+            ? null
+            : buildPatchGeometry(radius, patch.outline, { lift }),
           lineGeos: patch.line
             ? buildOutlineSegments(radius, patch.outline, { lift: lift + radius * 0.002, breaks: patch.breaks })
             : [],

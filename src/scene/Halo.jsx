@@ -6,8 +6,19 @@
 // externo espalha a queda. O material aditivo faz a soma parecer luz.
 
 import * as THREE from 'three'
+import { buildHaloPixels } from './haloGradient.js'
 
 const NO_RAYCAST = () => null
+const HALO_TEXTURE_SIZE = 128
+const HALO_TEXTURE = new THREE.DataTexture(
+  buildHaloPixels(HALO_TEXTURE_SIZE),
+  HALO_TEXTURE_SIZE,
+  HALO_TEXTURE_SIZE,
+  THREE.RGBAFormat,
+)
+HALO_TEXTURE.magFilter = THREE.LinearFilter
+HALO_TEXTURE.minFilter = THREE.LinearFilter
+HALO_TEXTURE.needsUpdate = true
 
 export function Halo({ radius, halo }) {
   if (!halo) return null
@@ -19,6 +30,7 @@ export function Halo({ radius, halo }) {
     <>
       <sprite scale={[inner, inner, 1]} raycast={NO_RAYCAST}>
         <spriteMaterial
+          map={HALO_TEXTURE}
           color={halo.color}
           transparent
           opacity={halo.opacity}
@@ -28,6 +40,7 @@ export function Halo({ radius, halo }) {
       </sprite>
       <sprite scale={[outer, outer, 1]} raycast={NO_RAYCAST}>
         <spriteMaterial
+          map={HALO_TEXTURE}
           color={halo.color}
           transparent
           opacity={halo.opacity * 0.4}
