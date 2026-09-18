@@ -521,6 +521,98 @@ button:focus-visible {
   background: transparent;
 }
 
+.settings-toggle {
+  position: fixed;
+  z-index: 3;
+  top: 1rem;
+  right: 6.2rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.settings-backdrop {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: var(--glass-backdrop);
+}
+
+.settings-panel {
+  width: min(30rem, 100%);
+  max-height: min(42rem, 90dvh);
+  overflow-y: auto;
+  padding: 1.2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+}
+
+.settings-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.settings-panel__header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.settings-panel__close {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.settings-group {
+  margin: 1rem 0 0;
+  padding: 0.7rem 0.9rem 0.9rem;
+  border: 1px solid var(--glass-border-soft);
+  border-radius: 0.7rem;
+}
+
+.settings-group legend {
+  padding: 0 0.4rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.settings-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.25rem 0;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.settings-option input {
+  margin-top: 0.35rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--color-accent);
+  flex: none;
+}
+
+.settings-option small {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.settings-group__note {
+  margin: 0.4rem 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
 @media (max-width: 700px) {
   .nav-sidebar {
     width: 100%;
@@ -562,5 +654,22 @@ button:focus-visible {
   .help-toggle {
     top: 0.75rem;
     right: 0.75rem;
+  }
+
+  .settings-toggle {
+    top: 0.75rem;
+    right: 5.4rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  /* Em celular o painel não cobre a cena inteira. */
+  .settings-panel {
+    width: 100%;
+    max-height: 80dvh;
+  }
+
+  .settings-backdrop {
+    align-items: end;
+    padding: 0.5rem;
   }
 }

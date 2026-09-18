@@ -3,6 +3,7 @@ import { DestinationPanel } from './components/DestinationPanel.jsx'
 import { NavSidebar } from './components/NavSidebar.jsx'
 import { Onboarding } from './components/Onboarding.jsx'
 import { SceneReadout } from './components/SceneReadout.jsx'
+import { SettingsPanel } from './components/SettingsPanel.jsx'
 import { TravelOverlay } from './components/TravelOverlay.jsx'
 import { destinations } from './content/destinations.js'
 import { getOnboardingSteps } from './content/onboardingSteps.js'
@@ -30,6 +31,7 @@ function App() {
   const [travel, setTravel] = useState(null)
   const [panel, setPanel] = useState(createPanelState)
   const [onboardingSteps] = useState(() => getOnboardingSteps(detectOnboardingPlatform()))
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
   const [onboarding, setOnboarding] = useState(
     () => createOnboardingState(!preferences.hasSeenOnboarding),
   )
@@ -40,7 +42,7 @@ function App() {
 
   function handleTravelTo(destinationId) {
     setSelectedId(destinationId)
-    setTravel(startTravel(destinationId, 'full'))
+    setTravel(startTravel(destinationId, preferences.travel))
   }
 
   function handleTravelComplete() {
@@ -57,7 +59,7 @@ function App() {
 
   function handleReturnToEarth() {
     setSelectedId('earth')
-    setTravel(returnToEarth('full'))
+    setTravel(returnToEarth(preferences.travel))
   }
 
   function updateOnboarding(nextState) {
@@ -94,6 +96,14 @@ function App() {
         onConfirmTravel={handleTravelTo}
         onReturnToEarth={handleReturnToEarth}
       />
+      <button
+        type="button"
+        className="settings-toggle"
+        onClick={() => setIsSettingsOpen(true)}
+      >
+        Configurações
+      </button>
+      <SettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
       <button type="button" className="help-toggle" onClick={() => setOnboarding(reopenOnboarding())}>
         Ajuda
       </button>
