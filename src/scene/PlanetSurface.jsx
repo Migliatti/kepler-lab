@@ -16,6 +16,7 @@
 import { useMemo } from 'react'
 import * as THREE from 'three'
 import { buildOutlineSegments, buildPatchGeometry } from './sphericalPatch.js'
+import { buildRibbonGeometry } from './ribbon.js'
 import { bandStops } from './latitudeBands.js'
 import { resolveContinents } from './continents.js'
 
@@ -85,6 +86,15 @@ function buildCraterRing(radius, centerDir, r) {
   return geo
 }
 
+function buildPatchFill(radius, patch, lift) {
+  if (patch.fill === null) return null
+  // Uma fita é um traço comprido e estreito — uma lineae, uma fratura — e não
+  // cabe no limite de extensão de um patch preenchido.
+  return patch.ribbon
+    ? buildRibbonGeometry(radius, patch.outline, { widthDegrees: patch.ribbon, lift })
+    : buildPatchGeometry(radius, patch.outline, { lift })
+}
+
 export function PlanetSurface({
   radius = 1,
   oceanLow = '#0d2e3f',
@@ -148,15 +158,9 @@ export function PlanetSurface({
         const lift = radius * (patch.liftFactor ?? 0.02)
         return {
           ...patch,
-          fillGeo: patch.fill === null
-            ? null
-            : buildPatchGeometry(radius, patch.outline, { lift }),
+          fillGeo: buildPatchFill(radius, patch, lift),
           lineGeos: patch.line
-            ? buildOutlineSegments(radius, patch.outline, {
-                lift: lift + radius * 0.002,
-                breaks: patch.breaks,
-                closed: patch.closed !== false,
-              })
+            ? buildOutlineSegments(radius, patch.outline, { lift: lift + radius * 0.002, breaks: patch.breaks })
             : [],
         }
       }),
