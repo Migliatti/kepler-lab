@@ -14,6 +14,9 @@ export function SceneReadout({ destination }) {
         ))}
       </dl>
       <p className="scene-readout__notice" role="note">{readout.scaleNotice}</p>
+      {readout.appearanceNotice && (
+        <p className="scene-readout__notice" role="note">{readout.appearanceNotice}</p>
+      )}
     </aside>
   )
 }

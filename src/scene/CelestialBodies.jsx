@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 
 import { getBodyAppearance } from './appearance.js'
+import { BlackHole } from './BlackHole.jsx'
 import { BodyLabel } from './BodyLabel.jsx'
 import { BodyRing } from './BodyRing.jsx'
 import { BodySurface } from './BodySurface.jsx'
@@ -41,6 +42,8 @@ export function CelestialBodies({
     const isHovered = id === hoveredId
     const isCurrentLocation = id === currentLocationId
     const hasSurface = hasBodySurface(id)
+    const isBlackHole = category === 'black-hole'
+    const usesOwnArt = hasSurface || isBlackHole
 
     function handlePointerOver(event) {
       event.stopPropagation()
@@ -68,13 +71,14 @@ export function CelestialBodies({
       <group key={id} position={position} scale={isSelected ? 1.25 : 1}>
         <SpinningGroup spin={appearance.spin}>
           {hasSurface && <BodySurface id={id} radius={radius} highlighted={isSelected || isHovered} />}
+          {isBlackHole && <BlackHole radius={radius} appearance={appearance} />}
 
           {/* Um corpo com superfície própria guarda uma esfera invisível para os
               eventos de ponteiro, para que a decoração nunca responda ao
               raycaster. */}
           <mesh onPointerOver={handlePointerOver} onPointerOut={handlePointerOut} onClick={handleClick}>
-            <sphereGeometry args={[hasSurface ? radius * 1.05 : radius, 20, 14]} />
-            {hasSurface ? (
+            <sphereGeometry args={[usesOwnArt ? radius * 1.05 : radius, 20, 14]} />
+            {usesOwnArt ? (
               <meshBasicMaterial transparent opacity={0} depthWrite={false} />
             ) : (
               <meshStandardMaterial

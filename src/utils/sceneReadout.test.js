@@ -38,4 +38,12 @@ describe('buildSceneReadout', () => {
     expect(readout.entries).not.toBe(mars.coordinates.entries)
     expect(readout.entries[0]).not.toBe(mars.coordinates.entries[0])
   })
+
+  it('warns that the black hole appearance is illustrative, and only there', () => {
+    const blackHole = destinations.find(({ id }) => id === 'sagittarius-a-star')
+    const earth = destinations.find(({ id }) => id === 'earth')
+
+    expect(buildSceneReadout(blackHole).appearanceNotice).toMatch(/ilustrativ/i)
+    expect(buildSceneReadout(earth).appearanceNotice).toBeNull()
+  })
 })
