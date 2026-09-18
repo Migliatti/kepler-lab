@@ -3,6 +3,7 @@
 
 import { getBodyAppearance } from './appearance.js'
 import { BodyRing } from './BodyRing.jsx'
+import { CategoryEffects } from './CategoryEffects.jsx'
 import { buildEarthPatches, EARTH_APPEARANCE } from './earthSurface.js'
 import { Halo } from './Halo.jsx'
 import { PlanetSurface } from './PlanetSurface.jsx'
@@ -71,6 +72,7 @@ export function CelestialBodies({
 
         <Halo radius={radius} halo={appearance.halo} />
         <BodyRing radius={radius} ring={appearance.ring} />
+        <CategoryEffects id={id} radius={radius} particles={appearance.particles} />
 
         {/* Um corpo com superfície própria guarda uma esfera invisível para os
             eventos de ponteiro, para que a decoração nunca responda ao
