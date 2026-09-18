@@ -16,6 +16,7 @@
 import { useMemo } from 'react'
 import * as THREE from 'three'
 import { buildOutlineSegments, buildPatchGeometry } from './sphericalPatch.js'
+import { bandStops } from './latitudeBands.js'
 
 const NO_RAYCAST = () => null
 
@@ -94,6 +95,7 @@ export function PlanetSurface({
   oceanLow = '#0d2e3f',
   oceanHigh = '#2f7a8c',
   gradient = 'latitude',
+  bands,
   landFill = '#7fa563',
   landLine = '#2c4321',
   craterLine = '#0a1a22',
@@ -120,19 +122,35 @@ export function PlanetSurface({
     const low = new THREE.Color(oceanLow)
     const high = new THREE.Color(oceanHigh)
     const tmp = new THREE.Color()
+    const from = new THREE.Color()
+
     for (let i = 0; i < pos.count; i++) {
       const height = pos.getY(i) / radius
-      // 'poles' grades from the equator outwards, which is how an illustrated
-      // globe reads; 'latitude' grades south to north.
-      const t = gradient === 'poles' ? Math.pow(Math.abs(height), 0.9) : Math.pow((height + 1) / 2, 0.85)
-      tmp.copy(low).lerp(high, t)
+
+      if (bands) {
+        // Faixas por latitude: é assim que Júpiter e Netuno ganham bandas sem
+        // textura nenhuma.
+        const latitude = (Math.asin(Math.min(1, Math.max(-1, height))) * 180) / Math.PI
+        const stops = bandStops(bands, latitude)
+        from.set(stops.from)
+        tmp.copy(from).lerp(new THREE.Color(stops.to), stops.t)
+      } else {
+        // 'poles' grada do equador para fora, que é como um globo ilustrado se
+        // lê; 'latitude' grada do sul para o norte.
+        const t = gradient === 'poles'
+          ? Math.pow(Math.abs(height), 0.9)
+          : Math.pow((height + 1) / 2, 0.85)
+        tmp.copy(low).lerp(high, t)
+      }
+
       colors[i * 3] = tmp.r
       colors[i * 3 + 1] = tmp.g
       colors[i * 3 + 2] = tmp.b
     }
+
     geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
     return geo
-  }, [radius, oceanLow, oceanHigh, gradient])
+  }, [radius, oceanLow, oceanHigh, gradient, bands])
 
   const surfacePatches = useMemo(
     () =>
@@ -182,16 +200,18 @@ export function PlanetSurface({
 
       {surfacePatches.map((patch) => (
         <group key={patch.id}>
-          <mesh geometry={patch.fillGeo} raycast={NO_RAYCAST}>
-            <meshStandardMaterial
-              color={patch.fill ?? landFill}
-              roughness={0.95}
-              metalness={0}
-              side={THREE.DoubleSide}
-              transparent={(patch.opacity ?? 1) < 1}
-              opacity={patch.opacity ?? 1}
-            />
-          </mesh>
+          {patch.fill !== null && (
+            <mesh geometry={patch.fillGeo} raycast={NO_RAYCAST}>
+              <meshStandardMaterial
+                color={patch.fill ?? landFill}
+                roughness={0.95}
+                metalness={0}
+                side={THREE.DoubleSide}
+                transparent={(patch.opacity ?? 1) < 1}
+                opacity={patch.opacity ?? 1}
+              />
+            </mesh>
+          )}
           {patch.lineGeos.map((geometry, index) => (
             <line key={index} geometry={geometry} raycast={NO_RAYCAST}>
               <lineBasicMaterial color={patch.line} transparent opacity={0.85} />
