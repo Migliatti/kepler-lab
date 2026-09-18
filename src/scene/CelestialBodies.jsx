@@ -1,5 +1,5 @@
+import { getBodyAppearance } from './appearance.js'
 import { buildEarthPatches, EARTH_APPEARANCE } from './earthSurface.js'
-import { getCategoryAppearance } from './layout.js'
 import { PlanetSurface } from './PlanetSurface.jsx'
 
 // Built once: the geometry is deterministic, so every Earth in every render
@@ -30,7 +30,7 @@ export function CelestialBodies({
   onConfirmTravel,
 }) {
   return destinations.map(({ id, category, position, radius }) => {
-    const appearance = getCategoryAppearance(category)
+    const appearance = getBodyAppearance(id, category)
     const isSelected = id === selectedId
     const isHovered = id === hoveredId
     const isCurrentLocation = id === currentLocationId
@@ -69,7 +69,13 @@ export function CelestialBodies({
           {hasSurface ? (
             <meshBasicMaterial transparent opacity={0} depthWrite={false} />
           ) : (
-            <meshStandardMaterial {...appearance} emissiveIntensity={isSelected || isHovered ? 1.7 : 1} />
+            <meshStandardMaterial
+              color={appearance.color}
+              emissive={appearance.emissive}
+              transparent={appearance.transparent}
+              opacity={appearance.opacity}
+              emissiveIntensity={isSelected || isHovered ? 1.7 : 1}
+            />
           )}
         </mesh>
 

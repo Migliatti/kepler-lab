@@ -25,17 +25,6 @@ const PRESENTATION_BY_ID = Object.freeze({
   'milky-way': Object.freeze({ position: [0, -9, -52], radius: 5 }),
 })
 
-const CATEGORY_APPEARANCE = Object.freeze({
-  planet: Object.freeze({ color: '#3d9ee8', emissive: '#082744', transparent: false, opacity: 1 }),
-  moon: Object.freeze({ color: '#a9c6e8', emissive: '#162331', transparent: false, opacity: 1 }),
-  'dwarf-planet': Object.freeze({ color: '#8ca6d1', emissive: '#171f36', transparent: false, opacity: 1 }),
-  'star-system': Object.freeze({ color: '#ffd66b', emissive: '#7a4a08', transparent: false, opacity: 1 }),
-  star: Object.freeze({ color: '#ffe38a', emissive: '#9d5d08', transparent: false, opacity: 1 }),
-  nebula: Object.freeze({ color: '#b37aff', emissive: '#3a1769', transparent: true, opacity: 0.72 }),
-  'galactic-region': Object.freeze({ color: '#6181cf', emissive: '#141c57', transparent: true, opacity: 0.68 }),
-  'black-hole': Object.freeze({ color: '#ffb04a', emissive: '#6f2800', transparent: false, opacity: 1 }),
-})
-
 export function getSceneDestination(destination) {
   const presentation = PRESENTATION_BY_ID[destination.id]
 
@@ -53,8 +42,4 @@ export function getSceneDestination(destination) {
 
 export function getSceneDestinations(destinations) {
   return destinations.map(getSceneDestination)
-}
-
-export function getCategoryAppearance(category) {
-  return CATEGORY_APPEARANCE[category]
 }

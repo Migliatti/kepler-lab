@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest'
 import { destinations } from '../content/destinations.js'
 import {
   EARTH_CAMERA_POSITION,
-  getCategoryAppearance,
   getSceneDestination,
   getSceneDestinations,
 } from './layout.js'
@@ -25,10 +24,5 @@ describe('scene layout', () => {
     expect(getSceneDestinations(destinations).map(({ id }) => id).sort()).toEqual(
       destinations.map(({ id }) => id).sort(),
     )
-  })
-
-  it('provides a visible appearance for every rendered category', () => {
-    expect(getCategoryAppearance('planet')).toMatchObject({ color: expect.stringMatching(/^#/) })
-    expect(getCategoryAppearance('nebula')).toMatchObject({ transparent: true, opacity: expect.any(Number) })
   })
 })
