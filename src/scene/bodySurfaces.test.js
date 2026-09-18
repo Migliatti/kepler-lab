@@ -12,10 +12,10 @@ describe('body surfaces', () => {
     for (const id of SURFACE_IDS) expect(ids).toContain(id)
   })
 
-  // A lista cresce na Task 14, com os quatro gigantes gasosos.
-  it('gives a surface to every rocky and icy body', () => {
+  it('gives a surface to every Solar System body with one', () => {
     expect([...SURFACE_IDS].sort()).toEqual([
-      'earth', 'europa', 'io', 'mars', 'mercury', 'moon', 'pluto', 'titan', 'venus',
+      'earth', 'europa', 'io', 'jupiter', 'mars', 'mercury', 'moon', 'neptune',
+      'pluto', 'saturn', 'titan', 'uranus', 'venus',
     ])
   })
 
@@ -61,5 +61,33 @@ describe('body surfaces', () => {
 
   it('is deterministic: the same surface every call', () => {
     expect(getBodySurface('mars')).toEqual(getBodySurface('mars'))
+  })
+
+  it('bands the gas giants from south to north', () => {
+    for (const id of ['jupiter', 'saturn', 'uranus', 'neptune']) {
+      const { bands } = getBodySurface(id)
+
+      expect(bands.length).toBeGreaterThan(4)
+      expect(bands[0].latitude).toBe(-90)
+      expect(bands[bands.length - 1].latitude).toBe(90)
+      for (let i = 1; i < bands.length; i++) {
+        expect(bands[i].latitude).toBeGreaterThan(bands[i - 1].latitude)
+        expect(bands[i].color).toMatch(HEX)
+      }
+    }
+  })
+
+  it('places the Great Red Spot where Jupiter has it', () => {
+    const spot = getBodySurface('jupiter').patches.find(({ id }) => id === 'great-red-spot')
+
+    expect(spot).toBeDefined()
+    expect(spot.fill).toMatch(HEX)
+    // 60° O, 22° S: o contorno tem de ficar todo no hemisfério sul.
+    for (const [, latitude] of spot.outline) expect(latitude).toBeLessThan(0)
+  })
+
+  it('leaves the giants without craters and gives Neptune its dark spot', () => {
+    expect(getBodySurface('jupiter').craters).toHaveLength(0)
+    expect(getBodySurface('neptune').patches.some(({ id }) => id === 'great-dark-spot')).toBe(true)
   })
 })
