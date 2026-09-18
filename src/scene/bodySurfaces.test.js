@@ -54,12 +54,17 @@ describe('body surfaces', () => {
     const caps = getBodySurface('mars').patches.filter(({ id }) => id.includes('cap'))
     expect(caps).toHaveLength(2)
 
-    // As fraturas de Europa são só linha, sem preenchimento.
-    const fractures = getBodySurface('europa').patches.filter(({ fill }) => fill === null)
-    expect(fractures.length).toBeGreaterThan(3)
-    // E são linhas abertas: fechar a curva desenharia um risco atravessando o
-    // globo de volta ao primeiro ponto.
-    for (const fracture of fractures) expect(fracture.closed).toBe(false)
+    // As lineae de Europa são fitas com largura angular própria, não linhas de
+    // um pixel, e formam uma rede: uma ou duas não leem como Europa.
+    const europa = getBodySurface('europa')
+    const fractures = europa.patches.filter(({ ribbon }) => ribbon > 0)
+
+    expect(fractures.length).toBeGreaterThan(8)
+    expect(fractures).toHaveLength(europa.patches.length)
+    for (const fracture of fractures) expect(fracture.ribbon).toBeLessThan(3)
+
+    // Nenhuma cratera: é a superfície mais jovem e lisa do catálogo.
+    expect(europa.craters).toHaveLength(0)
   })
 
   it('is deterministic: the same surface every call', () => {

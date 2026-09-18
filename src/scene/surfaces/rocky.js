@@ -23,11 +23,11 @@ function cap(id, latitude, angularRadius, fill) {
   return { id, outline: circleOutline(0, latitude, angularRadius), fill }
 }
 
-function fracture(id, outline, line) {
-  // fill: null é o que faz o PlanetSurface desenhar só o contorno; closed:
-  // false impede que a linha volte do último ponto ao primeiro atravessando o
-  // globo — uma lineae de Europa é um risco, não um laço.
-  return { id, outline, fill: null, line, closed: false }
+function lineae(id, outline, widthDegrees, fill) {
+  // `ribbon` é a largura angular do traço, em graus: uma fita de verdade sobre
+  // a esfera, não uma `line`, cuja espessura o WebGL trava em um pixel e que
+  // por isso desaparece justamente quando a câmera chega perto.
+  return { id, outline, fill, ribbon: widthDegrees, liftFactor: 0.004 }
 }
 
 const MERCURY_CRATERS = [
@@ -87,14 +87,24 @@ export const ROCKY_SURFACES = Object.freeze({
   },
 
   europa: {
-    oceanLow: '#c9d6de', oceanHigh: '#dfe7ec', gradient: 'poles',
+    // Gelo quase branco, e a lua mais lisa do catálogo: nenhuma cratera, nenhum
+    // relevo. O que se vê é a rede de lineae, fraturas de milhares de
+    // quilômetros tingidas pelos sais que sobem do oceano abaixo da crosta.
+    oceanLow: '#ccd8dd', oceanHigh: '#f0f4f5', gradient: 'poles',
     showAtmosphere: false,
     patches: [
-      fracture('lineae-1', [[-150, 30], [-90, 12], [-20, -4], [50, -18], [130, -30]], '#9a6f55'),
-      fracture('lineae-2', [[-170, -30], [-100, -18], [-10, 6], [70, 24], [150, 34]], '#a87a5c'),
-      fracture('lineae-3', [[-60, 70], [-40, 20], [-20, -30], [-5, -70]], '#8f6850'),
-      fracture('lineae-4', [[40, 68], [70, 22], [95, -26], [120, -66]], '#8f6850'),
-      fracture('lineae-5', [[-120, -60], [-30, -52], [60, -46], [150, -40]], '#a87a5c'),
+      lineae('agenor', [[-150, 30], [-90, 14], [-20, -2], [50, -16], [130, -28]], 1.6, '#a3705a'),
+      lineae('thera', [[-170, -32], [-100, -18], [-10, 6], [70, 24], [150, 34]], 1.8, '#9d6a55'),
+      lineae('belus', [[-60, 72], [-44, 26], [-24, -22], [-8, -68]], 1.4, '#ab7962'),
+      lineae('cadmus', [[40, 70], [68, 24], [94, -24], [120, -64]], 1.4, '#ab7962'),
+      lineae('minos', [[-120, -58], [-30, -50], [60, -44], [150, -38]], 1.2, '#b5836b'),
+      lineae('rhadamanthys', [[-160, 58], [-70, 50], [20, 44], [110, 40]], 1.2, '#b5836b'),
+      lineae('phineus', [[-130, -8], [-70, -34], [0, -56], [70, -70]], 1, '#b98a6e'),
+      lineae('asterius', [[150, 8], [-160, 34], [-110, 56], [-50, 70]], 1, '#b98a6e'),
+      lineae('katreus', [[100, 62], [104, 18], [108, -26], [112, -68]], 0.8, '#c0937a'),
+      lineae('androgeos', [[-20, 64], [-16, 20], [-12, -24], [-8, -66]], 0.8, '#c0937a'),
+      lineae('libya', [[-90, -70], [-20, -44], [40, -14], [100, 16], [160, 44]], 0.9, '#b07d64'),
+      lineae('argadnel', [[-40, 44], [30, 36], [100, 26], [170, 14]], 0.9, '#b07d64'),
     ],
     craters: [],
   },
